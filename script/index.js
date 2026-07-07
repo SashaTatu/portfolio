@@ -1,12 +1,5 @@
 // --- ЕФЕКТ СКРОЛУ НАВІГАЦІЇ ---
-window.addEventListener('scroll', () => {
-  const navbar = document.querySelector('.navbar');
-  if (window.scrollY > 60) {
-    navbar.style.padding = '20px 0';
-  } else {
-    navbar.style.padding = '35px 0';
-  }
-});
+
 
 // --- FAQ АККОРДЕОН ---
 document.querySelectorAll('.faq-trigger').forEach(trigger => {

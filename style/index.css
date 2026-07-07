@@ -67,7 +67,7 @@ a { text-decoration: none; color: inherit; }
 .navbar {
   position: fixed;
   width: 100%; top: 0; left: 0; z-index: 100;
-  padding: 35px 0;
+  padding: 15px 0;
   border-bottom: 1px solid rgba(201, 194, 189, 0.3);
   background-color: rgba(249, 246, 244, 0.85);
   backdrop-filter: blur(12px);
@@ -83,7 +83,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .nav-logo-img-kolibri {
-  width: 60px; /* Розмір логотипу */
+  width: 40px; /* Розмір логотипу */
   height: auto;
   margin-right: 15px; /* Відступ між логотипом та текстом */
   flex-shrink: 0; /* Захищає логотип від стискання іншими елементами */
@@ -337,13 +337,144 @@ a { text-decoration: none; color: inherit; }
   font-weight: 300;
 }
 
-/* --- HERO & КРЕДО --- */
-.hero { height: 100vh; display: flex; align-items: flex-end; padding-bottom: 120px; position: relative; z-index: 1; }
-.hero-container { width: 100%; }
-.hero-meta { display: flex; justify-content: space-between; margin-bottom: 40px; border-bottom: 1px solid rgba(201, 194, 189, 0.35); padding-bottom: 15px; }
-.hero h1 { font-size: clamp(44px, 6.5vw, 80px); line-height: 1.05; margin-bottom: 50px; }
-.hero-footer { display: flex; justify-content: space-between; align-items: flex-end; }
-.hero-p { font-size: 15px; font-weight: 300; max-width: 500px; line-height: 1.7; }
+
+/* --- HERO ЕКРАН (КОНТЕЙНЕР-ОБОЛОНКА) --- */
+.hero-image-bg {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 120px;
+  overflow: hidden; /* КРИТИЧНО: ховає краї фотографії, коли вона збільшується */
+  
+  /* ВИДАЛЯЄМО ЗВІДСИ background-image, бо тепер він нижче */
+}
+
+/* --- ШАР З КАРТИНКОЮ (ЕФЕКТ KEN BURNS) --- */
+.hero-bg-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../img/background/credo-back.jpg'); /* Твій шлях до фото */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  
+  /* Запуск преміального повільного танення та руху */
+  animation: kenBurnsEffect 20s ease-in-out infinite alternate;
+}
+
+
+/* Делікатне журнальне затемнення фотографії */
+/* --- ОНОВЛЕНИЙ ШАР ЗАТЕМНЕННЯ ТА ЧІТКОСТІ --- */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    background:
+        /* затемнення зліва */
+        linear-gradient(
+            90deg,
+            rgba(18,16,15,0.58) 0%,
+            rgba(18,16,15,0.40) 28%,
+            rgba(18,16,15,0.18) 55%,
+            rgba(18,16,15,0.05) 100%
+        ),
+
+        /* локальне затемнення під текстом */
+        radial-gradient(
+            circle at 18% 72%,
+            rgba(18,16,15,0.40) 0%,
+            rgba(18,16,15,0.18) 45%,
+            transparent 80%
+        );
+}
+
+/* --- ОНОВЛЕНИЙ ВЕЛИКИЙ ЗАГОЛОВОК --- */
+.hero-image-bg h1 {
+  font-size: clamp(44px, 6.5vw, 80px);
+  line-height: 0.9;
+  margin-bottom: 50px;
+  margin-top: auto;
+  color: #FFFFFF; /* Чистий білий для максимального контрасту */
+  font-weight: 300;
+  text-align: left;
+  
+  /* М'яке архітектурне світіння навколо літер (замість брудної чорної тіні) 
+     Воно створює непомітний білий ореол, що захищає текст від темних штор та деталей */
+  text-shadow: 0 0 40px rgba(255, 255, 255, 0.15); 
+}
+
+/* --- ОНОВЛЕНИЙ НИЖНІЙ ОПИС СТУДІЇ --- */
+.hero-p {
+  font-size: 16px;
+  font-weight: 400;
+  max-width: 650px;
+  line-height: 1.7;
+  color: #E5E2DC; /* Текст залишається повністю видимим і яскравим */
+  text-align: left;
+  letter-spacing: 0.5px;
+  
+  position: relative; /* База для позиціонування скла */
+  padding: 15px 20px;
+  margin-left: -20px;
+  z-index: 2; /* Виводить текст НАД склом */
+}
+
+/* МАГІЯ: Ефект скла, яке розчиняється окремо від тексту */
+.hero-p::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Ховає скло ПІД текст */
+  
+  /* Налаштування самого матового скла */
+  background: rgba(20, 18, 17, 0.4); 
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  
+  /* Маска, яка розчиняє ТІЛЬКИ скло зліва направо */
+  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 100%);
+}
+
+/* Контейнер для збереження лівого вирівнювання */
+.hero-container {
+  width: 100%;
+  position: relative;
+  z-index: 2; /* Виводить текст поверх фотографії та затемнення */
+}
+
+/* Верхня мета-інформація */
+.hero-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(249, 246, 244, 0.25); /* Тонка світла лінія замість темної */
+  padding-bottom: 15px;
+}
+
+
+.hero-image-bg h1 i {
+  color: #F9F6F4; /* Курсивне слово "відчуття" також світле */
+}
+
+/* Нижній блок з описом студії */
+.hero-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+
 
 /* КНОПКА SHELNAT СТРІЛКА */
 .btn-shelnat { display: inline-flex; align-items: center; gap: 15px; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #666956; padding: 10px 0; position: relative; border: none; background: transparent; cursor: pointer; }
@@ -470,4 +601,41 @@ a { text-decoration: none; color: inherit; }
   .hero-footer { flex-direction: column; align-items: flex-start; gap: 35px; }
   .nav-links { display: none; }
   .radio-group { flex-direction: column; gap: 12px; }
+}
+
+
+
+
+
+/* --- КІНЕМАТОГРАФІЧНІ АНІМАЦІЇ --- */
+
+/* 1. Магія Ken Burns: дуже повільне збільшення на 7% та мікро-зсув по діагоналі */
+@keyframes kenBurnsEffect {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.07) translate(-1%, -0.5%);
+  }
+}
+
+/* 2. Ефект появи: елементи елегантно випливають знизу + фокусування камери (blur) */
+.fade-in-up-blur {
+  opacity: 0;
+  transform: translateY(30px);
+  filter: blur(4px); /* М'яке розмиття літер на старті */
+  animation: fadeInUpBlurAnim 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes fadeInUpBlurAnim {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0); /* Текст стає ідеально чітким */
+  }
 }

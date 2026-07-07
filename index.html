@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2 family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style/index.css">
-  <link rel="icon" type="image/png" href="img/favicon/kolibri.jpg">
+  <link rel="icon" type="image/png" href="img/favicon/kolibri2.png">
 </head>
 <body>
 
@@ -23,7 +23,7 @@
   <!-- Навігація -->
     <nav class="navbar">
     <div class="container nav-container">
-        <img src="img/favicon/kolibri.jpg" alt="Kolibri Logo" class="nav-logo-img-kolibri">
+        <img src="img/favicon/kolibri2.png" alt="Kolibri Logo" class="nav-logo-img-kolibri">
         <a href="index.html" class="nav-logo">LIBRI<br>INTERIORS</a>
         <ul class="nav-links">
         <li><a href="#" class="nav-item active">Головна</a></li>
@@ -55,19 +55,27 @@
     </div>
     </nav>
 
-  <!-- 1. HERO СЕКЦІЯ & КРЕДО -->
-  <header class="hero">
-    <div class="container hero-container">
-      <div class="hero-meta fade-in">
-        <span class="luxury-tag">ARCHITECTURAL STUDIO</span>
-        <span class="luxury-tag">[ EST. 2022 ]</span>
-      </div>
-      <h1 class="fade-in-delayed">Дім — це не просто місце. <br><i>Дім — це відчуття.</i></h1>
-      <div class="hero-footer fade-in-delayed">
-        <p class="hero-p">Ми проектуємо простори з характером для людей з історією. Студія вишуканих архітектурних рішень.</p>
-      </div>
-    </div>
-  </header>
+    <!-- 1. HERO СЕКЦІЯ (ГОЛОВНИЙ ЕКРАН З ФОНОМ ВІТАЛЬНІ) -->
+    <!-- ЗНАЙДИ СВІЙ БЛОК <header class="hero-image-bg"> ТА ЗАМІНИ ЙОГО НА ЦЕЙ: -->
+    <header class="hero-image-bg">
+        <!-- 1. Окремий ізольований шар для фотографії (щоб вона рухалась, не зачіпаючи текст) -->
+        <div class="hero-bg-image"></div>
+
+        <div class="hero-overlay"></div> <!-- Преміум-затемнення поверх фото -->
+
+        <div class="container hero-container">
+    
+            <!-- Міняємо класи на нову журнальну анімацію з різною затримкою (delay) -->
+            <h1 class="fade-in-up-blur" style="animation-delay: 0.4s;">
+            Дім — <br>це не просто місце.<br>
+            <i>Дім — <br>це відчуття.</i>
+            </h1>
+    
+            <div class="hero-footer fade-in-up-blur" style="animation-delay: 0.8s;">
+            <p class="hero-p">Ми створюємо простір для цього. Разом ми створюємо простори, які не лише гарно виглядають, але й чудово функціонують, надихають та дарують відчуття дому.</p>
+            </div>
+        </div>
+    </header>
 
   <!-- 2. ОЛЕНА ТА ОЛЕКСАНДР (ТИЗЕР) -->
   <section class="section-padding reveal">
