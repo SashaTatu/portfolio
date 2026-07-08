@@ -301,9 +301,9 @@ a { text-decoration: none; color: inherit; }
   background-position: center;
   background-repeat: no-repeat;
   z-index: 0;
-  animation: kenBurnsEffect 20s ease-in-out infinite alternate;
-  /* Оптимізація для плавної Ken Burns анімації */
+  /* Важливо: анімуємо ТІЛЬКИ transform (scale), не чіпаємо background-position */
   will-change: transform;
+  animation: kenBurnsEffect 15s ease-in-out infinite alternate;
 }
 
 .hero-overlay {
@@ -854,15 +854,17 @@ a { text-decoration: none; color: inherit; }
 
 /* --- КІНЕМАТОГРАФІЧНІ АНІМАЦІЇ HERO --- */
 @keyframes kenBurnsEffect {
-  0% { transform: scale(1) translate(0, 0); }
-  100% { transform: scale(1.07) translate(-1%, -0.5%); }
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); } /* Зменшили крок до 1.05 для плавності */
 }
 
 .fade-in-up-blur {
   opacity: 0;
   transform: translateY(30px);
   filter: blur(4px);
-  animation: fadeInUpBlurAnim 1.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  /* Додаємо transform у will-change, щоб винести анімацію на GPU */
+  will-change: transform, opacity, filter;
+  animation: fadeInUpBlurAnim 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
 @keyframes fadeInUpBlurAnim {

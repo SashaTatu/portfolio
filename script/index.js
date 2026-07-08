@@ -1,4 +1,25 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    requestAnimationFrame(() => {
+    const revealElements = document.querySelectorAll('.reveal');
+    
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.05, // Зменшили поріг, щоб анімація спрацьовувала швидше
+      rootMargin: "0px 0px -20px 0px"
+    });
+
+    revealElements.forEach(element => {
+      revealObserver.observe(element);
+    });
+  });
   
   // 1. Плавна скрол-анімація появи блоків (IntersectionObserver)
   const revealElements = document.querySelectorAll('.reveal');
