@@ -485,33 +485,285 @@ a { text-decoration: none; color: inherit; }
 
 /* --- ОЛЕНА ТА ОЛЕКСАНДР СЕКЦІЯ --- */
 .team-header-row { margin-bottom: 50px; }
-.team-grid { display: flex; border-top: 1px solid rgba(201, 194, 189, 0.4); }
-.team-card { flex: 1; padding: 60px 40px 40px 0; }
+
+.team-grid {
+  display: flex;
+  align-items: flex-start;
+  border-top: 1px solid rgba(201, 194, 189, 0.4);
+  position: relative;
+}
+
+/* Точка з'єднання по центру — місце, де зустрічаються дві перспективи */
+.team-grid::after {
+  content: '';
+  position: absolute;
+  top: -1px; left: 50%;
+  width: 11px; height: 11px;
+  background: #F9F6F4;
+  border: 1px solid #8E857B;
+  transform: translate(-50%, -50%) rotate(45deg);
+  z-index: 3;
+}
+
+.team-card { flex: 1; padding: 60px 40px 40px 0; position: relative; }
 .team-card.line-right { border-right: 1px solid rgba(201, 194, 189, 0.4); padding-left: 0; padding-right: 40px; }
 .team-card:last-child { padding-left: 40px; padding-right: 0; }
 
-/* Прямокутні суворі блоки для фото */
+/* Асиметричний зсув — двоє окремих голосів, а не дзеркальна пара */
+.team-card.line-right { transform: translateY(-32px); }
+.team-card:last-child { transform: translateY(32px); }
+
+/* --- ІДЕАЛЬНЕ ВИРІВНЮВАННЯ ФОТОГРАФІЙ КОМАНДИ --- */
 .team-photo-placeholder {
-  width: 100%; height: 450px; background-color: #E5E2DC;
-  margin-bottom: 30px; display: flex; align-items: center; justify-content: center;
-  font-family: 'Cormorant Garamond', serif; font-style: italic; color: #8E857B;
+  width: 100%;
+  height: 500px; /* Суворо фіксуємо висоту для обох карток */
+  background-color: transparent; /* Прибираємо дефолтний сірий фон */
+  margin-bottom: 30px;
+  overflow: hidden; /* Ховає все, що виходить за межі рамки */
+  position: relative;
+
+  /* Вишукане заокруглення (як у капсулі) */
+  border-radius: 160px 160px 20px 20px;
+  box-shadow: 0 20px 40px rgba(142, 133, 123, 0.05);
+
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
-.team-photo-placeholder img { width: 100%; height: 100%; object-fit: cover; }
-.card-role { display: block; font-size: 10px; letter-spacing: 2px; margin-bottom: 15px; }
-.team-card h3 { font-size: 28px; margin-bottom: 15px; }
-.team-quote { font-size: 14px; font-weight: 300; line-height: 1.7; text-align: left; }
-.team-action { margin-top: 40px; }
+
+/* М'який градієнт знизу, що з'являється при наведенні — для картки ролі */
+.team-photo-placeholder::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(20, 18, 17, 0.55) 0%, rgba(20, 18, 17, 0) 45%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 1;
+}
+
+.team-card:hover .team-photo-placeholder::after { opacity: 1; }
+
+/* Налаштування самих зображень всередині рамок */
+.team-photo-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* КЛЮЧОВИЙ ПАРАМЕТР: обрізає фото по фіксованій висоті 500px без деформації */
+  object-position: center top; /* Центрує фокус на обличчях (можна змінити на center center) */
+  filter: grayscale(100%); /* Робить обидва фото чистими ч/б в одному стилі */
+
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Елегантний інтерактивний ефект при наведенні на картку */
+.team-card:hover .team-photo-placeholder {
+  transform: translateY(-5px);
+}
+
+.team-card:hover .team-photo-placeholder img {
+  transform: scale(1.03); /* М'яке преміальне наближення портрета */
+}
+
+/* Роль ховається всередині фото і з'являється при наведенні */
+.card-role {
+  transform: translateY(10px);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #666956;
+}
+
+.team-card h3 { font-size: 35px; margin-bottom: 20px; margin-top: 20px; line-height: 1.1; color: #666956;; font-weight: 300; }
+
+/* Цитата як головний акцент розділу */
+.team-quote {
+  position: relative;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 19px;
+  line-height: 1.6;
+  text-align: left;
+  padding-left: 28px;
+  color: #666956;
+}
+.team-quote::before {
+  content: '"';
+  position: absolute;
+  left: 2px; top: -5px;
+  font-size: 45px;
+  font-style: normal;
+  color: #C9C2BD;
+  line-height: 1;
+}
+
+.team-action { margin-top: 70px; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #666956; display: flex; align-items: center; gap: 15px; }
+.team-action span { font-size: 15px;; letter-spacing: 3px; }
 
 /* --- ПОРТФОЛІО ТИЗЕР --- */
-.section-header-clean { margin-bottom: 50px; }
-.portfolio-teaser-grid { display: flex; gap: 50px; }
-.portfolio-item { flex: 1; }
-.portfolio-item.item-wide { flex: 1.4; }
-.portfolio-img-block { width: 100%; height: 500px; background-color: #E5E2DC; display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-style: italic; }
-.portfolio-meta { display: flex; justify-content: space-between; align-items: baseline; margin-top: 20px; }
-.portfolio-meta h3 { font-size: 24px; }
-.portfolio-meta span { font-size: 12px; font-weight: 300; }
-.section-action-end { display: flex; justify-content: flex-end; margin-top: 40px; }
+.portfolio-capsule-section {
+  padding-top: 120px;
+  padding-bottom: 120px;
+  overflow: hidden; /* Захист від вильоту тексту за межі екрана */
+}
+.portfolio-capsule-section h2 {
+  margin-bottom: 80px;
+  text-align: left;
+  font-size: clamp(34px, 4.5vw, 50px);
+}
+
+/* Сітка на дві головні великі колонки */
+.portfolio-capsule-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr; 
+  gap: 60px 80px; /* Збільшили простір для "повітря", як у дорогих медіа */
+  align-items: start;
+}
+
+/* Базовий елемент */
+.portfolio-capsule-item {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Загальний контейнер маски для фотографій */
+.capsule-image-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background-color: #F4F2EE; /* Світла преміальна заглушка під час завантаження фото */
+  transition: transform 0.8s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+.capsule-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(8%) contrast(1.02); /* Благородний контраст для рендерів */
+  transition: transform 1.2s cubic-bezier(0.25, 1, 0.3, 1);
+}
+
+/* --- ГЕОМЕТРІЯ І ПРОПОРЦІЇ КАПСУЛ --- */
+
+/* 1. Лівий верхній (горизонтальний) */
+.horizontal-capsule {
+  height: 360px;
+  border-radius: 180px; 
+   
+}
+.item-top-left {
+  max-width: 560px;
+  /* Робимо внутрішній флекс-ряд, щоб безпечно відкинути опис праворуч без негативних маргінів */
+  flex-direction: row !important; 
+  align-items: flex-end;
+  gap: 30px;
+}
+
+/* 2. Праве велике вертикальне вікно */
+.vertical-capsule {
+  height: 600px;
+  border-radius: 200px; /* Масивне заокруглення, що тримає форму арки/капсули */
+}
+.item-right-vertical {
+  grid-column: 2;
+  grid-row: 1 / 3; 
+  margin-top: 100px; /* Спад вниз для журнального ритму */
+}
+
+/* 3. Лівий нижній широкий овал */
+.wide-capsule {
+  height: 400px;
+  border-radius: 200px;
+}
+.item-bottom-wide {
+  grid-column: 1;
+  margin-top: -20px;
+}
+
+/* --- СТИЛЬ ТЕКСТУ (ШРИФТ ТА БЕЗПЕКА ВЕРСТКИ) --- */
+.capsule-description {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-weight: 300;
+  font-style: italic; /* Додає візуальної витонченості архітектурному опису */
+  color: #666956; 
+  line-height: 1.4;
+}
+
+/* Абсолютно безпечне вирівнювання тексту першого блоку (праворуч від овалу) */
+.item-top-left .capsule-image-wrapper {
+  flex: 1; /* Овал займає весь доступний простір */
+  margin-right: -30px; /* Делікатно накладаємо овал на текст, щоб уникнути порожнього простору */
+}
+
+.item-top-left .capsule-description {
+  width: 200px;
+  flex-shrink: 0; /* Текст не стискатиметься */
+  padding-bottom: 20px;
+  text-align: left; /* Читати зліва направо вільне поле набагато комфортніше */
+}
+
+/* Описи інших блоків */
+.item-right-vertical .capsule-description {
+  margin-top: 20px;
+  padding-left: 30px;
+  max-width: 300px;
+}
+
+.item-bottom-wide .capsule-description {
+  margin-top: 20px;
+  padding-left: 25px;
+}
+
+/* --- М'ЯКИЙ ХОВЕР ЕФЕКТ --- */
+/* Ефект занурення: рамка ледь зміщується, а фото всередині масштабується */
+.portfolio-capsule-item:hover .capsule-image-wrapper {
+  transform: translateY(-2px);
+}
+
+.portfolio-capsule-item:hover .capsule-image-wrapper img {
+  transform: scale(1.05);
+}
+
+/* --- АДАПТИВНІСТЬ (БЕЗПЕЧНИЙ ПЕРЕХІД НА МОБІЛЬНІ) --- */
+@media (max-width: 992px) {
+  .portfolio-capsule-section {
+    padding-top: 80px;
+    padding-bottom: 80px;
+  }
+  .portfolio-capsule-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+  .item-top-left {
+    flex-direction: column !important; /* На мобільних повертаємо стандартний стек */
+    align-items: flex-start;
+    max-width: 100%;
+    gap: 15px;
+  }
+  .item-top-left .capsule-description {
+    width: 100%;
+    padding-bottom: 0;
+  }
+  .item-right-vertical {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: 0;
+  }
+  .item-bottom-wide {
+    margin-top: 0;
+  }
+  .horizontal-capsule,
+  .vertical-capsule,
+  .wide-capsule {
+    height: 320px; /* Оптимальна висота, щоб фото повністю влазило в екран смартфона */
+    border-radius: 60px; /* Зменшений овал, адаптований під вузькі екрани */
+  }
+  .item-right-vertical .capsule-description,
+  .item-bottom-wide .capsule-description {
+    padding-left: 15px;
+    margin-top: 15px;
+  }
+}
 
 /* --- СУВОРА ТАБЛИЦЯ ПОСЛУГ --- */
 .shelnat-table { border-top: 1px solid #C9C2BD; }
@@ -597,7 +849,10 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 992px) {
   .container, .bg-grid-lines { padding: 0 25px; }
   .team-grid, .portfolio-teaser-grid, .table-row, .contact-grid, .form-grid-2 { flex-direction: column; gap: 45px; }
-  .team-card, .team-card.line-right, .team-card:last-child { padding: 40px 0; border-right: none; border-bottom: 1px solid rgba(201, 194, 189, 0.3); }
+  .team-card, .team-card.line-right, .team-card:last-child { padding: 40px 0; border-right: none; border-bottom: 1px solid rgba(201, 194, 189, 0.3); transform: none; }
+  .team-grid::after { display: none; }
+  .card-role { position: static; opacity: 1; transform: none; color: #8E857B; margin-bottom: 15px; }
+  .team-photo-placeholder::after { display: none; }
   .hero-footer { flex-direction: column; align-items: flex-start; gap: 35px; }
   .nav-links { display: none; }
   .radio-group { flex-direction: column; gap: 12px; }
