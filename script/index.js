@@ -84,4 +84,64 @@ document.addEventListener('DOMContentLoaded', () => {
       langSelector.classList.remove('active');
     });
   }
+
+  // --- СИСТЕМА ПЕРЕКЛАДУ (i18n) ---
+  const currentLangCodeEl = document.getElementById('current-lang');
+  const langDropdownItems = document.querySelectorAll('.lang-dropdown-item');
+  
+  // 1. Функція завантаження JSON файлу та перекладу
+  async function loadLanguage(lang) {
+    try {
+      // Завантажуємо файл конфігурації мови
+      const response = await fetch(`./lang/${lang}.json`);
+      if (!response.ok) throw new Error(`Не вдалося завантажити мову: ${lang}`);
+      const data = await response.json();
+
+      // Шукаємо всі елементи з атрибутом data-i18n
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (data[key]) {
+          // Використовуємо innerHTML, оскільки у вас в текстах є теги <br> та <i>
+          el.innerHTML = data[key];
+        }
+      });
+
+      // Оновлюємо атрибути тегу <html> та текст на кнопці селектора
+      document.documentElement.lang = lang;
+      if (currentLangCodeEl) currentLangCodeEl.textContent = lang.toUpperCase();
+
+      // Оновлюємо активний клас у випадаючому списку
+      langDropdownItems.forEach(item => {
+        if (item.getAttribute('data-lang') === lang) {
+          item.classList.add('active');
+        } else {
+          item.classList.remove('active');
+        }
+      });
+
+      // Зберігаємо вибір користувача
+      localStorage.setItem('selectedLanguage', lang);
+
+    } catch (error) {
+      console.error("Помилка локалізації:", error);
+    }
+  }
+
+  // 2. Слухач кліків на пункти меню мов
+  langDropdownItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetLang = item.getAttribute('data-lang');
+      if (targetLang) {
+        loadLanguage(targetLang);
+        langSelector.classList.remove('active'); // закриваємо меню
+      }
+    });
+  });
+
+  // 3. Ініціалізація при завантаженні: перевіряємо збережену мову або ставимо дефолтну (uk)
+  const savedLang = localStorage.getItem('selectedLanguage') || 'uk';
+  if (savedLang !== 'uk') {
+    loadLanguage(savedLang);
+  }
 });

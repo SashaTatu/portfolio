@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LIBRI INTERIORS — Студія дизайну інтер'єру</title>
+  <title data-i18n="title">LIBRI INTERIORS — Студія дизайну інтер'єру</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,14 +29,14 @@
       <img src="img/favicon/kolibri2.png" alt="Kolibri Logo" class="nav-logo-img-kolibri" width="40" height="40">
       <a href="index.html" class="nav-logo">LIBRI<br>INTERIORS</a>
       <ul class="nav-links">
-        <li><a href="#" class="nav-item active">Головна</a></li>
-        <li><a href="about.html" class="nav-item">Про нас</a></li>
-        <li><a href="portfolio.html" class="nav-item">Портфоліо</a></li>
-        <li><a href="services.html" class="nav-item">Послуги</a></li>
+        <li><a href="#" class="nav-item active" data-i18n="main">Головна</a></li>
+        <li><a href="about.html" class="nav-item" data-i18n="about">Про нас</a></li>
+        <li><a href="portfolio.html" class="nav-item" data-i18n="portfolio">Портфоліо</a></li>
+        <li><a href="services.html" class="nav-item" data-i18n="services">Послуги</a></li>
       </ul>
       
       <div class="nav-actions">
-        <a href="order.html" class="btn-nav-order"><span>Замовити дизайнера</span></a>
+        <a href="order.html" class="btn-nav-order" data-i18n="order-btn">Замовити дизайнера</a>
         
         <div class="lang-selector">
           <button class="lang-btn" id="langBtn">
@@ -44,15 +44,15 @@
               <circle cx="12" cy="12" r="10"/>
               <path d="M12 2a14.5 14.5 0 0 0 0 20M12 2a14.5 14.5 0 0 1 0 20M2 12h20"/>
             </svg>
-            <span>UA</span>
+            <span id="current-lang">UA</span>
           </button>
           
-          <div class="lang-dropdown" id="langDropdown">
-            <a href="#" class="lang-dropdown-item active">Українська</a>
-            <a href="#" class="lang-dropdown-item standard-disabled">Deutsch <span class="soon-tag">незабаром</span></a>
-            <a href="#" class="lang-dropdown-item standard-disabled">English <span class="soon-tag">незабаром</span></a>
-            <a href="#" class="lang-dropdown-item standard-disabled">Русский <span class="soon-tag">незабаром</span></a>
-          </div>
+            <div class="lang-dropdown" id="langDropdown">
+                <a href="#" class="lang-dropdown-item active" data-lang="uk">Українська</a>
+                <a href="#" class="lang-dropdown-item" data-lang="de">Deutsch</a>
+                <a href="#" class="lang-dropdown-item" data-lang="en">English</a>
+                <a href="#" class="lang-dropdown-item" data-lang="ru">Русский</a>
+            </div>
         </div>
       </div>
     </div>
@@ -72,38 +72,43 @@
     </div>
   </header>
 
-  <section class="section-padding reveal">
+    <section class="section-padding reveal">
     <div class="container">
-      <div class="team-header-row">
+        <div class="team-header-row">
         <span class="luxury-tag">// 01 / Творці</span>
         <h2>Дві перспективи — одна спільна мета</h2>
-      </div>
-      <div class="team-grid">
-        <div class="team-card line-right">
-          <div class="team-photo-placeholder">
-            <img src="img/people/olena.webp" alt="Олена Суворова" loading="lazy" width="600" height="500"> 
-          </div>
-          <span class="card-role">[ КУРАТОР ЕСТЕТИКИ ]</span>
-          <h3>Олена Суворова</h3>
-          <p class="team-quote">Там, де інші бачать межі, ми бачимо можливості. Перетворюємо бачення на матеріальну витонченість.</p>
         </div>
+        
+        <div class="team-grid team-grid-divider">
+        
         <div class="team-card">
-          <div class="team-photo-placeholder">
-            <img src="img/people/oleksander.webp" alt="Олександр Кругляк" loading="lazy" width="600" height="500">
-          </div>
-          <span class="card-role">[ ТЕХНІЧНА ІНЖЕНЕРІЯ ]</span>
-          <h3>Олександр Кругляк</h3>
-          <p class="team-quote">Архітектурна точність, ергономіка та безкомпромісна реалізація того, що здається неможливим.</p>
+            <div class="team-photo-placeholder">
+            <img src="img/people/olena.webp" alt="Олена Суворова" loading="lazy" width="600" height="500"> 
+            </div>
+            <span class="card-role">Душа кожного приміщення</span>
+            <h3>Олена Суворова</h3>
+            <p class="team-quote">З любов’ю до деталей. З відчуттям затишку.</p>
         </div>
-      </div>
-      <div class="team-action">
+        
+        <div class="team-card">
+            <div class="team-photo-placeholder">
+            <img src="img/people/oleksander.webp" alt="Олександр Кругляк" loading="lazy" width="600" height="500">
+            </div>
+            <span class="card-role">Технічний геній, що стоїть за ідеями</span>
+            <h3>Олександр Кругляк</h3>
+            <p class="team-quote">Робить можливим те, що здається неможливим.</p>
+        </div>
+
+        </div>
+
+        <div class="team-action">
         <a href="about.html" class="btn-shelnat">
-          <span style="font-size: 15px; letter-spacing: 3px;">Читати про нас</span>
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 13L13 1M13 1H4M13 1V10" stroke="currentColor" stroke-width="1.2"/></svg>
+            <span style="font-size: 15px; letter-spacing: 3px;">Читати про нас</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 13L13 1M13 1H4M13 1V10" stroke="currentColor" stroke-width="1.2"/></svg>
         </a>
-      </div>
+        </div>
     </div>
-  </section>
+    </section>
 
   <section class="section-padding reveal portfolio-capsule-section">
     <div class="container">
@@ -203,7 +208,7 @@
             <div class="faq-plus"></div>
           </div>
           <div class="faq-content">
-            <p>Так, мы надаємо наші послуги як на об'єкті, так і повністю в цифровому форматі, зокрема на міжнародному рівні.</p>
+            <p>Так, ми надаємо наші послуги як на об'єкті, так і повністю в цифровому форматі, зокрема на міжнародному рівні.</p>
           </div>
         </div>
       </div>

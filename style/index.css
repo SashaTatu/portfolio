@@ -376,7 +376,10 @@ a { text-decoration: none; color: inherit; }
 .btn-shelnat:hover svg { transform: translate(3px, -3px); }
 
 /* --- ОЛЕНА ТА ОЛЕКСАНДР СЕКЦІЯ --- */
-.team-header-row { margin-bottom: 50px; }
+.team-header-row { 
+  margin-bottom: 60px; 
+}
+
 .team-grid {
   display: flex;
   align-items: flex-start;
@@ -384,36 +387,59 @@ a { text-decoration: none; color: inherit; }
   position: relative;
 }
 
+/* Статична точна розділова лінія по центру, яка не рухається від transform */
+.team-grid-divider::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background-color: rgba(201, 194, 189, 0.4);
+  z-index: 2;
+}
+
+/* Ромб по центру лінії */
 .team-grid::after {
   content: '';
   position: absolute;
-  top: -1px; left: 50%;
-  width: 11px; height: 11px;
+  top: -1px; 
+  left: 50%;
+  width: 11px; 
+  height: 11px;
   background: #F9F6F4;
   border: 1px solid #8E857B;
   transform: translate(-50%, -50%) rotate(45deg);
   z-index: 3;
 }
 
-.team-card { flex: 1; padding: 60px 40px 40px 0; position: relative; }
-.team-card.line-right { border-right: 1px solid rgba(201, 194, 189, 0.4); padding-left: 0; padding-right: 40px; }
-.team-card:last-child { padding-left: 40px; padding-right: 0; }
+/* Налаштування відступів карток відносно центральної лінії */
+.team-card { 
+  flex: 1; 
+  padding: 60px 50px 40px 0; /* Рівномірний відступ справа */
+  position: relative; 
+}
 
-.team-card.line-right { transform: translateY(-32px); }
-.team-card:last-child { transform: translateY(32px); }
+.team-card:last-child { 
+  padding-left: 50px; /* Рівномірний відступ зліва */
+  padding-right: 0; 
+}
+
+/* Асиметричний зсув (тепер лінія залишається ідеальною) */
+.team-grid .team-card:first-child { transform: translateY(-32px); }
+.team-grid .team-card:last-child { transform: translateY(32px); }
 
 .team-photo-placeholder {
   width: 100%;
   height: 500px;
   background-color: transparent;
-  margin-bottom: 30px;
+  margin-bottom: 35px;
   overflow: hidden;
   position: relative;
   border-radius: 160px 160px 20px 20px;
   box-shadow: 0 20px 40px rgba(142, 133, 123, 0.05);
   transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
-
 .team-photo-placeholder::after {
   content: '';
   position: absolute;
@@ -445,31 +471,49 @@ a { text-decoration: none; color: inherit; }
 
 .card-role {
   font-size: 10px;
-  letter-spacing: 2px;
-  color: #666956;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: #8E857B;
+  display: block;
+  margin-bottom: 12px;
 }
 
-.team-card h3 { font-size: 35px; margin-bottom: 20px; margin-top: 20px; line-height: 1.1; color: #666956; font-weight: 300; }
+.team-card h3 { 
+  font-size: clamp(28px, 3vw, 38px); 
+  margin-bottom: 25px; 
+  line-height: 1.1; 
+  color: #666956; 
+  font-weight: 300; 
+}
 
 .team-quote {
   position: relative;
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
   font-weight: 300;
-  font-size: 19px;
+  font-size: 20px;
   line-height: 1.6;
   text-align: left;
-  padding-left: 28px;
+  padding-left: 30px;
   color: #666956;
+  max-width: 90%;
 }
+
 .team-quote::before {
-  content: '"';
+  content: '“';
   position: absolute;
-  left: 2px; top: -5px;
-  font-size: 45px;
+  left: 2px; 
+  top: -10px;
+  font-size: 55px;
   font-style: normal;
-  color: #C9C2BD;
+  color: rgba(201, 194, 189, 0.6);
   line-height: 1;
+}
+
+/* Адаптивність для мобільних пристроїв */
+@media (max-width: 992px) {
+  .team-grid-divider::before, .team-grid::after { display: none; }
+  .team-card, .team-card:last-child { padding: 40px 0; border-bottom: 1px solid rgba(201, 194, 189, 0.3); }
 }
 
 .team-action { margin-top: 70px; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #666956; display: flex; align-items: center; gap: 15px; }
