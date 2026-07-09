@@ -644,18 +644,50 @@ a { text-decoration: none; color: inherit; }
 
 
 /* ==========================================================================
-   --- РОЗДІЛ ЗВОРOТНОГО ЗВ'ЯЗКУ (ЖУРНАЛЬНИЙ МІНІМАЛІЗМ) ---
+   --- РОЗДІЛ ЗВОРOТНОГО ЗВ'ЯЗКУ (РЕФЕРЕНС ІЗ БІЛОЮ КАРТКОЮ) ---
    ========================================================================== */
 
 .contact-section-luxury {
-  padding-top: 150px;
-  padding-bottom: 150px;
+  position: relative;
+  padding-top: 180px;
+  padding-bottom: 180px;
+  overflow: hidden;
+  border-bottom: none; /* Забираємо дефолтний бордер, щоб не різав фон */
 }
 
-.contact-grid { 
-  display: flex; 
-  gap: 120px; 
+/* Шорстка архітектурна текстура на фоні */
+.contact-bg-texture {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: url('../img/background/tex4.jpg'); /* Підберіть текстуру бетону чи штукатурки */
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  filter: contrast(1.05) brightness(0.9);
+}
+
+/* Напівпрозоре затемнення для м'якості та вписування в палітру студії */
+.contact-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(142, 133, 123, 0.25) 0%, rgba(102, 105, 86, 0.15) 100%);
+  z-index: 1;
+}
+
+.contact-container-luxury {
+  position: relative;
+  z-index: 2;
+}
+
+/* Велика біла картка форми (як на макеті замовниці) */
+.contact-card-box {
+  background-color: #FFFFFF;
+  padding: 80px 100px;
+  box-shadow: 0 40px 90px rgba(18, 16, 15, 0.08);
+  display: flex;
+  gap: 100px;
   align-items: flex-start;
+  width: 100%;
 }
 
 .contact-left { 
@@ -663,8 +695,8 @@ a { text-decoration: none; color: inherit; }
 }
 
 .contact-left h2 { 
-  margin: 30px 0 35px; 
-  font-size: clamp(36px, 4.8vw, 54px);
+  margin: 25px 0 30px; 
+  font-size: clamp(36px, 4.2vw, 50px);
 }
 
 .contact-meta-text { 
@@ -672,31 +704,21 @@ a { text-decoration: none; color: inherit; }
   font-weight: 300; 
   line-height: 1.7; 
   color: #8E857B;
-  margin-bottom: 50px; 
-  max-width: 480px;
+  margin-bottom: 40px; 
 }
 
-/* Мікроблоки контактної інформації */
+/* Контактна інформація всередині картки */
 .contact-info-blocks {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
   border-top: 1px solid rgba(201, 194, 189, 0.35);
-  padding-top: 35px;
+  padding-top: 30px;
 }
 
 .info-block-item {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-}
-
-.info-label {
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #C9C2BD;
-  font-weight: 400;
 }
 
 .contact-link-luxury { 
@@ -714,13 +736,7 @@ a { text-decoration: none; color: inherit; }
   transform: translateX(4px);
 }
 
-.contact-text-static {
-  font-size: 14px;
-  font-weight: 300;
-  color: #666956;
-}
-
-/* --- ПРАВА ЧАСТИНА: АСИМЕТРИЧНА ФОРМА --- */
+/* --- ПРАВА ЧАСТИНА --- */
 .contact-right { 
   flex: 1.2; 
   width: 100%;
@@ -729,15 +745,15 @@ a { text-decoration: none; color: inherit; }
 .shelnat-form { 
   display: flex; 
   flex-direction: column; 
-  gap: 35px; 
+  gap: 40px; 
 }
 
-/* Обгортка полів з вирівнюванням по верхньому краю */
+/* Рядки введення */
 .input-row-numeric {
   display: flex;
   align-items: flex-start; 
-  gap: 25px;
-  border-bottom: 1px solid rgba(201, 194, 189, 0.5);
+  gap: 20px;
+  border-bottom: 1px solid rgba(201, 194, 189, 0.4);
   padding-bottom: 5px;
   position: relative;
   transition: border-color 0.4s ease;
@@ -747,13 +763,12 @@ a { text-decoration: none; color: inherit; }
   border-color: #666956;
 }
 
-/* Архітектурний індекс поля */
 .field-num {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 20px;
+  font-size: 18px;
   font-style: italic;
   color: #C9C2BD;
-  padding-top: 10px; 
+  padding-top: 12px; 
   line-height: 1;
   user-select: none;
   flex-shrink: 0; 
@@ -772,13 +787,12 @@ a { text-decoration: none; color: inherit; }
   border: none !important;
   outline: none !important;
   padding: 12px 0; 
-  color: #666956; 
+  color: #2c2c2c; /* Робимо текст трохи темнішим, оскільки тепер фон білий */
   font-size: 14px; 
   font-weight: 300; 
   font-family: 'Inter', sans-serif;
 }
 
-/* Фікс для textarea, щоб текст не зсувався */
 .shelnat-form textarea {
   resize: none;
   display: block;
@@ -786,14 +800,13 @@ a { text-decoration: none; color: inherit; }
   line-height: 1.6;
 }
 
-/* Розумний плейсхолдер */
 .shelnat-form input::placeholder,
 .shelnat-form textarea::placeholder {
   color: #8E857B;
-  font-size: 12px;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  opacity: 0.7;
+  opacity: 0.8;
   transition: opacity 0.3s ease;
 }
 
@@ -803,7 +816,7 @@ a { text-decoration: none; color: inherit; }
 }
 
 .form-submit-row {
-  margin-top: 15px;
+  margin-top: 10px;
   display: flex;
 }
 
@@ -814,36 +827,72 @@ a { text-decoration: none; color: inherit; }
   cursor: pointer;
 }
 
+/* Оновлений адаптив під нову структуру */
+@media (max-width: 1200px) {
+  .contact-card-box { padding: 60px 50px; gap: 60px; }
+}
+
+@media (max-width: 992px) {
+  .contact-section-luxury { padding-top: 100px; padding-bottom: 100px; }
+  .contact-card-box { flex-direction: column; padding: 40px 30px; gap: 50px; }
+}
+
+
+
 
 /* ==========================================================================
-   --- КОНТРАСТНИЙ ФУТЕР ---
+   --- ФУТЕР (У СТИЛІ НАВІГАЦІЇ) ---
    ========================================================================== */
 
 .footer {
-  padding: 80px 0; 
-  background-color: #666956; 
+  padding: 40px 0; /* Робимо компактнішим, як і навбар */
+  border-top: 1px solid rgba(201, 194, 189, 0.35); /* Ніжний верхній бордюр */
+  background-color: rgba(249, 246, 244, 0.85); /* Такий самий колір, як у .navbar */
+  backdrop-filter: blur(12px); /* Фірмовий ефект розмиття */
+  -webkit-backdrop-filter: blur(12px);
   position: relative;
-  z-index: 5;
+  z-index: 100;
 }
 
 .footer-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
 }
 
+/* Копіює стилістику головного логотипу з шапки */
 .f-logo {
   font-size: 14px;
-  letter-spacing: 6px;
-  color: #F9F6F4; 
   font-weight: 500;
+  letter-spacing: 5px;
+  color: #666956; /* Фірмовий зеленувато-оливковий колір */
+  text-align: left;
+  line-height: 1.2;
 }
 
+/* Копіює стилістику текстових мета-тегів сайту */
 .f-copy {
   font-size: 10px;
+  font-weight: 400;
   letter-spacing: 2px;
-  color: rgba(249, 246, 244, 0.55); 
+  color: #8E857B; /* Благородний сіро-бежевий колір тексту сайту */
   text-transform: uppercase;
+}
+
+/* --- ОНОВЛЕНИЙ АДАПТИВ ДЛЯ ФУТЕРА --- */
+@media (max-width: 768px) {
+  .footer {
+    padding: 35px 0;
+  }
+  .footer-container {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  .f-logo {
+    text-align: center;
+  }
 }
 
 
