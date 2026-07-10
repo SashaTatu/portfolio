@@ -26,8 +26,12 @@
 
   <nav class="navbar">
     <div class="container nav-container">
-      <img src="img/favicon/kolibri2.png" alt="Kolibri Logo" class="nav-logo-img-kolibri" width="40" height="40">
-      <a href="index.html" class="nav-logo">LIBRI<br>INTERIORS</a>
+      <div class="nav-left-brand">
+        <img src="img/favicon/kolibri2.png" alt="Kolibri Logo" class="nav-logo-img-kolibri" width="40" height="40">
+        <a href="index.html" class="nav-logo">LIBRI<br>INTERIORS</a>
+      </div>
+
+      <!-- Десктопні лінки (автоматично ховаються на мобільних) -->
       <ul class="nav-links">
         <li><a href="#" class="nav-item active" data-i18n="main">Головна</a></li>
         <li><a href="about.html" class="nav-item" data-i18n="about">Про нас</a></li>
@@ -47,16 +51,52 @@
             <span id="current-lang">UA</span>
           </button>
           
-            <div class="lang-dropdown" id="langDropdown">
-                <a href="#" class="lang-dropdown-item active" data-lang="uk">Українська</a>
-                <a href="#" class="lang-dropdown-item" data-lang="de">Deutsch</a>
-                <a href="#" class="lang-dropdown-item" data-lang="en">English</a>
-                <a href="#" class="lang-dropdown-item" data-lang="ru">Русский</a>
-            </div>
+          <div class="lang-dropdown" id="langDropdown">
+              <a href="#" class="lang-dropdown-item active" data-lang="uk">Українська</a>
+              <a href="#" class="lang-dropdown-item" data-lang="de">Deutsch</a>
+              <a href="#" class="lang-dropdown-item" data-lang="en">English</a>
+              <a href="#" class="lang-dropdown-item" data-lang="ru">Русский</a>
+          </div>
         </div>
+
+        <!-- Мобільна кнопка-меню (Кружечок як на референсі) -->
+        <div class="mobile-menu-trigger-wrapper">
+          <button class="burger-menu" id="mobileMenuBtn" aria-label="Toggle Menu">
+            <div class="burger-dot-grid">
+              <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
+              <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
+              <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
+            </div>
+          </button>
+        </div>
+
       </div>
     </div>
   </nav>
+
+  <!-- Виїзне мобільне меню -->
+  <div class="mobile-overlay-menu" id="mobileOverlayMenu">
+    <button class="close-mobile-menu" id="closeMobileMenuBtn">&times;</button>
+    <div class="mobile-menu-content">
+      <ul class="mobile-nav-links">
+        <li><a href="#" class="mobile-nav-item active" data-i18n="main">Головна</a></li>
+        <li><a href="about.html" class="mobile-nav-item" data-i18n="about">Про нас</a></li>
+        <li><a href="portfolio.html" class="mobile-nav-item" data-i18n="portfolio">Портфоліо</a></li>
+        <li><a href="services.html" class="mobile-nav-item" data-i18n="services">Послуги</a></li>
+      </ul>
+      
+      <!-- Оновлений футер меню з виділеною кнопкою -->
+      <div class="mobile-menu-footer">
+        <div class="mobile-action-wrapper">
+          <a href="order.html" class="btn-mobile-menu-order" data-i18n="order-btn">Обговорити проєкт</a>
+        </div>
+        <div class="mobile-menu-meta">
+          <p>© 2026 LIBRI INTERIORS</p>
+          <a href="https://instagram.com/libri.interiors" target="_blank">@libri.interiors</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <header class="hero-image-bg">
     <div class="hero-bg-image"></div>
@@ -79,45 +119,43 @@
     </div>
   </header>
 
-    <section id="first-section" class="section-padding reveal">
+  <section id="first-section" class="section-padding reveal">
     <div class="container">
         <div class="team-header-row">
-        <span class="luxury-tag" data-i18n="team_header">// 01 / Засновники</span>
-        <h2 data-i18n="team_title">Дві перспективи — спільна мета</h2>
+          <span class="luxury-tag" data-i18n="team_header">// 01 / Засновники</span>
+          <h2 data-i18n="team_title">Дві перспективи — спільна мета</h2>
         </div>
         
         <div class="team-grid team-grid-divider">
-        
-        <div class="team-card">
-            <div class="team-photo-placeholder">
-            <img src="img/people/olena.webp" alt="Олена Суворова" loading="lazy" width="600" height="500"> 
-            </div>
-            <span class="card-role" data-i18n="olena_role">Душа кожного приміщення</span>
-            <h3 data-i18n="olena_name">Олена Суворова</h3>
-            <p class="team-quote" data-i18n="olena_quote">З увагою до деталей. З відчуттям затишку.</p>
-        </div>
-        
-        <div class="team-card">
-            <div class="team-photo-placeholder">
-            <img src="img/people/oleksander.webp" alt="Олександр Кругляк" loading="lazy" width="600" height="500">
-            </div>
-            <span class="card-role" data-i18n="oleksander_role">Технічний геній, що стоїть за ідеями</span>
-            <h3 data-i18n="oleksander_name">Олександр Кругляк</h3>
-            <p class="team-quote" data-i18n="oleksander_quote">Робить можливим те, що здається неможливим.</p>
-        </div>
-
+          <div class="team-card">
+              <div class="team-photo-placeholder">
+                <img src="img/people/olena.webp" alt="Олена Суворова" loading="lazy" width="600" height="500"> 
+              </div>
+              <span class="card-role" data-i18n="olena_role">Душа кожного приміщення</span>
+              <h3 data-i18n="olena_name">Олена Суворова</h3>
+              <p class="team-quote" data-i18n="olena_quote">З увагою до деталей. З відчуттям затишку.</p>
+          </div>
+          
+          <div class="team-card">
+              <div class="team-photo-placeholder">
+                <img src="img/people/oleksander.webp" alt="Олександр Кругляк" loading="lazy" width="600" height="500">
+              </div>
+              <span class="card-role" data-i18n="oleksander_role">Технічний геній, що стоїть за ідеями</span>
+              <h3 data-i18n="oleksander_name">Олександр Кругляк</h3>
+              <p class="team-quote" data-i18n="oleksander_quote">Робить можливим те, що здається неможливим.</p>
+          </div>
         </div>
 
         <div class="team-action">
-        <a href="about.html" class="btn-shelnat">
-            <span style="font-size: 15px; letter-spacing: 3px;" data-i18n="team_action">Більше про нас</span>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 13L13 1M13 1H4M13 1V10" stroke="currentColor" stroke-width="1.2"/></svg>
-        </a>
+          <a href="about.html" class="btn-shelnat">
+              <span style="font-size: 15px; letter-spacing: 3px;" data-i18n="team_action">Більше про нас</span>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 13L13 1M13 1H4M13 1V10" stroke="currentColor" stroke-width="1.2"/></svg>
+          </a>
         </div>
     </div>
-    </section>
+  </section>
 
-  <section class="section-padding reveal portfolio-capsule-section">
+  <section id="portfolio" class="section-padding reveal portfolio-capsule-section">
     <div class="container">
       <div class="section-header-clean">
         <span class="luxury-tag" data-i18n="portfolio_header">// 02 / ПОРТФОЛІО</span>
@@ -152,7 +190,7 @@
     </div>
   </section>
 
-  <section class="section-padding reveal">
+  <section id="services" class="section-padding reveal">
     <div class="container">
       <div class="section-header-clean">
         <span class="luxury-tag" data-i18n="services_header">// 03 / Послуги</span>
@@ -183,7 +221,7 @@
       </div>
     </div>
   </section>
-<!-- Преміальна повноширинна архітектурна секція CTA між Послугами та FAQ -->
+
   <section class="section-padding reveal cta-fluid-section">
     <div class="cta-fluid-shape">
       <div class="cta-story-bg"></div>
@@ -201,7 +239,7 @@
     </div>
   </section>
 
-  <section class="section-padding reveal">
+  <section id="faq" class="section-padding reveal">
     <div class="container" style="position: relative; z-index: 2;">
       <div class="section-header-clean">
         <span class="luxury-tag">// 04 / FAQ</span>
@@ -232,22 +270,19 @@
             <div class="faq-plus"></div>
           </div>
           <div class="faq-content">
-            <p data-i18n="faq_answer_3">Так, ми надаємо наші послуги як на об'єкті, так і повністю в цифровому форматі, зокрема на міжнародному рівні.</p>
+            <p data-i18n="faq_answer_3">Так, мы надаємо наші послуги як на об'єкті, так і повністю в цифровому форматі, зокрема на міжнародному рівні.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="section-padding reveal contact-section-luxury">
-      <!-- Текстурне зображення фону -->
+  <section id="contact" class="section-padding reveal contact-section-luxury">
       <div class="contact-bg-texture"></div>
       <div class="contact-bg-overlay"></div>
 
       <div class="container contact-container-luxury">
-        <!-- Біла картка-бокс, як на референсі замовниці -->
         <div class="contact-card-box">
-          
           <div class="contact-left">
             <span class="luxury-tag" data-i18n="contact_tag">// 05 / ЗВОРОТНІЙ ЗВ'ЯЗКОК</span>
             <h2 data-i18n="contact_title">Завжди <br><i>на зв'язку</i></h2>
@@ -278,33 +313,29 @@
                 </div>
             </form>
           </div>
-
         </div>
       </div>
     </section>
 
   <footer class="footer">
       <div class="container footer-container">
-        
-        <!-- Лівий блок: Бренд та філософія -->
         <div class="footer-brand-col">
           <div class="f-logo">LIBRI INTERIORS</div>
           <p class="f-brand-philosophy" data-i18n="footer_philosophy">Простори з характером. <br>Для людей з історіями.</p>
           <div class="f-copy">&copy; 2026. ALL RIGHTS RESERVED.</div>
         </div>
         
-        <!-- Середній блок: Лаконічна навігація -->
         <div class="footer-nav-col">
           <span class="f-column-label" data-i18n="footer_navigation">// Навігація</span>
           <ul class="f-nav-list">
-            <li><a href="#" class="f-nav-link" data-i18n="main">Головна</a></li>
-            <li><a href="about.html" class="f-nav-link" data-i18n="about">Про нас</a></li>
-            <li><a href="portfolio.html" class="f-nav-link" data-i18n="portfolio">Портфоліо</a></li>
-            <li><a href="services.html" class="f-nav-link" data-i18n="services">Послуги</a></li>
+            <li><a href="#first-section" class="f-nav-link" data-i18n="team">Засновники</a></li>
+            <li><a href="#portfolio" class="f-nav-link" data-i18n="portfolio2">Портфоліо</a></li>
+            <li><a href="#services" class="f-nav-link" data-i18n="services2">Послуги</a></li>
+            <li><a href="#faq" class="f-nav-link" data-i18n="faq">Часті запитання</a></li>
+            <li><a href="#contact" class="f-nav-link" data-i18n="contact">Зворотній зв'язок</a></li>
           </ul>
         </div>
 
-        <!-- Правий блок: Контакти та Студія -->
         <div class="footer-contacts-col">
           <span class="f-column-label" data-i18n="contact_heading">// Зв'язок</span>
           <div class="footer-contacts-grid">
@@ -326,7 +357,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </footer>
 

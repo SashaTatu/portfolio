@@ -10,12 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
-          observer.unobserve(entry.target); // Вимикаємо стеження після появи
+          observer.unobserve(entry.target); 
         }
       });
     }, {
       root: null,
-      threshold: 0.1, // Оптимальний поріг для швидкого та плавого відгуку
+      threshold: 0.1, 
       rootMargin: "0px 0px -40px 0px"
     });
 
@@ -24,13 +24,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================
-  // 2. ІНДИКАТОР СКРОЛУ HERO (Стрілка)
+  // 2. МOБІЛЬНЕ ВИЇЗНЕ МЕНЮ (МАТРИЧНИЙ КРУЖЕЧОК)
+  // ==========================================
+  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+  const closeMobileMenuBtn = document.getElementById('closeMobileMenuBtn');
+  const mobileOverlayMenu = document.getElementById('mobileOverlayMenu');
+  const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+
+  if (mobileMenuBtn && mobileOverlayMenu) {
+    // Відкрити меню
+    mobileMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      mobileOverlayMenu.classList.add('active');
+      document.body.style.overflow = 'hidden'; // забігаємо прокрутці тла
+    });
+
+    // Закрити через хрестик
+    if (closeMobileMenuBtn) {
+      closeMobileMenuBtn.addEventListener('click', () => {
+        mobileOverlayMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    }
+
+    // Закривати панель при кліку на будь-яке посилання всередині
+    mobileNavItems.forEach(item => {
+      item.addEventListener('click', () => {
+        mobileOverlayMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Закривати панель, якщо клікнули поза її межами
+    document.addEventListener('click', (e) => {
+      if (mobileOverlayMenu.classList.contains('active') && !mobileOverlayMenu.contains(e.target)) {
+        mobileOverlayMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  }
+
+
+  // ==========================================
+  // 3. ІНДИКАТОР СКРОЛУ HERO (Стрілка)
   // ==========================================
   const scrollTrigger = document.getElementById('scrollTrigger');
   const firstSection = document.getElementById('first-section');
 
   if (scrollTrigger && firstSection) {
-    // Клік для плавного скролу до першої секції
     scrollTrigger.addEventListener('click', () => {
       firstSection.scrollIntoView({ 
         behavior: 'smooth', 
@@ -38,12 +79,10 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Автоматичне приховання через 5 секунд, якщо користувач бездіє
     const autoHideTimeout = setTimeout(() => {
       scrollTrigger.classList.add('fade-out');
     }, 5000);
 
-    // Миттєве приховання при ручному скролі (збереження продуктивності)
     window.addEventListener('scroll', () => {
       if (window.scrollY > 20) {
         scrollTrigger.classList.add('fade-out');
@@ -54,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================
-  // 3. ДИНАМІЧНИЙ НАВБАР
+  // 4. ДИНАМІЧНИЙ НАВБАР
   // ==========================================
   const navbar = document.querySelector('.navbar');
   if (navbar) {
@@ -71,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================
-  // 4. FAQ АКОРДЕОН
+  // 5. FAQ АКОРДЕОН
   // ==========================================
   const faqItems = document.querySelectorAll('.faq-item');
 
@@ -83,7 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
       trigger.addEventListener('click', () => {
         const isActive = item.classList.contains('active');
 
-        // Закриваємо інші відкриті вкладки для акуратності інтерфейсу
         faqItems.forEach(otherItem => {
           if (otherItem !== item) {
             otherItem.classList.remove('active');
@@ -92,7 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         });
 
-        // Перемикаємо стан поточної вкладки
         if (isActive) {
           item.classList.remove('active');
           content.style.maxHeight = null;
@@ -106,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================
-  // 5. СЕЛЕКТОР МОВИ (Dropdown)
+  // 6. СЕЛЕКТОР МОВИ (Dropdown)
   // ==========================================
   const langBtn = document.getElementById('langBtn');
   const langSelector = document.querySelector('.lang-selector');
@@ -117,7 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
       langSelector.classList.toggle('active');
     });
 
-    // Закриваємо меню при кліку в будь-яке інше місце сторінки
     document.addEventListener('click', () => {
       langSelector.classList.remove('active');
     });
@@ -125,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================
-  // 6. СИСТЕМА ЛОКАЛІЗАЦІЇ (i18n)
+  // 7. СИСТЕМА ЛОКАЛІЗАЦІЇ (i18n)
   // ==========================================
   const currentLangCodeEl = document.getElementById('current-lang');
   const langDropdownItems = document.querySelectorAll('.lang-dropdown-item');
@@ -136,15 +172,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!response.ok) throw new Error(`Не вдалося завантажити файл мови: ${lang}`);
       const data = await response.json();
 
-      // Переклад звичайного текстового контенту
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (data[key]) {
-          el.innerHTML = data[key]; // innerHTML для збереження <br>, <i> тощо.
+          el.innerHTML = data[key];
         }
       });
 
-      // Переклад плейсхолдерів у формах
       document.querySelectorAll('[data-i18n-placeholder]').forEach(elem => {
         const key = elem.getAttribute('data-i18n-placeholder');
         if (data[key]) {
@@ -152,11 +186,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      // Оновлення технічних атрибутів та стану селектора
       document.documentElement.lang = lang;
       if (currentLangCodeEl) currentLangCodeEl.textContent = lang.toUpperCase();
 
-      // Оновлення активного класу в елементах списку мов
       langDropdownItems.forEach(item => {
         if (item.getAttribute('data-lang') === lang) {
           item.classList.add('active');
@@ -165,7 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      // Зберігаємо вибір користувача в браузері
       localStorage.setItem('selectedLanguage', lang);
 
     } catch (error) {
@@ -173,7 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Слухач подій для зміни мови при кліку
   langDropdownItems.forEach(item => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
@@ -185,7 +215,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Ініціалізація при першому візиті / перезавантаженні
   const savedLang = localStorage.getItem('selectedLanguage') || 'uk';
   if (savedLang !== 'uk') {
     loadLanguage(savedLang);
@@ -193,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================
-  // 7. ІНТЕРАКТИВНЕ НАДСИЛАННЯ ФОРМИ (Ajax-like)
+  // 8. ІНТЕРАКТИВНЕ НАДСИЛАННЯ ФОРМИ
   // ==========================================
   const contactForm = document.getElementById('generalContactForm');
 
@@ -211,7 +240,6 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.style.pointerEvents = 'none';
       submitBtn.style.opacity = '0.7';
 
-      // Емуляція відправки на сервер (наприклад, через fetch API)
       setTimeout(() => {
         if (btnText) btnText.textContent = 'Дякуємо! Повідомлення надіслано';
         contactForm.reset();
