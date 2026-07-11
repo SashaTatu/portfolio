@@ -58,6 +58,8 @@
     "contact_phone": "Telefon",
     "contact_email2": "E-Mail",
     "contact_social": "Soziale Netzwerke",
-    "contact_location": "Standort / Öffnungszeiten",
-    "contact_hours": "Mo — Fr : 09:00 — 18:00<br>Stuttgart, Deutschland"
+    "contact_location": "Öffnungszeiten / Standort",
+    "contact_hours": "Mo — Fr : 09:00 — 18:00<br> Deutschland",
+    "form_sending": "Senden...",
+    "form_success": "Vielen Dank! Ihre Nachricht wurde gesendet."
 }

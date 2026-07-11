@@ -58,6 +58,8 @@
     "contact_email2": "Email",
     "contact_phone": "Телефон",
     "contact_social": "Соціальні мережі",
-    "contact_location": "Локація / Графік",
-    "contact_hours": "Пн — Пт : 09:00 — 18:00<br>Штутгарт, Німеччина"
+    "contact_location": "Графік / Локація",
+    "contact_hours": "Пн — Пт : 09:00 — 18:00<br> Німеччина",
+    "form_sending": "Надсилання...",
+    "form_success": "Дякуємо! Повідомлення надіслано."
 }

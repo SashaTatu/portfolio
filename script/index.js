@@ -234,18 +234,41 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!submitBtn) return;
 
       const btnText = submitBtn.querySelector('span');
-      const originalText = btnText ? btnText.textContent : 'Надіслати повідомлення';
+      
+      // 1. Отримуємо активну на даний момент мову з localStorage (або ставимо за замовчуванням 'uk')
+      const currentLang = localStorage.getItem('selectedLanguage') || 'uk';
 
-      if (btnText) btnText.textContent = 'Надсилання...';
+      if (btnText) {
+        // 2. Тимчасово змінюємо атрибут ключа на стан надсилання
+        btnText.setAttribute('data-i18n', 'form_sending');
+      }
+      
+      // Кнопка стає неактивною
       submitBtn.style.pointerEvents = 'none';
       submitBtn.style.opacity = '0.7';
 
+      // 3. Запускаємо ваше динамічне оновлення тексту через наявну функцію loadLanguage
+      loadLanguage(currentLang);
+
       setTimeout(() => {
-        if (btnText) btnText.textContent = 'Дякуємо! Повідомлення надіслано';
+        if (btnText) {
+          // 4. Після "надсилання" міняємо ключ на успіх
+          btnText.setAttribute('data-i18n', 'form_success');
+        }
+        
+        // Знову оновлюємо тексти на сторінці під поточну мову
+        loadLanguage(currentLang);
         contactForm.reset();
 
         setTimeout(() => {
-          if (btnText) btnText.textContent = originalText;
+          if (btnText) {
+            // 5. Повертаємо оригінальний ключ кнопки («Надіслати повідомлення» / «Nachricht senden»)
+            btnText.setAttribute('data-i18n', 'contact_submit');
+          }
+          
+          // Фінально повертаємо початковий текст на кнопці згідно з мовою
+          loadLanguage(currentLang);
+          
           submitBtn.style.pointerEvents = 'all';
           submitBtn.style.opacity = '1';
         }, 4000);

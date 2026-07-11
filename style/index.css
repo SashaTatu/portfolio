@@ -753,3 +753,73 @@ a { text-decoration: none; color: inherit; }
   .contact-card-box { padding: 30px 20px; }
   .mobile-overlay-menu { max-width: 100%; } /* Меню на весь екран на маленьких смартфонах */
 }
+
+/* --- Додатковий базовий стиль для десктопної версії (збереження сітки) --- */
+@media (min-width: 993px) {
+  .footer-container {
+    display: grid;
+    /* Повертаємо оригінальні пропорції трьох колонок, де копірайт лежить всередині першої */
+    grid-template-columns: 1.2fr 2.3fr; 
+    gap: 80px;
+  }
+  .footer-links-wrapper {
+    display: grid;
+    grid-template-columns: 0.8fr 1.5fr;
+    gap: 80px;
+  }
+  .f-copy {
+    grid-column: 1;
+    margin-top: 40px;
+  }
+}
+
+/* ==========================================================================
+   --- ОНОВЛЕНА АДАПТИВНІСТЬ ФУТЕРА ДЛЯ МОБІЛЬНИХ ПРИСТРОЇВ ---
+   ========================================================================== */
+
+@media (max-width: 992px) {
+  /* Переводимо контейнер футера у вертикальний flex-потік */
+  .footer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    text-align: left;
+  }
+
+  /* Блок 1: Назва та філософія */
+  .footer-brand-col {
+    gap: 15px;
+  }
+  .f-brand-philosophy {
+    max-width: 100%;
+  }
+
+  /* Блок 2: Обгортка навігації та зв'язку, що ділить екран на дві колонки */
+  .footer-links-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Дві рівні колонки */
+    gap: 30px 20px;
+    width: 100%;
+  }
+
+  /* Скидаємо десктопну сітку контактів всередині правої колонки, робимо їх в один стовпчик */
+  .footer-contacts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Фіксуємо розміри шрифтів посилань на мобільних пристроях для кращої читабельності */
+  .f-contact-link {
+    font-size: 15px;
+    word-break: break-word; /* Запобігає виходу довгих email-адрес за межі екрана */
+  }
+
+  /* Блок 3: Копірайт завжди залишається в самому низу */
+  .f-copy {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(201, 194, 189, 0.2); /* Візуальна лінія над копірайтом */
+    width: 100%;
+  }
+}
