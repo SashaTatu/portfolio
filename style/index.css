@@ -123,6 +123,7 @@ a { text-decoration: none; color: inherit; }
   line-height: 1.2;
   flex-shrink: 0;
   display: block;
+  font-family: 'Cormorant Garamond', serif;
 }
 
 .nav-links { 
@@ -1199,20 +1200,186 @@ a { text-decoration: none; color: inherit; }
 .btn-cta-order:hover::before { transform: scaleY(1); }
 
 /* --- FAQ АКОРДЕОН --- */
-.faq-accordion { max-width: 900px; margin-left: auto;  }
-.faq-item { border-bottom: 1px solid rgba(201, 194, 189, 0.4); transition: border-bottom-color 0.4s ease; }
-.faq-item.active { border-bottom-color: #666956; }
-.faq-trigger { padding: 30px 0; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
-.faq-title { font-size: 16px; color: #8E857B; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s ease; }
-.faq-item:hover .faq-title, .faq-item.active .faq-title { color: #666956; }
-.faq-plus { position: relative; width: 12px; height: 12px; }
-.faq-plus::before, .faq-plus::after { content: ''; position: absolute; background-color: #666956; transition: transform 0.3s; }
-.faq-plus::before { top: 5px; left: 0; width: 12px; height: 1px; }
-.faq-plus::after { top: 0; left: 5px; width: 1px; height: 12px; }
-.faq-item.active .faq-plus::after { transform: rotate(90deg); opacity: 0; }
-.faq-item.active .faq-plus::before { transform: rotate(180deg); }
-.faq-content { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
-.faq-content p { padding-bottom: 30px; font-size: 14px; font-weight: 300; line-height: 1.7; }
+/* ==========================================
+   FAQ SECTION (LIGHT & ELEGANT STYLE)
+   ========================================== */
+
+/* Загальні налаштування секції */
+#faq.section-padding {
+  padding: 100px 20px;
+  background-color: #F6F2EC;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* 1. Заголовок секції */
+.section-header-clean {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 60px auto;
+}
+
+.section-subtitle {
+  display: inline-block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #666956; /* М'який шавлієвий акцент */
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.section-header-clean h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 30px;
+  line-height: 1.35;
+  color: #5C554E; /* Теплий м'який антрацит замість темного чорного */
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+/* 2. Контейнер акордеона */
+.faq-accordion {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+/* 3. Елементи списку та розділювачі */
+.faq-item {
+  border-bottom: 1px solid rgba(180, 170, 160, 0.25); /* Дуже ніжна, напівпрозора лінія */
+  transition: border-color 0.3s ease;
+}
+
+.faq-item:first-child {
+  border-top: 1px solid rgba(180, 170, 160, 0.25);
+}
+
+.faq-item.active {
+  border-bottom-color: rgba(102, 105, 86, 0.5); /* М'який акцент при відкритті */
+}
+
+/* 4. Кнопка-тригер (Запитання) */
+.faq-trigger {
+  width: 100%;
+  padding: 26px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  outline: none;
+  gap: 20px;
+}
+
+.faq-title {
+  font-size: 17px;
+  font-weight: 400;
+  color: #6E675F; /* Світло-кавовий відтінок */
+  letter-spacing: 0.2px;
+  transition: color 0.3s ease;
+}
+
+.faq-trigger:hover .faq-title,
+.faq-item.active .faq-title {
+  color: #666956;
+}
+
+/* 5. Мінімалістична іконка Плюс / Мінус */
+.faq-plus {
+  position: relative;
+  flex-shrink: 0;
+  width: 12px;
+  height: 12px;
+  opacity: 0.6; /* Напівпрозорість для легкості */
+  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-trigger:hover .faq-plus,
+.faq-item.active .faq-plus {
+  opacity: 1;
+}
+
+.faq-plus::before,
+.faq-plus::after {
+  content: '';
+  position: absolute;
+  background-color: #666956;
+  border-radius: 1px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Тоненькі лінії (1px) */
+.faq-plus::before {
+  top: 5px;
+  left: 0;
+  width: 12px;
+  height: 1px;
+}
+
+.faq-plus::after {
+  top: 0;
+  left: 5px;
+  width: 1px;
+  height: 12px;
+}
+
+/* Тランスформація плюса в мінус */
+.faq-item.active .faq-plus {
+  transform: rotate(180deg);
+}
+
+.faq-item.active .faq-plus::after {
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+/* 6. Випадаючий текст (Відповідь) */
+.faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.faq-content-inner {
+  padding: 0 8px 26px 8px;
+}
+
+.faq-content p {
+  margin: 0;
+  font-size: 14.5px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #7A746E; /* Повітряний, приємний для читання текст */
+}
+
+/* 7. Адаптивність під мобільні пристрої */
+@media (max-width: 768px) {
+  #faq.section-padding {
+    padding: 60px 16px;
+  }
+  
+  .section-header-clean h2 {
+    font-size: 22px;
+  }
+
+  .faq-title {
+    font-size: 15.5px;
+  }
+  
+  .faq-trigger {
+    padding: 20px 4px;
+  }
+
+  .faq-content p {
+    font-size: 14px;
+  }
+}
 
 /* --- РОЗДІЛ ЗВОРOТНОГО ЗВ'ЯЗКУ --- */
 .contact-section-luxury { position: relative; padding-top: 180px; padding-bottom: 180px; overflow: hidden; border-bottom: none; }

@@ -112,53 +112,70 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // 5. FAQ АКОРДЕОН
   // ==========================================
-  const faqItems = document.querySelectorAll('.faq-item');
+  document.querySelectorAll('.faq-trigger').forEach(trigger => {
+  trigger.addEventListener('click', () => {
+    const parent = trigger.parentElement;
+    const content = parent.querySelector('.faq-content');
 
-  faqItems.forEach(item => {
-    const trigger = item.querySelector('.faq-trigger');
-    const content = item.querySelector('.faq-content');
+    // Закрити інші відкриті елементи (за бажанням)
+    document.querySelectorAll('.faq-item').forEach(item => {
+      if (item !== parent) {
+        item.classList.remove('active');
+        item.querySelector('.faq-content').style.maxHeight = null;
+      }
+    });
 
-    if (trigger && content) {
-      trigger.addEventListener('click', () => {
-        const isActive = item.classList.contains('active');
-
-        faqItems.forEach(otherItem => {
-          if (otherItem !== item) {
-            otherItem.classList.remove('active');
-            const otherContent = otherItem.querySelector('.faq-content');
-            if (otherContent) otherContent.style.maxHeight = null;
-          }
-        });
-
-        if (isActive) {
-          item.classList.remove('active');
-          content.style.maxHeight = null;
-        } else {
-          item.classList.add('active');
-          content.style.maxHeight = content.scrollHeight + "px";
-        }
-      });
+    // Перемикання поточного елемента
+    parent.classList.toggle('active');
+    if (parent.classList.contains('active')) {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } else {
+      content.style.maxHeight = null;
     }
   });
+});
 
 
   // ==========================================
   // 6. СЕЛЕКТОР МОВИ (Dropdown)
   // ==========================================
-  const langBtn = document.getElementById('langBtn');
-  const langSelector = document.querySelector('.lang-selector');
+const langBtn = document.getElementById('langBtn');
+const langSelector = document.querySelector('.lang-selector');
+const currentLangLabel = document.getElementById('current-lang');
+const langItems = document.querySelectorAll('.lang-dropdown-item');
 
-  if (langBtn && langSelector) {
-    langBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      langSelector.classList.toggle('active');
-    });
+if (langBtn && langSelector) {
+  // Відкриття / закриття меню
+  langBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    langSelector.classList.toggle('active');
+  });
 
-    document.addEventListener('click', () => {
+  // Закриття при кліку поза меню
+  document.addEventListener('click', () => {
+    langSelector.classList.remove('active');
+  });
+
+  // Перемикання мов у списку
+  langItems.forEach((item) => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+
+      // Знімаємо active з усіх і додаємо обраному
+      langItems.forEach((el) => el.classList.remove('active'));
+      item.classList.add('active');
+
+      // Оновлюємо текст у кнопці (наприклад, "DE", "UK", "EN")
+      const langCode = item.getAttribute('data-lang').toUpperCase();
+      if (currentLangLabel) {
+        currentLangLabel.textContent = langCode;
+      }
+
+      // Закриваємо селектор
       langSelector.classList.remove('active');
     });
-  }
-
+  });
+}
 
   // ==========================================
   // 7. СИСТЕМА ЛОКАЛІЗАЦІЇ (i18n)
