@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LIBRI INTERIORS — Studio für Innenarchitektur</title>
+  <meta name="description" content="Дизайн інтер'єру, розробка архітектурних проектів та авторський нагляд.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -151,6 +152,7 @@
         </div>
       </div>
 
+
       <!-- 3. Команда - ОКРУГЛЕНІ ФОТО -->
       <div class="team-grid">
         <!-- Olena -->
@@ -177,27 +179,31 @@
           </div>
         </div>
       </div>
+          <div class="section-top-arch">
+            <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+              <!-- Дуга вигинається донизу, як на вашому референсі -->
+              <path d="M0,0 C360,100 1080,100 1440,0 L1440,100 L0,100 Z" fill="#485243"></path>
+            </svg>
+          </div>
+          <div class="section-bottom-about">
+          </div>
    </div>
   </section>
-      <!-- Блок-перехід: Цитата на всю ширину з зеленим фоном -->
-      <section class="full-quote-section reveal">
-        <div class="full-quote-container">
-          
-          <!-- Верхній знак лапок -->
-          <div class="full-quote-symbol">“</div>
+    <section class="full-quote-section" id="quote-section">
+      <div class="full-quote-container">
+        <div class="full-quote-symbol">“</div>
+        
+        <!-- Додаємо клас typewriter-text для ідентифікації -->
+        <blockquote class="full-quote-text typewriter-text" data-text="Wo andere Grenzen sehen, sehen wir Möglichkeiten. Gemeinsam verwandeln wir Ideen in Orte, an denen man gerne lebt.">
+          <!-- Тут буде порожньо, скрипт сам вставить текст -->
+        </blockquote>
 
-          <!-- Текст цитати -->
-          <blockquote class="full-quote-text" data-i18n="about_manifesto">
-            Wo andere Grenzen sehen, sehen wir Möglichkeiten. Gemeinsam verwandeln wir Ideen in Orte, an denen man gerne lebt.
-          </blockquote>
-
-          <!-- Підпис під цитатою та праворуч -->
-          <div class="full-quote-author">
-            <span class="author-title">— UNSERE PHILOSOPHIE</span>
-          </div>
-
+        <div class="full-quote-author">
+          <span class="author-title">— UNSERE PHILOSOPHIE</span>
         </div>
-      </section>
+      </div>
+    </section>
+
 
    
 
@@ -268,11 +274,18 @@
         </a>
       </div>
     </div>
-  </section>
+      <!-- Хвиля-перехід від Послуг до Процесу -->
+      <div class="services-bottom-wave">
+        <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
+          <path fill="#485243" d="M0,40 C 360,100 1080,0 1440,50 L1440,100 L0,100 Z"></path>
+        </svg>
+      </div>
+  </section> <!-- Кінець секції послуг -->
   
-  <!-- SECTION: PROCESS / DER WEG ZU IHREM ZUHAUSE -->
-  <section id="process" class="section-padding reveal process-section">
-    <div class="container">
+  
+<!-- SECTION: PROCESS / DER WEG ZU IHREM ZUHAUSE -->
+  <section id="process" class="process-section">
+    <div class="container process-content-relative">
       
       <!-- Заголовок у стилі THE PROCESS -->
       <div class="process-header">
@@ -288,6 +301,9 @@
           
           <!-- STEP 1 -->
           <div class="process-step-item">
+            <div class="step-icon-wrapper">
+              <img src="img/icons/dialog.png" alt="Analyse & Erstgespräch" class="step-icon">
+            </div>
             <div class="step-badge">1</div>
             <h3 class="step-title" data-i18n="process_step1_title">Analyse & Erstgespräch</h3>
             <p class="step-desc" data-i18n="process_step1_desc">
@@ -297,6 +313,9 @@
 
           <!-- STEP 2 -->
           <div class="process-step-item">
+            <div class="step-icon-wrapper">
+              <img src="img/icons/edit.png" alt="Konzept & Visualisierung" class="step-icon">
+            </div>
             <div class="step-badge">2</div>
             <h3 class="step-title" data-i18n="process_step2_title">Konzept & Visualisierung</h3>
             <p class="step-desc" data-i18n="process_step2_desc">
@@ -306,6 +325,9 @@
 
           <!-- STEP 3 -->
           <div class="process-step-item">
+            <div class="step-icon-wrapper">
+              <img src="img/icons/measuring.png" alt="Ausarbeitung & Detaillierung" class="step-icon">
+            </div>
             <div class="step-badge">3</div>
             <h3 class="step-title" data-i18n="process_step3_title">Ausarbeitung & Detaillierung</h3>
             <p class="step-desc" data-i18n="process_step3_desc">
@@ -315,6 +337,9 @@
 
           <!-- STEP 4 -->
           <div class="process-step-item">
+            <div class="step-icon-wrapper">
+              <img src="img/icons/home.png" alt="Umsetzung & Begleitung" class="step-icon">
+            </div>
             <div class="step-badge">4</div>
             <h3 class="step-title" data-i18n="process_step4_title">Umsetzung & Begleitung</h3>
             <p class="step-desc" data-i18n="process_step4_desc">
@@ -325,6 +350,13 @@
         </div>
       </div>
 
+    </div>
+
+<!-- Повернута фігура з темно-зеленою хвилею (#485243) -->
+    <div class="process-bottom-wave">
+      <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
+        <path fill="#485243" d="M0,0 L1440,0 L1440,95 C 1020,-15 420,135 0,20 Z"></path>
+      </svg>
     </div>
   </section>
 

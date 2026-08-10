@@ -10,6 +10,11 @@
   scroll-behavior: smooth;
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: clip; /* Замість hidden, щоб sticky працював */
+}
+
 body {
   background-color: #F9F6F4;
   font-family: 'Montserrat', sans-serif;
@@ -17,44 +22,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-
-/* ==========================================
-   ЕФЕКТ "ВІКНА" / "ШТОРИ" (STICKY REVEAL)
-   ========================================== */
-
-/* 1. Бежеві секції перекривають фонові та мають суцільне тло */
-.about-section,
-#portfolio,
-#services,
-#process,
-#faq {
-  position: relative;
-  z-index: 2;
-  background-color: #F9F6F4;
-}
-
-/* 2. Секції з фоном (Hero, Цитата, CTA, Контакти) фіксуються під час скролу */
-.hero-image-bg,
-.full-quote-section,
-.cta-fluid-section,
-.contact-section-luxury {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-}
-
-/* 3. Скидаємо стилі, які заважали шаруванню та ширині */
-.full-quote-section {
-  width: 100%;
-  left: 0;
-  margin-left: 0;
-  margin-right: 0;
-}
-
-.hero-bg-image {
-  animation: none !important;
-  transform: none !important;
-}
 /* Приклад додавання елегантного шуму на тло */
 body::before {
   content: "";
@@ -71,10 +38,18 @@ h1, h2, h3, h4, i {
   color: #485243;
   font-weight: 400;
 }
+/* Збільшуємо міжрядковий інтервал та розрядку букв */
+h1, h2, h3 {
+  letter-spacing: 0.02em;
+}
 
 h2 {
-  font-size: clamp(34px, 4.5vw, 50px);
-  line-height: 1.15;
+  line-height: 1.25; /* Робимо заголовок легшим для сприйняття */
+}
+
+p, .about-story p, .col-text p {
+  line-height: 1.85; /* Повітряний міжрядковий інтервал для тексту */
+  letter-spacing: 0.3px;
 }
 
 a { text-decoration: none; color: inherit; }
@@ -153,9 +128,63 @@ a { text-decoration: none; color: inherit; }
   width: 1px; height: 100%;
   background-color: rgba(201, 194, 189, 0.15);
 }
+.about-section,
+.full-quote-section,
+.portfolio-capsule-section,
+#services,
+.process-section,
+.cta-fluid-section,
+#faq,
+.contact-section-luxury,
+.footer {
+  position: relative;
+  z-index: 2; /* Нашаровуються поверх Hero */
+  background-color: #F9F6F4; /* Обов'язково суцільний фон, щоб Hero не просвічувала */
+}
+
+.full-quote-section,
+.process-section {
+  background-color: #485243;
+}
+
+#faq {
+  background-color: #F6F2EC;
+}
+
+/* --- ФІКС ПРОЗОРOСТІ ПРИ СКРОЛІ (REVEAL) --- */
+
+/* 1. Самі секції завжди залишаємо 100% непрозорими */
+section.reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+/* 2. Переносимо плавну появу (opacity, transform, blur) на внутрішні контейнери */
+section.reveal > .container,
+section.reveal > .full-quote-container,
+section.reveal > .cta-fluid-shape {
+  opacity: 0;
+  transform: translateY(40px);
+  filter: blur(2px);
+  transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), 
+              transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), 
+              filter 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform, opacity, filter;
+}
+
+/* 3. Коли секція стає активною — плавно показуємо вміст */
+section.reveal.active > .container,
+section.reveal.active > .full-quote-container,
+section.reveal.active > .cta-fluid-shape {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
 
 /* --- НАВІГАЦІЯ --- */
 .navbar {
+  z-index: 1000 !important;
   position: fixed;
   width: 100%; top: 0; left: 0; z-index: 100;
   padding: 15px 0;
@@ -515,13 +544,15 @@ a { text-decoration: none; color: inherit; }
 
 /* --- HERO ЕКРАН --- */
 .hero-image-bg {
-  position: relative;
+  position: sticky;
+  top: 0;
   height: 100vh;
   width: 100%;
   display: flex;
   align-items: flex-end;
   padding-bottom: 120px;
   overflow: hidden;
+  z-index: 1;
 }
 
 .hero-bg-image {
@@ -723,12 +754,15 @@ a { text-decoration: none; color: inherit; }
    --- ОНОВЛЕНА СЕКЦІЯ "ПРО НАС" (ABOUT & TEAM) ---
    ========================================================================== */
 
+/* ВІДРЕФАКТОРЕНИЙ БЛОК ABOUT-SECTION */
 .about-section {
-  max-width: 1200px; /* Трохи розширимо для простору */
+  width: 100%;
   margin: 0 auto;
-  padding: 120px 20px; /* Більше відступів */
+  padding: 120px 0 60px 0; /* Зменшено нижній падінг секції */
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  border-radius: 60px 60px 0 0;
+  box-shadow: 0 -25px 50px rgba(0, 0, 0, 0.15);
 }
 
 /* 1. Header & Typography */
@@ -775,7 +809,19 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* --- ABOUT SECTION --- */
-.about-section { padding: 120px 0; }
+.about-section {
+  width: 100%;
+  margin: 0 auto;
+  padding: 100px 0 40px 0; /* Ще трохи менший падінг */
+  position: relative;
+  z-index: 2;
+  border-radius: 60px 60px 0 0;
+  box-shadow: 0 -25px 50px rgba(0, 0, 0, 0.15);
+}
+
+
+
+
 
 .about-grid {
   display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px;
@@ -814,26 +860,77 @@ a { text-decoration: none; color: inherit; }
 
 .photo-wrapper img { width: 100%; height: 100%; object-fit: cover; }
 
-.team-info h3 { font-size: 24px; color: #485243; margin-bottom: 4px; }
+.team-info h3 { font-size: 24px; color: #f7f7f7; margin-bottom: 4px; }
 .team-info .role { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #8E857B; }
+
+.section-top-arch {
+  position: absolute;
+  /* Центруємо дугу по горизонталі */
+  left: 50%;
+  transform: translateX(-50%);
+  top: 70%; /* Встановлюємо зверху секції */
+  /* Позиціонуємо по вертикалі позаду карток */
+  bottom: -20px; 
+  width: 100vw; /* Розтягуємо на всю ширину екрана або вкажіть конкретну ширину, наприклад 100% */
+  height: 100px;
+  
+  /* Менший z-index робить її позаду карток (у яких z-index: 2) */
+  z-index: -1; 
+  pointer-events: none;
+
+
+}
+
+.section-top-arch svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.section-bottom-about{
+  position: absolute;
+  bottom: -20px; /* Встановлюємо знизу секції */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw; /* Розтягуємо на всю ширину екрана або вкажіть конкретну ширину, наприклад 100% */
+  height: 760px;
+  background-color: #485243; /* Колір фону секції */
+  
+  /* Менший z-index робить її позаду карток (у яких z-index: 2) */
+  z-index: -1; 
+  pointer-events: none;
+  margin-bottom: -500px; /* Щоб уникнути вертикального скролу через дугу */
+}
+
+
+
 
 /* ==========================================
    --- ВИШУКАНА ЦИТАТА-СТРІЧКА (ЗЕЛЕНИЙ ФОН) ---
    ========================================== */
 
+/* Видаляємо всі попередні спроби (якщо додавали окремі блоки) */
+
 .full-quote-section {
-  width: 100vw;
-  position: relative;
+  position: relative; /* Обов'язково для роботи псевдоелемента */
+  padding: 80px 0;    /* Збільшуємо простір для лінії */
+  background-color: #485243;
+}
+.full-quote-section::before {
+  content: "";
+  position: absolute;
+  top: 40px;
   left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  
-  background-color: #485243; /* Ваш колір фону */
-  padding: 48px 0; /* Зменшили висоту блоку майже вдвічі */
-  margin-top: 60px;
-  margin-bottom: 60px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08), inset 0 -1px 3px rgba(0, 0, 0, 0.08);
+  transform: translateX(-50%);
+  width: 40%; /* Лінія на 40% ширини екрану */
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.2) 20%, 
+    rgba(255, 255, 255, 0.8) 50%, 
+    rgba(255, 255, 255, 0.2) 80%, 
+    transparent 100%);
+  z-index: 10;
 }
 
 .full-quote-container {
@@ -885,6 +982,23 @@ a { text-decoration: none; color: inherit; }
   color: #BCC2B1; /* Витончений світлий нюанс */
   text-transform: uppercase;
   opacity: 0.9;
+}
+
+.typewriter-text {
+  min-height: 1.5 em; /* Щоб блок не стрибав при появі тексту */
+  display: inline-block;
+}
+
+/* Ефект миготливого курсора */
+.typewriter-text::after {
+  content: '|';
+  animation: blink 1s infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 /* --- АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ --- */
@@ -957,6 +1071,7 @@ a { text-decoration: none; color: inherit; }
 .capsule-description { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; color: #485243; margin-top: 15px; }
 
 /* --- ТАБЛИЦЯ ПОСЛУГ --- */
+#services { padding: 0px }
 .shelnat-table { border-top: 1px solid #C9C2BD; }
 .table-row { 
   display: flex; padding: 45px 0; border-bottom: 1px solid rgba(201, 194, 189, 0.4); position: relative;
@@ -975,12 +1090,88 @@ a { text-decoration: none; color: inherit; }
 /* ==========================================
    PROCESS SECTION (DER WEG ZU IHREM ZUHAUSE)
    ========================================== */
-
-.process-section {
-  padding: 120px 0;
-  position: relative;
-  background-color: #F9F6F4;
+/* Верхня хвиля в кінці секції Послуг */
+.services-bottom-wave {
+  width: 100%;
+  height: 200px;
+  margin-top: 40px; /* Відступ від блоку "Detaillierte Bedingungen und Preise" */
+  line-height: 0;
 }
+
+.services-bottom-wave svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* 1. Секція Process */
+.process-section {
+  position: relative;
+  background-color: #485243;
+  padding-top: 40px;
+  padding-bottom: 120px;
+  overflow: visible !important; /* Необхідно, щоб тінь та хвиля виходили за межі */
+  margin-bottom: 0;
+  z-index: 10;
+}
+
+.process-bottom-wave {
+  position: absolute;
+  bottom: -170px;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  z-index: 10;
+  pointer-events: none;
+
+  /* Зсув тіні більше вниз (Y: 18px) при меншому розмитті (10px) */
+  filter: drop-shadow(0px 18px 10px rgba(0, 0, 0, 0.25));
+
+  /* Обрізаємо тінь зверху (0px), але залишаємо відкритим простір знизу (-60px) */
+  clip-path: inset(0px -30px -60px -30px);
+}
+.process-bottom-wave svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+
+
+
+.process-content-relative {
+  position: relative;
+  z-index: 2;
+}
+
+/* Кольори тексті та елементів на темному фоні */
+.process-section .process-tag-line {
+  color: #C9C2BD;
+}
+
+.process-section .process-title,
+.process-section .step-title {
+  color: #FFFFFF;
+}
+
+.process-section .step-desc {
+  color: #E2DDD9;
+}
+
+.process-section .step-icon {
+  filter: brightness(0) invert(1);
+}
+
+.process-section .step-badge {
+  background-color: #F9F6F4;
+  color: #485243;
+  box-shadow: 0 0 0 6px #485243;
+}
+
+.process-section .process-connecting-line {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
 
 .process-header {
   text-align: center;
@@ -1088,6 +1279,54 @@ a { text-decoration: none; color: inherit; }
   color: #8E857B;
   max-width: 260px;
 }
+/* Іконка над кроком */
+.step-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  margin-bottom: 15px;
+}
+
+.step-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+}
+
+.process-step-item:hover .step-icon {
+  transform: translateY(-3px);
+}
+
+/* Оновлення висоти лінії для врахування іконок (40px висота + 15px margin + 21px центр бейджа = 76px) */
+.process-connecting-line {
+  position: absolute;
+  top: 76px;
+  left: 60px;
+  right: 60px;
+  height: 1px;
+  background-color: rgba(201, 194, 189, 0.6);
+  z-index: 0;
+}
+
+/* Адаптивність для мобільних пристроїв */
+@media (max-width: 992px) {
+  .step-icon-wrapper {
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    height: auto;
+  }
+  
+  .step-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .process-connecting-line {
+    top: 0;
+  }
+}
 
 /* --- МОБІЛЬНА АДАПТИВНІСТЬ --- */
 @media (max-width: 992px) {
@@ -1133,12 +1372,53 @@ a { text-decoration: none; color: inherit; }
   }
 }
 
-/* --- СЕКЦІЯ CTA --- */
-.cta-fluid-section { padding: 60px 0; background-color: #F9F6F4; width: 100%; overflow: hidden; }
-.cta-fluid-shape { position: static; width: 100%; min-height: 450px; display: flex; align-items: center; justify-content: center; overflow: hidden; clip-path: ellipse(85% 100% at 50% 50%); }
-.cta-story-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('../img/background/call-back.webp'); background-size: cover; background-position: center 40%; z-index: 0; filter: grayscale(20%) brightness(0.65) contrast(1.05); transform: scale(1.01); transition: transform 2.5s cubic-bezier(0.25, 1, 0.5, 1), filter 2.5s ease; will-change: transform, filter; }
-.cta-fluid-shape:hover .cta-story-bg { transform: scale(1.05); filter: grayscale(5%) brightness(0.58) contrast(1.05); }
-.cta-story-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(22, 20, 19, 0.8) 0%, rgba(102, 105, 86, 0.5) 100%); z-index: 1; }
+.cta-fluid-section {
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: #F9F6F4;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.cta-fluid-shape { 
+  position: relative; /* Змінено з static на relative, щоб bg та overlay обмежувалися цією фігурою */
+  width: 100%; 
+  min-height: 600px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  overflow: hidden; 
+  clip-path: ellipse(85% 100% at 50% 50%); 
+}
+
+.cta-story-bg { 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  background-image: url('../img/background/call-back.webp'); 
+  background-size: cover; 
+  background-position: center 40%; 
+  z-index: 0; 
+  filter: grayscale(20%) brightness(0.65) contrast(1.05); 
+  transform: scale(1.01); 
+  transition: transform 2.5s cubic-bezier(0.25, 1, 0.5, 1), filter 2.5s ease; 
+  will-change: transform, filter; 
+}
+
+.cta-fluid-shape:hover .cta-story-bg { 
+  transform: scale(1.05); 
+  filter: grayscale(5%) brightness(0.58) contrast(1.05); 
+}
+
+.cta-story-overlay { 
+  position: absolute; 
+  inset: 0; 
+  background: linear-gradient(135deg, rgba(22, 20, 19, 0.8) 0%, rgba(102, 105, 86, 0.5) 100%); 
+  z-index: 1; 
+}
 .cta-fluid-content-wrapper { position: relative; z-index: 2; width: 100%; max-width: 1200px; padding: 0 40px; box-sizing: border-box; }
 .cta-story-content { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 22px; text-align: center; }
 .cta-story-content h2 { font-size: clamp(30px, 3.5vw, 42px); color: #FFFFFF; line-height: 1.2; letter-spacing: 1.5px; text-transform: uppercase; text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2); }
@@ -1335,11 +1615,38 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* --- РОЗДІЛ ЗВОРOТНОГО ЗВ'ЯЗКУ --- */
-.contact-section-luxury { position: relative; padding-top: 180px; padding-bottom: 180px; overflow: hidden; border-bottom: none; }
-.contact-bg-texture { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('../img/background/tex5.webp'); background-size: cover; background-position: center; z-index: 0; filter: contrast(1.05) brightness(0.9); }
+/* Контейнер контактів з відносним позиціонуванням */
+.contact-section-luxury {
+  position: relative;
+  background-color: #12100F; /* Основний темний колір фону */
+  /* Переконайтеся, що зауважено відступи для дуги */
+  padding-top: 40px; 
+  padding-bottom: 120px;
+}
+
+/* Оформлення SVG-дуги, що накладається вгору */
+.contact-top-arch {
+  position: absolute;
+  top: -119px; /* Висуваємо дугу вгору на секцію FAQ */
+  left: 0;
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  line-height: 0;
+  z-index: 3; /* Кладемо над фоном FAQ */
+  pointer-events: none;
+}
+
+.contact-top-arch svg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.contact-bg-texture { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('../img/background/back.webp'); background-size: cover; background-position: center; z-index: 0; filter: contrast(1.05) brightness(0.9); }
 .contact-bg-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(142, 133, 123, 0.25) 0%, rgba(102, 105, 86, 0.15) 100%); z-index: 1; }
 .contact-container-luxury { position: relative; z-index: 2; }
-.contact-card-box { background-color: #FFFFFF; padding: 80px 100px; box-shadow: 0 40px 90px rgba(18, 16, 15, 0.08); display: flex; gap: 100px; align-items: flex-start; width: 100%; }
+.contact-card-box { background-color: #FFFFFF; padding: 80px 100px; box-shadow: 0 40px 90px rgba(18, 16, 15, 0.4); display: flex; gap: 100px; align-items: flex-start; width: 100%; }
 .contact-left { flex: 1; }
 .contact-left h2 { margin: 25px 0 30px; font-size: clamp(36px, 4.2vw, 50px); }
 .contact-meta-text { font-size: 14px; font-weight: 300; line-height: 1.7; color: #8E857B; }
@@ -1568,3 +1875,4 @@ a { text-decoration: none; color: inherit; }
   z-index: 0;
   pointer-events: none;
 }
+

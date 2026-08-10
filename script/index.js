@@ -321,4 +321,52 @@ if (contactForm) {
     }, 1500);
   });
 }
+
+
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const quoteSection = document.querySelector("#quote-section");
+  const textElement = document.querySelector(".typewriter-text");
+  
+  if (!quoteSection || !textElement) return;
+
+  const fullText = textElement.getAttribute("data-text");
+  let isAnimated = false;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !isAnimated) {
+        isAnimated = true;
+        
+        // --- ФІКС СТРИБКА ФОНУ ---
+        // 1. Тимчасово вставляємо повний текст, щоб виміряти його реальну висоту
+        textElement.textContent = fullText;
+        const targetHeight = textElement.offsetHeight;
+        
+        // 2. Фіксуємо висоту контейнера
+        textElement.style.minHeight = `${targetHeight}px`;
+        
+        // 3. Очищаємо текст і запускаємо друк
+        textElement.textContent = "";
+        typeText(textElement, fullText, 30);
+      }
+    });
+  }, { threshold: 0.3 });
+
+  observer.observe(quoteSection);
+
+  function typeText(element, text, speed) {
+    let i = 0;
+    function nextChar() {
+      if (i < text.length) {
+        element.textContent += text.charAt(i);
+        i++;
+        setTimeout(nextChar, speed);
+      } else {
+        element.classList.add('finished');
+      }
+    }
+    nextChar();
+  }
 });
