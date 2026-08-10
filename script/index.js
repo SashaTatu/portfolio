@@ -239,58 +239,86 @@ if (langBtn && langSelector) {
 
 
   // ==========================================
-  // 8. ІНТЕРАКТИВНЕ НАДСИЛАННЯ ФОРМИ
-  // ==========================================
-  const contactForm = document.getElementById('generalContactForm');
+// 8. ІНТЕРАКТИВНЕ НАДСИЛАННЯ ФОРМИ ТА ЗАВАНТАЖЕННЯ ФАЙЛУ
+// ==========================================
+const contactForm = document.getElementById('generalContactForm');
+const fileInput = document.getElementById('fileUpload');
+const fileNameDisplay = document.getElementById('fileNameDisplay');
 
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
+// 1. Відстеження вибору файлу (відображення назви файлу)
+if (fileInput && fileNameDisplay) {
+  fileInput.addEventListener('change', function () {
+    if (this.files && this.files[0]) {
+      fileNameDisplay.textContent = this.files[0].name;
+    }
+  });
+}
 
-      const submitBtn = contactForm.querySelector('.submit-btn');
-      if (!submitBtn) return;
+// 2. Обробка відправки форми
+if (contactForm) {
+  // Словник-заглушка на випадок, якщо в JSON немає ключів для стану відправки
+  const formStatusMessages = {
+    de: { sending: "Wird gesendet...", success: "Nachricht gesendet ✓", fileDefault: "Grundriss oder Fotos hinzufügen (optional)" }
+  };
 
-      const btnText = submitBtn.querySelector('span');
-      
-      // 1. Отримуємо активну на даний момент мову з localStorage (або ставимо за замовчуванням 'uk')
-      const currentLang = localStorage.getItem('selectedLanguage') || 'uk';
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-      if (btnText) {
-        // 2. Тимчасово змінюємо атрибут ключа на стан надсилання
-        btnText.setAttribute('data-i18n', 'form_sending');
-      }
-      
-      // Кнопка стає неактивною
-      submitBtn.style.pointerEvents = 'none';
-      submitBtn.style.opacity = '0.7';
+    const submitBtn = contactForm.querySelector('.submit-btn');
+    if (!submitBtn) return;
 
-      // 3. Запускаємо ваше динамічне оновлення тексту через наявну функцію loadLanguage
+    const btnText = submitBtn.querySelector('span');
+    const currentLang = localStorage.getItem('selectedLanguage') || 'de';
+    const langMsgs = formStatusMessages[currentLang] || formStatusMessages['de'];
+
+    // Крок А: Стан "Надсилання..."
+    if (btnText) {
+      btnText.setAttribute('data-i18n', 'form_sending');
+      btnText.textContent = langMsgs.sending; // Гарантована зміна тексту
+    }
+
+    submitBtn.style.pointerEvents = 'none';
+    submitBtn.style.opacity = '0.7';
+
+    if (typeof loadLanguage === 'function') {
       loadLanguage(currentLang);
+    }
+
+    setTimeout(() => {
+      // Крок Б: Стан "Успішно надіслано"
+      if (btnText) {
+        btnText.setAttribute('data-i18n', 'form_success');
+        btnText.textContent = langMsgs.success; // Гарантована зміна тексту
+      }
+
+      if (typeof loadLanguage === 'function') {
+        loadLanguage(currentLang);
+      }
+
+      // Скидаємо форму
+      contactForm.reset();
+
+      // Очищаємо вибраний файл і повертаємо початковий текст підказки для файлу
+      if (fileNameDisplay) {
+        fileNameDisplay.setAttribute('data-i18n', 'contact_file');
+        fileNameDisplay.textContent = langMsgs.fileDefault;
+      }
 
       setTimeout(() => {
+        // Крок В: Повертаємо кнопку в початковий стан через 4 секунди
         if (btnText) {
-          // 4. Після "надсилання" міняємо ключ на успіх
-          btnText.setAttribute('data-i18n', 'form_success');
+          btnText.setAttribute('data-i18n', 'contact_submit');
         }
-        
-        // Знову оновлюємо тексти на сторінці під поточну мову
-        loadLanguage(currentLang);
-        contactForm.reset();
 
-        setTimeout(() => {
-          if (btnText) {
-            // 5. Повертаємо оригінальний ключ кнопки («Надіслати повідомлення» / «Nachricht senden»)
-            btnText.setAttribute('data-i18n', 'contact_submit');
-          }
-          
-          // Фінально повертаємо початковий текст на кнопці згідно з мовою
+        if (typeof loadLanguage === 'function') {
           loadLanguage(currentLang);
-          
-          submitBtn.style.pointerEvents = 'all';
-          submitBtn.style.opacity = '1';
-        }, 4000);
+        }
 
-      }, 1500);
-    });
-  }
+        submitBtn.style.pointerEvents = 'all';
+        submitBtn.style.opacity = '1';
+      }, 4000);
+
+    }, 1500);
+  });
+}
 });

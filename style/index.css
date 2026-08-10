@@ -17,6 +17,44 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+
+/* ==========================================
+   ЕФЕКТ "ВІКНА" / "ШТОРИ" (STICKY REVEAL)
+   ========================================== */
+
+/* 1. Бежеві секції перекривають фонові та мають суцільне тло */
+.about-section,
+#portfolio,
+#services,
+#process,
+#faq {
+  position: relative;
+  z-index: 2;
+  background-color: #F9F6F4;
+}
+
+/* 2. Секції з фоном (Hero, Цитата, CTA, Контакти) фіксуються під час скролу */
+.hero-image-bg,
+.full-quote-section,
+.cta-fluid-section,
+.contact-section-luxury {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* 3. Скидаємо стилі, які заважали шаруванню та ширині */
+.full-quote-section {
+  width: 100%;
+  left: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.hero-bg-image {
+  animation: none !important;
+  transform: none !important;
+}
 /* Приклад додавання елегантного шуму на тло */
 body::before {
   content: "";
@@ -30,7 +68,7 @@ body::before {
 
 h1, h2, h3, h4, i {
   font-family: 'Cormorant Garamond', serif;
-  color: #666956;
+  color: #485243;
   font-weight: 400;
 }
 
@@ -51,6 +89,38 @@ a { text-decoration: none; color: inherit; }
   padding: 150px 0;
   border-bottom: none;
   position: relative;
+}
+
+/* Уніфіковані стилі для заголовків секцій */
+.section-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px auto;
+}
+
+.section-tag {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #8E857B;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4.2vw, 48px);
+  font-weight: 300;
+  color: #485243;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.section-title i {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
 }
 
 /* Тонкий "видих" замість жорсткої лінії — лише де потрібно акцентувати межу */
@@ -118,7 +188,7 @@ a { text-decoration: none; color: inherit; }
   font-size: 14px; 
   font-weight: 500; 
   letter-spacing: 5px; 
-  color: #666956;
+  color: #485243;
   text-align: left;
   line-height: 1.2;
   flex-shrink: 0;
@@ -151,25 +221,25 @@ a { text-decoration: none; color: inherit; }
 }
 
 .nav-links:hover .nav-item { opacity: 0.35; }
-.nav-links .nav-item:hover { opacity: 1; color: #666956; }
-.nav-item.active { opacity: 1; color: #666956; }
+.nav-links .nav-item:hover { opacity: 1; color: #485243; }
+.nav-item.active { opacity: 1; color: #485243; }
 
 .nav-item::after {
   content: '';
   position: absolute;
   bottom: 0; left: 50%; width: 0; height: 1px;
-  background-color: #666956;
+  background-color: #485243;
   transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1), left 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .nav-item:hover::after, .nav-item.active::after { width: 100%; left: 0; }
 
 .btn-nav-order {
-  border: 1px solid #666956;
+  border: 1px solid #485243;
   padding: 12px 25px;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #666956;
+  color: #485243;
   background: transparent;
   border-radius: 40px;
   font-weight: 500;
@@ -184,13 +254,13 @@ a { text-decoration: none; color: inherit; }
   content: '';
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background-color: #666956;
+  background-color: #485243;
   transform: scaleY(0);
   transform-origin: bottom;
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   z-index: -1;
 }
-.btn-nav-order:hover { color: #F9F6F4; border-color: #666956; transform: translateY(-2px); }
+.btn-nav-order:hover { color: #F9F6F4; border-color: #485243; transform: translateY(-2px); }
 .btn-nav-order:hover::before { transform: scaleY(1); }
 .btn-nav-order:active { transform: translateY(0); }
 
@@ -209,14 +279,14 @@ a { text-decoration: none; color: inherit; }
   padding: 12px 20px;
   font-size: 12px;
   font-weight: 500;
-  color: #666956;
+  color: #485243;
   border-radius: 40px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .lang-btn:hover, .lang-selector.active .lang-btn {
-  border-color: #666956;
+  border-color: #485243;
   background-color: rgba(102, 105, 86, 0.05);
 }
 
@@ -251,7 +321,7 @@ a { text-decoration: none; color: inherit; }
   transition: background 0.2s ease;
 }
 .lang-dropdown-item:hover { background-color: #F9F6F4; }
-.lang-dropdown-item.active { color: #666956; font-weight: 500; }
+.lang-dropdown-item.active { color: #485243; font-weight: 500; }
 
 /* --- МОБІЛЬНА КНОПКА-КРУЖЕЧОК (Зображення референсу) --- */
 .mobile-menu-trigger-wrapper {
@@ -264,7 +334,7 @@ a { text-decoration: none; color: inherit; }
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: #666956;
+  color: #485243;
   font-weight: 400;
 }
 
@@ -290,7 +360,7 @@ a { text-decoration: none; color: inherit; }
 
 /* Елементи всередині (лінії або крапки бургера) */
 .burger-menu span {
-  background-color: #666956;    /* Колір внутрішніх елементів */
+  background-color: #485243;    /* Колір внутрішніх елементів */
   transition: background-color 0.3s ease;
 }
 
@@ -316,7 +386,7 @@ a { text-decoration: none; color: inherit; }
 .burger-dot-grid span {
   width: 3px;
   height: 3px;
-  background-color: #666956; /* Білі точки */
+  background-color: #485243; /* Білі точки */
   border-radius: 50%;
   transition: transform 0.3s ease;
 }
@@ -348,7 +418,7 @@ a { text-decoration: none; color: inherit; }
   background: transparent;
   border: none;
   font-size: 38px;
-  color: #666956;
+  color: #485243;
   cursor: pointer;
   line-height: 1;
 }
@@ -371,7 +441,7 @@ a { text-decoration: none; color: inherit; }
 .mobile-nav-item {
   font-family: 'Cormorant Garamond', serif;
   font-size: 28px;
-  color: #666956;
+  color: #485243;
   display: block;
   transition: padding-left 0.3s ease;
 }
@@ -402,8 +472,8 @@ a { text-decoration: none; color: inherit; }
   display: block;
   width: 100%;
   text-align: center;
-  border: 1px solid #666956;
-  background-color: #666956; /* Акцентне залиття для мобілки */
+  border: 1px solid #485243;
+  background-color: #485243; /* Акцентне залиття для мобілки */
   color: #F9F6F4; /* Світлий текст на темному тлі */
   padding: 16px 25px;
   font-size: 12px;
@@ -488,6 +558,8 @@ a { text-decoration: none; color: inherit; }
 
 .hero-image-bg h1 i { color: #F9F6F4; }
 
+
+
 .hero-p {
   font-size: 16px;
   font-weight: 400;
@@ -512,6 +584,14 @@ a { text-decoration: none; color: inherit; }
   -webkit-backdrop-filter: blur(8px);
   -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 100%);
   mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 100%);
+}
+.hero-subtext {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: #8E857B;
+  font-style: italic;
+  letter-spacing: 0.5px;
 }
 
 /* --- СТИЛІЗАЦІЯ КНОПКИ В HERO СЕКЦІЇ --- */
@@ -603,9 +683,9 @@ a { text-decoration: none; color: inherit; }
 .hero-footer { display: flex; justify-content: space-between; align-items: flex-end; }
 
 /* КНОПКА SHELNAT СТРІЛКА */
-.btn-shelnat { display: inline-flex; align-items: center; gap: 15px; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #666956; padding: 10px 0; position: relative; border: none; background: transparent; cursor: pointer; }
+.btn-shelnat { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #485243; padding: 10px 0; position: relative; border: none; background: transparent; cursor: pointer; }
 .btn-shelnat svg { transition: transform 0.3s ease; }
-.btn-shelnat::after { content: ''; position: absolute; bottom: 4px; left: 0; width: 100%; height: 1px; background-color: #666956; transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease; }
+.btn-shelnat::after { content: ''; position: absolute; bottom: 4px; left: 0; width: 100%; height: 1px; background-color: #485243; transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease; }
 .btn-shelnat:hover::after { transform: scaleX(1); transform-origin: left; }
 .btn-shelnat:hover svg { transform: translate(3px, -3px); }
 
@@ -639,545 +719,419 @@ a { text-decoration: none; color: inherit; }
   50% { transform: translateY(6px); }
 }
 
-/* --- СЕКЦІЯ "ПРО МЕНЕ" (PREMIUM DESIGN) --- */
-.about-me-section {
-  position: relative;
-  background-color: transparent;
-  background-color: #F8F5F0;
-}
-
-.about-me-grid {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 90px;
-  align-items: center;
-}
-
-/* Контейнер фото з графічною рамкою */
-.about-me-image-container {
-  position: relative;
-  width: 100%;
-  max-width: 480px;
-  margin: 0 auto;
-}
-
-.about-me-frame-border {
-  position: absolute;
-  top: -15px;
-  left: -15px;
-  width: 100%;
-  height: 100%;
-  border: 1px solid rgba(102, 105, 86, 0.25);
-  border-radius: 140px 140px 24px 24px;
-  pointer-events: none;
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.about-me-photo-wrapper {
-  position: relative;
-  width: 100%;
-  height: 600px;
-  border-radius: 130px 130px 20px 20px;
-  overflow: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
-  background-color: #f4f2ee;
-}
-
-.about-me-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  filter: grayscale(100%) contrast(1.03);
-  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.9s ease;
-}
-
-/* Hover-ефекти для фото */
-.about-me-image-container:hover .about-me-img {
-  transform: scale(1.04);
-  filter: grayscale(80%) contrast(1.05);
-}
-
-.about-me-image-container:hover .about-me-frame-border {
-  top: -8px;
-  left: -8px;
-  border-color: rgba(102, 105, 86, 0.5);
-}
-
-/* Текстовий блок */
-.about-me-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(44px, 5vw, 68px);
-  font-weight: 300;
-  line-height: 1;
-  letter-spacing: 0.02em;
-  color: #2c2c2c;
-  margin-bottom: 24px;
-  text-transform: uppercase;
-}
-
-.about-me-quote-box {
-  position: relative;
-  padding-left: 20px;
-  border-left: 2px solid #666956;
-  margin-bottom: 30px;
-}
-
-.about-me-subtitle {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(20px, 2vw, 25px);
-  font-style: italic;
-  font-weight: 400;
-  color: #666956;
-  line-height: 1.35;
-  margin: 0;
-}
-
-.about-me-divider {
-  width: 60px;
-  height: 1px;
-  background-color: rgba(102, 105, 86, 0.3);
-  margin-bottom: 30px;
-}
-
-.about-me-text-body {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-}
-
-.about-me-text-body p {
-  font-size: 15px;
-  font-weight: 300;
-  line-height: 1.8;
-  color: #4a4d40;
-  letter-spacing: 0.01em;
-}
-
-/* Адаптивність */
-@media (max-width: 1024px) {
-  .about-me-grid {
-    grid-template-columns: 1fr;
-    gap: 60px;
-  }
-
-  .about-me-image-container {
-    max-width: 420px;
-  }
-
-  .about-me-photo-wrapper {
-    height: 520px;
-  }
-}
-
-@media (max-width: 576px) {
-  .about-me-photo-wrapper {
-    height: 420px;
-    border-radius: 90px 90px 16px 16px;
-  }
-
-  .about-me-frame-border {
-    border-radius: 100px 100px 20px 20px;
-    top: -10px;
-    left: -10px;
-  }
-}
-
-
 /* ==========================================================================
-   --- СТИЛІ ДЛЯ СЕКЦІЇ-ПЕРЕХОДУ З ЧЕРГУВАННЯМ ФОНУ (#F6F2EC) ---
+   --- ОНОВЛЕНА СЕКЦІЯ "ПРО НАС" (ABOUT & TEAM) ---
    ========================================================================== */
 
-.section-separation {
+.about-section {
+  max-width: 1200px; /* Трохи розширимо для простору */
+  margin: 0 auto;
+  padding: 120px 20px; /* Більше відступів */
   position: relative;
-  padding: 80px 0; 
-  background-color: #666956; /* Новий темний зелений фон */
-  z-index: 2;
-  transition: background-color 0.4s ease;
-  height: 200px;
-  margin-bottom: 50px;
+  z-index: 1;
 }
 
-.section-separation::after {
-  display: none;
+/* 1. Header & Typography */
+.about-header {
+  text-align: center;
+  margin-bottom: 90px; /* Відступ до гріда */
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.separation-container {
+.section-tag {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #8E857B;
+  display: block;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.hero-slogan {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 56px); /* Адаптивний розмір */
+  font-weight: 300;
+  color: #485243;
+  margin-bottom: 15px;
+  line-height: 1.1;
+}
+
+.hero-slogan i {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+}
+
+.hero-subtext {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  color: #8E857B;
+  font-style: italic;
+  letter-spacing: 0.5px;
+}
+
+/* --- ABOUT SECTION --- */
+.about-section { padding: 120px 0; }
+
+.about-grid {
+  display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px;
+  align-items: center; margin-bottom: 80px;
+}
+
+.lead-paragraph {
+  font-size: 17px; line-height: 1.7; color: #485243; font-weight: 400; margin-bottom: 15px;
+}
+
+.about-story p { font-size: 14px; line-height: 1.8; color: #8E857B; font-weight: 300; }
+
+.about-vision-card {
+  background: #FFFFFF; padding: 45px; border-radius: 24px;
+  border: 1px solid rgba(201, 194, 189, 0.3); position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+}
+
+.quote-mark {
+  font-family: 'Cormorant Garamond', serif; font-size: 6rem;
+  position: absolute; top: -10px; left: 25px; color: #485243; opacity: 0.12;
+}
+
+.about-vision-card p { font-size: 14px; line-height: 1.8; color: #8E857B; font-weight: 300; }
+
+.team-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; margin-bottom: 80px;
+}
+
+.team-card { display: flex; flex-direction: column; align-items: center; text-align: center; }
+
+.photo-wrapper {
+  width: 100%; max-width: 340px; aspect-ratio: 3/4; border-radius: 120px;
+  overflow: hidden; margin-bottom: 20px; border: 1px solid rgba(201, 194, 189, 0.3);
+}
+
+.photo-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+
+.team-info h3 { font-size: 24px; color: #485243; margin-bottom: 4px; }
+.team-info .role { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #8E857B; }
+
+/* ==========================================
+   --- ВИШУКАНА ЦИТАТА-СТРІЧКА (ЗЕЛЕНИЙ ФОН) ---
+   ========================================== */
+
+.full-quote-section {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  
+  background-color: #485243; /* Ваш колір фону */
+  padding: 48px 0; /* Зменшили висоту блоку майже вдвічі */
+  margin-top: 60px;
+  margin-bottom: 60px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.08), inset 0 -1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.full-quote-container {
+  max-width: 1050px; /* Трохи звузили ширину для кращого сприйняття */
+  margin: 0 auto;
+  padding: 0 40px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
 }
 
-/* Ювелірний роздільник: тонка лінія з центральною акцентною зіркою */
-.sep-divider-line {
-  position: relative;
-  width: 100%;
-  max-width: 300px;
-  height: 1px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgba(255, 255, 255, 0.3) 20%, 
-    rgba(255, 255, 255, 0.8) 50%, 
-    rgba(255, 255, 255, 0.3) 80%, 
-    transparent 100%
-  );
-  margin-bottom: 25px;
+/* Витончені акуратні лапки */
+.full-quote-symbol {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  line-height: 0.5;
+  color: #B2B8A6; /* Ніжний шавлієвий акцент */
+  opacity: 0.65;
+  margin-bottom: 12px;
+  user-select: none;
+}
+
+/* Текст цитати: стрункий, ледве розряджений */
+.full-quote-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 1.8vw, 25px);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.55;
+  color: #F4F3EE; /* М'який біло-кремовий */
+  margin: 0 0 18px 0;
+  max-width: 980px;
+  letter-spacing: 0.4px;
+}
+
+/* Підпис: під цитатою та праворуч */
+.full-quote-author {
+  align-self: flex-end;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 12px;
+  margin-top: 4px;
 }
 
-.sep-diamond-star {
-  font-size: 12px;
-  color: #E5E2DC;
-  background-color: #666956; /* Збігається з новим фоном */
-  padding: 0 14px;
-  line-height: 1;
-  display: inline-block;
-  transform: scale(0.9);
-  transition: transform 0.5s ease, color 0.5s ease;
-}
-
-.section-separation:hover .sep-diamond-star {
-  transform: scale(1.25) rotate(90deg);
-  color: #FFFFFF;
-}
-
-.separation-content {
-  max-width: 850px;
-  padding: 0 20px;
-}
-
-.sep-quote-blockquote {
-  border: none;
-  margin: 0;
-  padding: 0;
-}
-
-.sep-quote-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(26px, 3.5vw, 38px);
-  line-height: 1.4;
-  font-weight: 300;
-  color: #F9F6F4; /* Світлий колір для високого контрасту */
-  letter-spacing: 0.02em;
-}
-
-.sep-accent-limits {
-  font-weight: 300;
-  color: #D6D2CB;
+.author-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 400; /* Менша товщина для тонкості */
+  letter-spacing: 3.5px; /* Більша розрядка букв для преміального вигляду */
+  color: #BCC2B1; /* Витончений світлий нюанс */
+  text-transform: uppercase;
   opacity: 0.9;
 }
 
-.sep-accent-opportunities {
-  font-style: italic;
-  font-weight: 400;
-  color: #FFFFFF;
-  position: relative;
-  transition: all 0.4s ease;
+/* --- АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ --- */
+@media (max-width: 768px) {
+  .full-quote-section {
+    padding: 38px 0;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  .full-quote-container {
+    padding: 0 24px;
+  }
+
+  .full-quote-symbol {
+    font-size: 34px;
+    margin-bottom: 8px;
+  }
+
+  .full-quote-text {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  .author-title {
+    font-size: 9px;
+    letter-spacing: 2.5px;
+  }
 }
 
-.section-separation:hover .sep-accent-opportunities {
-  color: #E5E2DC;
-  text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-}
+/* --- АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ (ПЛАНШЕТИ ТА СМАРТФОНИ) --- */
 
-/* --- АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ ПРИСТРОЇВ --- */
+@media (max-width: 992px) {
+  .about-section { padding: 80px 20px; }
+  .about-header { margin-bottom: 60px; }
+  .about-grid {
+    grid-template-columns: 1fr; /* В одну колонку */
+    gap: 40px;
+    margin-bottom: 70px;
+  }
+  .about-vision-card { padding: 40px; }
+  .team-grid { gap: 40px; margin-bottom: 70px; }
+}
 
 @media (max-width: 768px) {
-  .section-separation {
-    padding: 40px 0 30px;
+  .hero-slogan { font-size: 32px; }
+  .team-grid {
+    grid-template-columns: 1fr; /* Команда в один стовпчик */
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
   }
-
-  .sep-divider-line {
-    max-width: 200px;
-    margin-bottom: 20px;
-  }
-
-  .sep-quote-text {
-    font-size: 20px;
-    line-height: 1.4;
-  }
-}
-
-/* --- СЕКЦІЯ ЗАСНОВНИКИ (LUXURY ARCHITECTURAL DESIGN) --- */
-.founders-section {
-  position: relative;
-  background-color: transparent;
-  padding-top: 60px;
-  padding-bottom: 90px;
-  background-color: #F8F5F0;
-}
-
-.founders-header-wrapper {
-  margin-bottom: 60px;
-}
-
-.founders-grid {
-  display: grid;
-  grid-template-columns: 1fr 1.35fr 1fr;
-  gap: 60px;
-  align-items: start;
-}
-
-/* Картки портретів */
-.founder-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.founder-photo-container {
-  position: relative;
-  width: 100%;
-  max-width: 360px;
-  margin-bottom: 28px;
-}
-
-.founder-photo-wrapper {
-  position: relative;
-  width: 100%;
-  height: 500px;
-  border-radius: 140px 140px 24px 24px;
-  overflow: hidden;
-  background-color: #f4f2ee;
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.04);
-  transition: box-shadow 0.6s ease;
-}
-
-.founder-photo-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  filter: grayscale(100%) contrast(1.04);
-  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
-}
-
-.founder-card:hover .founder-photo-wrapper {
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
-}
-
-.founder-card:hover .founder-photo-wrapper img {
-  transform: scale(1.04);
-  filter: grayscale(85%) contrast(1.05);
-}
-
-.founder-meta {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 300px;
-}
-
-.founder-name {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 26px;
-  font-weight: 400;
-  letter-spacing: 0.03em;
-  color: #2c2c2c;
-  margin-bottom: 6px;
-  text-transform: none;
-}
-
-.founder-role {
-  font-size: 13px;
-  font-weight: 400;
-  color: #666956;
-  letter-spacing: 0.02em;
-  margin-bottom: 12px;
-}
-
-.founder-tagline {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 16px;
-  font-style: italic;
-  font-weight: 500;
-  color: #2c2c2c;
-  line-height: 1.4;
-  margin: 0;
-}
-
-/* Центральний контент */
-.founders-center-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding-top: 10px;
-  margin-bottom: 200px;
-}
-
-.founders-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(26px, 2.6vw, 38px);
-  line-height: 1.15;
-  letter-spacing: 0.05em;
-  color: #2c2c2c;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  font-weight: 300;
-}
-
-.founders-title span {
-  display: block;
-  font-size: 0.92em;
-  letter-spacing: 0.06em;
-  color: #4a4d40;
-}
-
-.founders-subtitle-wrapper {
-  position: relative;
-  margin-bottom: 28px;
-  padding-bottom: 15px;
-}
-
-.founders-subtitle-wrapper::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 1px;
-  background-color: rgba(102, 105, 86, 0.35);
-}
-
-.founders-subtitle {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #2c2c2c;
-}
-
-.founders-description {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  font-size: 14px;
-  font-weight: 300;
-  line-height: 1.8;
-  color: #55584b;
-  margin-bottom: 35px;
-  max-width: 460px;
-}
-
-/* Картка цитати у преміальному стилі */
-.founders-quote-card {
-  position: relative;
-  border: 1px solid rgba(102, 105, 86, 0.3);
-  background-color: rgba(244, 242, 238, 0.4);
-  padding: 18px 30px;
-  margin-bottom: 28px;
-  width: 100%;
-  max-width: 440px;
-  border-radius: 4px;
-  transition: border-color 0.4s ease;
-}
-
-.founders-quote-card:hover {
-  border-color: rgba(102, 105, 86, 0.6);
-}
-
-.founders-quote-card p {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 19px;
-  font-style: italic;
-  font-weight: 500;
-  color: #2c2c2c;
-  margin: 0;
-  line-height: 1.4;
-  letter-spacing: 0.01em;
-}
-
-.founders-footer-text {
-  font-size: 20px;
-  font-weight: 300;
-  color: #666956;
-  max-width: 360px;
-  line-height: 1.6;
-  margin-bottom: 30px;
-  letter-spacing: 0.01em;
-  font-style: italic;
-
-}
-
-.founders-action .btn-shelnat {
-  font-size: 12px;
-  letter-spacing: 2.5px;
-  padding: 12px 28px;
-}
-
-/* Адаптивні стилі */
-@media (max-width: 1100px) {
-  .founders-grid {
-    grid-template-columns: 1fr;
-    gap: 70px;
-  }
-
-  .founders-center-content {
-    order: -1;
-  }
-
-  .founder-photo-wrapper {
-    height: 440px;
-  }
-}
-
-@media (max-width: 576px) {
-  .founder-photo-wrapper {
-    height: 380px;
-    border-radius: 100px 100px 20px 20px;
-  }
-
-  .founders-quote-card {
-    padding: 16px 20px;
-  }
+  .photo-wrapper { max-width: 100%; } /* Фото на всю ширину на мобільних */
+  .final-manifesto blockquote { font-size: 20px; }
 }
 
 /* --- ПОРТФОЛІО ТИЗЕР --- */
-.portfolio-capsule-section { padding-top: 120px; padding-bottom: 120px; overflow: hidden; background-color: #F6F2EC;}
-.portfolio-capsule-section h2 { margin-bottom: 80px; text-align: left; font-size: clamp(34px, 4.5vw, 50px); }
-.portfolio-capsule-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: 60px 80px; align-items: start; }
-.portfolio-capsule-item { display: flex; flex-direction: column; position: relative; }
-.capsule-image-wrapper { width: 100%; overflow: hidden; position: relative; background-color: #F4F2EE; transition: transform 0.8s cubic-bezier(0.25, 1, 0.3, 1); }
-.capsule-image-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(8%) contrast(1.02); transition: transform 1.2s cubic-bezier(0.25, 1, 0.3, 1); }
+.portfolio-capsule-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px; }
 
-.horizontal-capsule { height: 360px; border-radius: 180px; }
-.item-top-left { max-width: 560px; flex-direction: row !important; align-items: flex-end; gap: 30px; }
-.vertical-capsule { height: 600px; border-radius: 200px; }
-.item-right-vertical { grid-column: 2; grid-row: 1 / 3; margin-top: 100px; }
-.wide-capsule { height: 400px; border-radius: 200px; }
-.item-bottom-wide { grid-column: 1; margin-top: -20px; }
-.capsule-description { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 300; font-style: italic; color: #666956; line-height: 1.4; }
+.capsule-image-wrapper { width: 100%; overflow: hidden; background: #EAE6E1; }
+.capsule-image-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-.item-top-left .capsule-image-wrapper { flex: 1; margin-right: -30px; }
-.item-top-left .capsule-description { width: 200px; flex-shrink: 0; padding-bottom: 20px; text-align: left; }
-.item-right-vertical .capsule-description { margin-top: 20px; padding-left: 30px; max-width: 300px; }
-.item-bottom-wide .capsule-description { margin-top: 20px; padding-left: 25px; }
-.portfolio-capsule-item:hover .capsule-image-wrapper { transform: translateY(-2px); }
-.portfolio-capsule-item:hover .capsule-image-wrapper img { transform: scale(1.05); }
+.horizontal-capsule { height: 340px; border-radius: 170px; }
+.vertical-capsule { height: 540px; border-radius: 180px; }
+.wide-capsule { height: 380px; border-radius: 190px; }
+
+.item-top-left { flex-direction: row !important; align-items: flex-end; gap: 20px; }
+.item-right-vertical { grid-column: 2; grid-row: 1 / 3; }
+.capsule-description { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-style: italic; color: #485243; margin-top: 15px; }
 
 /* --- ТАБЛИЦЯ ПОСЛУГ --- */
-#services{ background-color: #F8F5F0; }
 .shelnat-table { border-top: 1px solid #C9C2BD; }
 .table-row { 
   display: flex; padding: 45px 0; border-bottom: 1px solid rgba(201, 194, 189, 0.4); position: relative;
   transition: padding-left 0.5s cubic-bezier(0.25, 1, 0.5, 1), border-bottom-color 0.5s ease; cursor: pointer; 
 }
-.table-row:hover { padding-left: 20px; border-bottom-color: #666956; }
-.table-row::before { content: ''; position: absolute; left: 0; bottom: -1px; width: 0; height: 1px; background-color: #666956; transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
+.table-row:hover { padding-left: 20px; border-bottom-color: #485243; }
+.table-row::before { content: ''; position: absolute; left: 0; bottom: -1px; width: 0; height: 1px; background-color: #485243; transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
 .table-row:hover::before { width: 100%; }
 .col-num { flex: 0.5; font-size: 11px; }
 .col-name { flex: 1.5; }
 .col-name h3 { font-size: 30px; transition: color 0.4s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
-.table-row:hover .col-name h3 { color: #666956; transform: translateX(5px); }
+.table-row:hover .col-name h3 { color: #485243; transform: translateX(5px); }
 .col-text { flex: 3; font-size: 14px; font-weight: 300; line-height: 1.7; }
+
+
+/* ==========================================
+   PROCESS SECTION (DER WEG ZU IHREM ZUHAUSE)
+   ========================================== */
+
+.process-section {
+  padding: 120px 0;
+  position: relative;
+  background-color: #F9F6F4;
+}
+
+.process-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.process-tag-line {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #8E857B;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.process-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3.5vw, 42px);
+  font-weight: 300;
+  color: #485243;
+}
+
+/* Обгортка таймлайну */
+.process-timeline-wrapper {
+  position: relative;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* Суцільна горизонтальна лінія за кругльами */
+.process-connecting-line {
+  position: absolute;
+  top: 21px; /* По центру кружечка 42px / 2 */
+  left: 60px;
+  right: 60px;
+  height: 1px;
+  background-color: rgba(201, 194, 189, 0.6);
+  z-index: 0;
+}
+
+/* Сітка на 4 колонки */
+.process-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Окремий крок */
+.process-step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 10px;
+}
+
+/* Темно-зелений кружечок з номером */
+.step-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #485243;
+  color: #FFFFFF;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  box-shadow: 0 0 0 8px #F9F6F4; /* Створює білий простір навколо лінії */
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.4s ease;
+}
+
+.process-step-item:hover .step-badge {
+  transform: scale(1.1);
+  background-color: #666956;
+}
+
+/* Заголовок кроку */
+.step-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #485243;
+  margin-bottom: 12px;
+  min-height: 28px; /* Однакова висота блоку для вирівнювання опису */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Опис кроку */
+.step-desc {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: #8E857B;
+  max-width: 260px;
+}
+
+/* --- МОБІЛЬНА АДАПТИВНІСТЬ --- */
+@media (max-width: 992px) {
+  .process-timeline-wrapper {
+    padding-left: 20px;
+  }
+
+  .process-connecting-line {
+    top: 0;
+    bottom: 0;
+    left: 40px;
+    width: 1px;
+    height: 100%;
+    right: auto;
+  }
+
+  .process-steps-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .process-step-item {
+    align-items: flex-start;
+    text-align: left;
+    padding-left: 60px;
+    position: relative;
+  }
+
+  .step-badge {
+    position: absolute;
+    left: 0;
+    top: -4px;
+    margin-bottom: 0;
+  }
+
+  .step-title {
+    justify-content: flex-start;
+    min-height: auto;
+  }
+
+  .step-desc {
+    max-width: 100%;
+  }
+}
 
 /* --- СЕКЦІЯ CTA --- */
 .cta-fluid-section { padding: 60px 0; background-color: #F9F6F4; width: 100%; overflow: hidden; }
@@ -1196,7 +1150,7 @@ a { text-decoration: none; color: inherit; }
   border: 1px solid rgba(255, 255, 255, 0.75); padding: 14px 36px; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #FFFFFF; background: transparent; border-radius: 40px; font-weight: 500; position: relative; overflow: hidden; z-index: 1; display: inline-block; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .btn-cta-order::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #FFFFFF; transform: scaleY(0); transform-origin: bottom; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); z-index: -1; }
-.btn-cta-order:hover { color: #666956; border-color: #FFFFFF; transform: translateY(-2px); }
+.btn-cta-order:hover { color: #485243; border-color: #FFFFFF; transform: translateY(-2px); }
 .btn-cta-order:hover::before { transform: scaleY(1); }
 
 /* --- FAQ АКОРДЕОН --- */
@@ -1207,7 +1161,6 @@ a { text-decoration: none; color: inherit; }
 /* Загальні налаштування секції */
 #faq.section-padding {
   padding: 100px 20px;
-  background-color: #F6F2EC;
 }
 
 .container {
@@ -1227,7 +1180,7 @@ a { text-decoration: none; color: inherit; }
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #666956; /* М'який шавлієвий акцент */
+  color: #485243; /* М'який шавлієвий акцент */
   margin-bottom: 12px;
   font-weight: 500;
 }
@@ -1287,7 +1240,7 @@ a { text-decoration: none; color: inherit; }
 
 .faq-trigger:hover .faq-title,
 .faq-item.active .faq-title {
-  color: #666956;
+  color: #485243;
 }
 
 /* 5. Мінімалістична іконка Плюс / Мінус */
@@ -1309,7 +1262,7 @@ a { text-decoration: none; color: inherit; }
 .faq-plus::after {
   content: '';
   position: absolute;
-  background-color: #666956;
+  background-color: #485243;
   border-radius: 1px;
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
@@ -1393,9 +1346,9 @@ a { text-decoration: none; color: inherit; }
 .contact-right { flex: 1.2; width: 100%; }
 .shelnat-form { display: flex; flex-direction: column; gap: 40px; }
 .input-row-numeric { display: flex; align-items: flex-start; gap: 20px; border-bottom: 1px solid rgba(201, 194, 189, 0.4); padding-bottom: 5px; position: relative; transition: border-color 0.4s ease; }
-.input-row-numeric:focus-within { border-color: #666956; }
+.input-row-numeric:focus-within { border-color: #485243; }
 .field-num { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: #C9C2BD; padding-top: 12px; line-height: 1; user-select: none; flex-shrink: 0; transition: color 0.4s ease, transform 0.4s ease; }
-.input-row-numeric:focus-within .field-num { color: #666956; transform: translateY(-2px); }
+.input-row-numeric:focus-within .field-num { color: #485243; transform: translateY(-2px); }
 .shelnat-form input, .shelnat-form textarea { width: 100%; background: transparent !important; border: none !important; outline: none !important; padding: 12px 0; color: #2c2c2c; font-size: 14px; font-weight: 300; font-family: 'Montserrat', sans-serif; }
 .shelnat-form textarea { resize: none; display: block; padding-top: 14px; line-height: 1.6; }
 .shelnat-form input::placeholder, .shelnat-form textarea::placeholder { color: #8E857B; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.8; transition: opacity 0.3s ease; }
@@ -1403,23 +1356,45 @@ a { text-decoration: none; color: inherit; }
 .form-submit-row { margin-top: 10px; display: flex; }
 .submit-btn { border: none; background: transparent; padding: 10px 0; cursor: pointer; }
 
+.file-upload-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 12px 0;
+  cursor: pointer;
+  color: #8E857B;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: opacity 0.3s ease;
+}
+
+.file-upload-label:hover {
+  opacity: 0.6;
+}
+
+.file-upload-label svg {
+  color: #485243;
+}
+
 /* --- ФУТЕР --- */
 .footer { padding: 100px 0 60px; border-top: 1px solid rgba(201, 194, 189, 0.35); background-color: #F9F6F4; position: relative; z-index: 100; }
 .footer-container { display: grid; grid-template-columns: 1.2fr 0.8fr 1.5fr; gap: 80px; width: 100%; align-items: flex-start; }
 .footer-brand-col { display: flex; flex-direction: column; gap: 25px; }
-.f-logo { font-size: 16px; font-weight: 500; letter-spacing: 5px; color: #666956; line-height: 1.2; }
+.f-logo { font-size: 16px; font-weight: 500; letter-spacing: 5px; color: #485243; line-height: 1.2; }
 .f-brand-philosophy { font-size: 13px; font-weight: 300; line-height: 1.6; color: #8E857B; max-width: 280px; }
 .f-copy { font-size: 10px; font-weight: 400; letter-spacing: 2px; color: #C9C2BD; text-transform: uppercase; margin-top: auto; padding-top: 20px; }
 .footer-nav-col { display: flex; flex-direction: column; gap: 25px; }
 .f-column-label { font-size: 10px; text-transform: uppercase; letter-spacing: 3px; color: #8E857B; font-weight: 400; border-bottom: 1px solid rgba(201, 194, 189, 0.2); padding-bottom: 10px; }
 .f-nav-list { list-style: none; display: flex; flex-direction: column; gap: 15px; }
 .f-nav-list .f-nav-link { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #8E857B; transition: color 0.3s ease, padding-left 0.3s ease; display: inline-block; }
-.f-nav-list .f-nav-link:hover { color: #666956; padding-left: 6px; }
+.f-nav-list .f-nav-link:hover { color: #485243; padding-left: 6px; }
 .footer-contacts-col { display: flex; flex-direction: column; gap: 25px; }
 .footer-contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 35px 25px; }
 .f-contact-item { display: flex; flex-direction: column; gap: 6px; }
 .f-contact-label { font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: #C9C2BD; }
-.f-contact-link { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: #666956; font-weight: 300; transition: color 0.3s ease, transform 0.3s ease; display: inline-block; }
+.f-contact-link { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: #485243; font-weight: 300; transition: color 0.3s ease, transform 0.3s ease; display: inline-block; }
 .f-contact-link:hover { color: #8E857B; transform: translateY(-1px); }
 .f-contact-text { font-size: 13px; font-weight: 300; line-height: 1.5; color: #8E857B; }
 
