@@ -630,6 +630,13 @@ section.reveal.active > .cta-fluid-shape {
   text-shadow: 0 0 40px rgba(255, 255, 255, 0.15); 
 }
 
+.hero-container {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  margin-left: 70px;
+}
+
 .hero-image-bg h1 i { color: #F9F6F4; }
 
 
