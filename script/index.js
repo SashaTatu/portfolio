@@ -22,6 +22,58 @@ document.addEventListener('DOMContentLoaded', () => {
     revealElements.forEach(element => revealObserver.observe(element));
   });
 
+  // ==========================================
+  // 1. ПОЕЛЕМЕНТНА АНІМАЦІЯ ПОЯВИ
+  // ==========================================
+  requestAnimationFrame(() => {
+    // 1. Елементи для поштучної появи
+    const singleElements = document.querySelectorAll(`
+      .section-tag,
+      .section-title,
+      .about-header > *,
+      .about-story-fullwidth > p,
+      .team-card,
+      .glass-quote-card,
+      .portfolio-capsule-item,
+      .table-row,
+      .cta-story-content > *,
+      .faq-item,
+      .contact-left > *,
+      .shelnat-form .input-row-numeric,
+      .form-submit-row,
+      .btn-shelnat,
+      .btn-hero-order
+    `);
+
+    singleElements.forEach(el => el.classList.add('reveal-item'));
+
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+
+    singleElements.forEach(el => observer.observe(el));
+
+    // 2. Окремий спостерігач для сітки Процесу (активує каскад)
+    const processGrid = document.querySelector('.process-steps-grid');
+    if (processGrid) {
+      const processObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+
+      processObserver.observe(processGrid);
+    }
+  });
+
 
   // ==========================================
   // 2. МOБІЛЬНЕ ВИЇЗНЕ МЕНЮ (МАТРИЧНИЙ КРУЖЕЧОК)

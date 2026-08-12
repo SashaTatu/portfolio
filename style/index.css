@@ -151,6 +151,32 @@ a { text-decoration: none; color: inherit; }
   background-color: #F6F2EC;
 }
 
+
+/* --- СКИДАННЯ АНІМАЦІЇ З СЕКЦІЙ --- */
+section.reveal,
+section.reveal > .container,
+section.reveal > .full-quote-container,
+section.reveal > .cta-fluid-shape {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+/* --- ПЛАВНА ПОЯВА ОКРЕНИХ ЕЛЕМЕНТІВ --- */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Стан, коли елемент з'являється на екрані */
+.reveal-item.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* --- ФІКС ПРОЗОРOСТІ ПРИ СКРОЛІ (REVEAL) --- */
 
 /* 1. Самі секції завжди залишаємо 100% непрозорими */
@@ -986,7 +1012,7 @@ section.reveal.active > .cta-fluid-shape {
   z-index: 10;
   
   /* Піднімаємо блок вище від зеленого фону */
-  margin: 0 40px 180px 40px;
+  margin: 0 40px 240px 40px;
   transform: translateY(-50px);
 }
 
@@ -2239,3 +2265,38 @@ section.reveal.active > .cta-fluid-shape {
   pointer-events: none;
 }
 
+
+
+/* --- ПОЧЕРГОВА ПОЯВА КРОКІВ У СЕКЦІЇ "ПРОЦЕС" --- */
+
+/* Базовий стан кожного кроку */
+.process-step-item {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Стан, коли сітка потрапляє в поле зору */
+.process-steps-grid.active .process-step-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Почергова затримка для кожного кроку (1 -> 2 -> 3 -> 4) */
+.process-steps-grid.active .process-step-item:nth-child(1) {
+  transition-delay: 0.15s;
+}
+
+.process-steps-grid.active .process-step-item:nth-child(2) {
+  transition-delay: 0.35s;
+}
+
+.process-steps-grid.active .process-step-item:nth-child(3) {
+  transition-delay: 0.55s;
+}
+
+.process-steps-grid.active .process-step-item:nth-child(4) {
+  transition-delay: 0.75s;
+}
