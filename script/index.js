@@ -1,32 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // ==========================================
-  // 1. АНІМАЦІЯ ПОЯВИ ЕЛЕМЕНТІВ (Reveal)
+  // 1. ПОЕЛЕМЕНТНА АНІМАЦІЯ ПОЯВИ (Intersection Observer)
   // ==========================================
   requestAnimationFrame(() => {
-    const revealElements = document.querySelectorAll('.reveal');
-    
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-          observer.unobserve(entry.target); 
-        }
-      });
-    }, {
-      root: null,
-      threshold: 0.1, 
-      rootMargin: "0px 0px -40px 0px"
-    });
 
-    revealElements.forEach(element => revealObserver.observe(element));
-  });
-
-  // ==========================================
-  // 1. ПОЕЛЕМЕНТНА АНІМАЦІЯ ПОЯВИ
-  // ==========================================
-  requestAnimationFrame(() => {
-    // 1. Елементи для поштучної появи
     const singleElements = document.querySelectorAll(`
       .section-tag,
       .section-title,
@@ -58,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     singleElements.forEach(el => observer.observe(el));
 
-    // 2. Окремий спостерігач для сітки Процесу (активує каскад)
+    // Окремий спостерігач для сітки Процесу
     const processGrid = document.querySelector('.process-steps-grid');
     if (processGrid) {
       const processObserver = new IntersectionObserver((entries, obs) => {
@@ -76,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================
-  // 2. МOБІЛЬНЕ ВИЇЗНЕ МЕНЮ (МАТРИЧНИЙ КРУЖЕЧОК)
+  // 2. МОБІЛЬНЕ ВИЇЗНЕ МЕНЮ
   // ==========================================
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   const closeMobileMenuBtn = document.getElementById('closeMobileMenuBtn');
@@ -84,34 +62,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
 
   if (mobileMenuBtn && mobileOverlayMenu) {
-    // Відкрити меню
-    mobileMenuBtn.addEventListener('click', (e) => {
+    const closeMenu = () => {
+      mobileOverlayMenu.classList.remove('active');
+      document.body.style.overflow = '';
+    };
+
+    const openMenu = (e) => {
       e.stopPropagation();
       mobileOverlayMenu.classList.add('active');
-      document.body.style.overflow = 'hidden'; // забігаємо прокрутці тла
-    });
+      document.body.style.overflow = 'hidden';
+    };
 
-    // Закрити через хрестик
+    mobileMenuBtn.addEventListener('click', openMenu);
+
     if (closeMobileMenuBtn) {
-      closeMobileMenuBtn.addEventListener('click', () => {
-        mobileOverlayMenu.classList.remove('active');
-        document.body.style.overflow = '';
-      });
+      closeMobileMenuBtn.addEventListener('click', closeMenu);
     }
 
-    // Закривати панель при кліку на будь-яке посилання всередині
     mobileNavItems.forEach(item => {
-      item.addEventListener('click', () => {
-        mobileOverlayMenu.classList.remove('active');
-        document.body.style.overflow = '';
-      });
+      item.addEventListener('click', closeMenu);
     });
 
-    // Закривати панель, якщо клікнули поза її межами
     document.addEventListener('click', (e) => {
       if (mobileOverlayMenu.classList.contains('active') && !mobileOverlayMenu.contains(e.target)) {
-        mobileOverlayMenu.classList.remove('active');
-        document.body.style.overflow = '';
+        closeMenu();
       }
     });
   }
@@ -164,99 +138,75 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // 5. FAQ АКОРДЕОН
   // ==========================================
-  document.querySelectorAll('.faq-trigger').forEach(trigger => {
-  trigger.addEventListener('click', () => {
-    const parent = trigger.parentElement;
-    const content = parent.querySelector('.faq-content');
+  const faqTriggers = document.querySelectorAll('.faq-trigger');
 
-    // Закрити інші відкриті елементи (за бажанням)
-    document.querySelectorAll('.faq-item').forEach(item => {
-      if (item !== parent) {
-        item.classList.remove('active');
-        item.querySelector('.faq-content').style.maxHeight = null;
+  faqTriggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+      const content = trigger.nextElementSibling;
+
+      // Закриваємо всі інші відкриті вкладки (лише 1 відкриваємо)
+      faqTriggers.forEach(otherTrigger => {
+        if (otherTrigger !== trigger) {
+          otherTrigger.setAttribute('aria-expanded', 'false');
+          if (otherTrigger.nextElementSibling) otherTrigger.nextElementSibling.style.maxHeight = null;
+        }
+      });
+
+      // Перемикаємо поточну вкладку
+      if (isExpanded) {
+        trigger.setAttribute('aria-expanded', 'false');
+        if (content) content.style.maxHeight = null;
+      } else {
+        trigger.setAttribute('aria-expanded', 'true');
+        if (content) content.style.maxHeight = content.scrollHeight + 'px';
       }
     });
-
-    // Перемикання поточного елемента
-    parent.classList.toggle('active');
-    if (parent.classList.contains('active')) {
-      content.style.maxHeight = content.scrollHeight + "px";
-    } else {
-      content.style.maxHeight = null;
-    }
   });
-});
 
 
   // ==========================================
-  // 6. СЕЛЕКТОР МОВИ (Dropdown)
+  // 6. СИСТЕМА ЛОКАЛІЗАЦІЇ ТА СЕЛЕКТОР МОВИ (i18n)
   // ==========================================
-const langBtn = document.getElementById('langBtn');
-const langSelector = document.querySelector('.lang-selector');
-const currentLangLabel = document.getElementById('current-lang');
-const langItems = document.querySelectorAll('.lang-dropdown-item');
+  const langBtn = document.getElementById('langBtn');
+  const langSelector = document.querySelector('.lang-selector');
+  const currentLangLabel = document.getElementById('current-lang');
+  const langDropdownItems = document.querySelectorAll('.lang-dropdown-item');
+  let currentLangData = {};
 
-if (langBtn && langSelector) {
-  // Відкриття / закриття меню
-  langBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    langSelector.classList.toggle('active');
-  });
+  if (langBtn && langSelector) {
+    langBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      langSelector.classList.toggle('active');
+    });
 
-  // Закриття при кліку поза меню
-  document.addEventListener('click', () => {
-    langSelector.classList.remove('active');
-  });
-
-  // Перемикання мов у списку
-  langItems.forEach((item) => {
-    item.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      // Знімаємо active з усіх і додаємо обраному
-      langItems.forEach((el) => el.classList.remove('active'));
-      item.classList.add('active');
-
-      // Оновлюємо текст у кнопці (наприклад, "DE", "UK", "EN")
-      const langCode = item.getAttribute('data-lang').toUpperCase();
-      if (currentLangLabel) {
-        currentLangLabel.textContent = langCode;
-      }
-
-      // Закриваємо селектор
+    document.addEventListener('click', () => {
       langSelector.classList.remove('active');
     });
-  });
-}
+  }
 
-  // ==========================================
-  // 7. СИСТЕМА ЛОКАЛІЗАЦІЇ (i18n)
-  // ==========================================
-  const currentLangCodeEl = document.getElementById('current-lang');
-  const langDropdownItems = document.querySelectorAll('.lang-dropdown-item');
-  
   async function loadLanguage(lang) {
     try {
       const response = await fetch(`./lang/${lang}.json`);
       if (!response.ok) throw new Error(`Не вдалося завантажити файл мови: ${lang}`);
-      const data = await response.json();
+      currentLangData = await response.json();
 
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
-        if (data[key]) {
-          el.innerHTML = data[key];
+        if (currentLangData[key]) {
+          el.innerHTML = currentLangData[key];
         }
       });
 
       document.querySelectorAll('[data-i18n-placeholder]').forEach(elem => {
         const key = elem.getAttribute('data-i18n-placeholder');
-        if (data[key]) {
-          elem.placeholder = data[key]; 
+        if (currentLangData[key]) {
+          elem.placeholder = currentLangData[key]; 
         }
       });
 
       document.documentElement.lang = lang;
-      if (currentLangCodeEl) currentLangCodeEl.textContent = lang.toUpperCase();
+      if (currentLangLabel) currentLangLabel.textContent = lang.toUpperCase();
 
       langDropdownItems.forEach(item => {
         if (item.getAttribute('data-lang') === lang) {
@@ -285,140 +235,108 @@ if (langBtn && langSelector) {
   });
 
   const savedLang = localStorage.getItem('selectedLanguage') || 'uk';
-  if (savedLang !== 'uk') {
-    loadLanguage(savedLang);
+  loadLanguage(savedLang);
+  
+  // ==========================================
+  // 7. ІНТЕРАКТИВНЕ НАДСИЛАННЯ ФОРМИ ТА ЗАВАНТАЖЕННЯ ФАЙЛУ
+  // ==========================================
+  const contactForm = document.getElementById('generalContactForm');
+  const fileInput = document.getElementById('fileUpload');
+  const fileNameDisplay = document.getElementById('fileNameDisplay');
+
+  if (fileInput && fileNameDisplay) {
+    fileInput.addEventListener('change', function () {
+      if (this.files && this.files[0]) {
+        fileNameDisplay.textContent = this.files[0].name;
+      }
+    });
+  }
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const submitBtn = contactForm.querySelector('.submit-btn');
+      if (!submitBtn) return;
+
+      const btnText = submitBtn.querySelector('span');
+
+      // Крок А: Стан "Надсилання..."
+      if (btnText) {
+        btnText.textContent = currentLangData['form_sending'] || "Wird gesendet...";
+      }
+
+      submitBtn.style.pointerEvents = 'none';
+      submitBtn.style.opacity = '0.7';
+
+      setTimeout(() => {
+        // Крок Б: Стан "Успішно надіслано"
+        if (btnText) {
+          btnText.textContent = currentLangData['form_success'] || "Nachricht gesendet ✓";
+        }
+
+        contactForm.reset();
+
+        if (fileNameDisplay) {
+          fileNameDisplay.textContent = currentLangData['contact_file'] || "Grundriss oder Fotos hinzufügen (optional)";
+        }
+
+        setTimeout(() => {
+          // Крок В: Повернення кнопки в початковий стан через 4 секунди
+          if (btnText) {
+            btnText.textContent = currentLangData['contact_submit'] || "Senden";
+          }
+
+          submitBtn.style.pointerEvents = 'all';
+          submitBtn.style.opacity = '1';
+        }, 4000);
+
+      }, 1500);
+    });
   }
 
 
   // ==========================================
-// 8. ІНТЕРАКТИВНЕ НАДСИЛАННЯ ФОРМИ ТА ЗАВАНТАЖЕННЯ ФАЙЛУ
-// ==========================================
-const contactForm = document.getElementById('generalContactForm');
-const fileInput = document.getElementById('fileUpload');
-const fileNameDisplay = document.getElementById('fileNameDisplay');
-
-// 1. Відстеження вибору файлу (відображення назви файлу)
-if (fileInput && fileNameDisplay) {
-  fileInput.addEventListener('change', function () {
-    if (this.files && this.files[0]) {
-      fileNameDisplay.textContent = this.files[0].name;
-    }
-  });
-}
-
-// 2. Обробка відправки форми
-if (contactForm) {
-  // Словник-заглушка на випадок, якщо в JSON немає ключів для стану відправки
-  const formStatusMessages = {
-    de: { sending: "Wird gesendet...", success: "Nachricht gesendet ✓", fileDefault: "Grundriss oder Fotos hinzufügen (optional)" }
-  };
-
-  contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const submitBtn = contactForm.querySelector('.submit-btn');
-    if (!submitBtn) return;
-
-    const btnText = submitBtn.querySelector('span');
-    const currentLang = localStorage.getItem('selectedLanguage') || 'de';
-    const langMsgs = formStatusMessages[currentLang] || formStatusMessages['de'];
-
-    // Крок А: Стан "Надсилання..."
-    if (btnText) {
-      btnText.setAttribute('data-i18n', 'form_sending');
-      btnText.textContent = langMsgs.sending; // Гарантована зміна тексту
-    }
-
-    submitBtn.style.pointerEvents = 'none';
-    submitBtn.style.opacity = '0.7';
-
-    if (typeof loadLanguage === 'function') {
-      loadLanguage(currentLang);
-    }
-
-    setTimeout(() => {
-      // Крок Б: Стан "Успішно надіслано"
-      if (btnText) {
-        btnText.setAttribute('data-i18n', 'form_success');
-        btnText.textContent = langMsgs.success; // Гарантована зміна тексту
-      }
-
-      if (typeof loadLanguage === 'function') {
-        loadLanguage(currentLang);
-      }
-
-      // Скидаємо форму
-      contactForm.reset();
-
-      // Очищаємо вибраний файл і повертаємо початковий текст підказки для файлу
-      if (fileNameDisplay) {
-        fileNameDisplay.setAttribute('data-i18n', 'contact_file');
-        fileNameDisplay.textContent = langMsgs.fileDefault;
-      }
-
-      setTimeout(() => {
-        // Крок В: Повертаємо кнопку в початковий стан через 4 секунди
-        if (btnText) {
-          btnText.setAttribute('data-i18n', 'contact_submit');
-        }
-
-        if (typeof loadLanguage === 'function') {
-          loadLanguage(currentLang);
-        }
-
-        submitBtn.style.pointerEvents = 'all';
-        submitBtn.style.opacity = '1';
-      }, 4000);
-
-    }, 1500);
-  });
-}
-
-
-});
-
-document.addEventListener("DOMContentLoaded", () => {
+  // 8. АНІМАЦІЯ ДРУКУ ТЕКСТУ (TYPEWRITER)
+  // ==========================================
   const quoteSection = document.querySelector("#quote-section");
   const textElement = document.querySelector(".typewriter-text");
-  
-  if (!quoteSection || !textElement) return;
 
-  const fullText = textElement.getAttribute("data-text");
-  let isAnimated = false;
+  if (quoteSection && textElement) {
+    const fullText = textElement.getAttribute("data-text");
+    let isAnimated = false;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !isAnimated) {
-        isAnimated = true;
-        
-        // --- ФІКС СТРИБКА ФОНУ ---
-        // 1. Тимчасово вставляємо повний текст, щоб виміряти його реальну висоту
-        textElement.textContent = fullText;
-        const targetHeight = textElement.offsetHeight;
-        
-        // 2. Фіксуємо висоту контейнера
-        textElement.style.minHeight = `${targetHeight}px`;
-        
-        // 3. Очищаємо текст і запускаємо друк
-        textElement.textContent = "";
-        typeText(textElement, fullText, 30);
+    const typewriterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !isAnimated) {
+          isAnimated = true;
+          
+          // Фікс стрибка фону
+          textElement.textContent = fullText;
+          const targetHeight = textElement.offsetHeight;
+          textElement.style.minHeight = `${targetHeight}px`;
+          textElement.textContent = "";
+
+          typeText(textElement, fullText, 30);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    typewriterObserver.observe(quoteSection);
+
+    function typeText(element, text, speed) {
+      let i = 0;
+      function nextChar() {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+          setTimeout(nextChar, speed);
+        } else {
+          element.classList.add('finished');
+        }
       }
-    });
-  }, { threshold: 0.3 });
-
-  observer.observe(quoteSection);
-
-  function typeText(element, text, speed) {
-    let i = 0;
-    function nextChar() {
-      if (i < text.length) {
-        element.textContent += text.charAt(i);
-        i++;
-        setTimeout(nextChar, speed);
-      } else {
-        element.classList.add('finished');
-      }
+      nextChar();
     }
-    nextChar();
   }
+
 });

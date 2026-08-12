@@ -1827,104 +1827,60 @@ section.reveal.active > .cta-fluid-shape {
    FAQ SECTION (LIGHT & ELEGANT STYLE)
    ========================================== */
 
-/* Загальні налаштування секції */
+/* ==========================================
+   FAQ SECTION (LIGHT & ELEGANT STYLE)
+   ========================================== */
+
 #faq.section-padding {
-  padding: 100px 20px;
+  padding: 100px 0;
+  background-color: #F6F2EC;
 }
 
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-}
-
-/* 1. Заголовок секції */
-.section-header-clean {
-  text-align: center;
-  max-width: 680px;
-  margin: 0 auto 60px auto;
-}
-
-.section-subtitle {
-  display: inline-block;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #485243; /* М'який шавлієвий акцент */
-  margin-bottom: 12px;
-  font-weight: 500;
-}
-
-.section-header-clean h2 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 30px;
-  line-height: 1.35;
-  color: #5C554E; /* Теплий м'який антрацит замість темного чорного */
-  font-weight: 300;
-  letter-spacing: 0.5px;
-  margin: 0;
-}
-
-/* 2. Контейнер акордеона */
 .faq-accordion {
-  max-width: 820px;
+  max-width: 900px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-/* 3. Елементи списку та розділювачі */
 .faq-item {
-  border-bottom: 1px solid rgba(180, 170, 160, 0.25); /* Дуже ніжна, напівпрозора лінія */
-  transition: border-color 0.3s ease;
+  border-bottom: 1px solid rgba(201, 194, 189, 0.4);
+  background: transparent;
+  transition: background-color 0.3s ease;
 }
 
-.faq-item:first-child {
-  border-top: 1px solid rgba(180, 170, 160, 0.25);
-}
-
-.faq-item.active {
-  border-bottom-color: rgba(102, 105, 86, 0.5); /* М'який акцент при відкритті */
-}
-
-/* 4. Кнопка-тригер (Запитання) */
 .faq-trigger {
   width: 100%;
-  padding: 26px 8px;
+  padding: 24px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: transparent;
+  background: none;
   border: none;
-  text-align: left;
   cursor: pointer;
-  outline: none;
+  text-align: left;
   gap: 20px;
 }
 
 .faq-title {
-  font-size: 17px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(20px, 2vw, 24px);
+  color: #485243;
   font-weight: 400;
-  color: #6E675F; /* Світло-кавовий відтінок */
-  letter-spacing: 0.2px;
   transition: color 0.3s ease;
 }
 
-.faq-trigger:hover .faq-title,
-.faq-item.active .faq-title {
-  color: #485243;
+.faq-trigger:hover .faq-title {
+  color: #8E857B;
 }
 
-/* 5. Мінімалістична іконка Плюс / Мінус */
+/* Іконка "+" / "−" */
 .faq-plus {
   position: relative;
+  width: 16px;
+  height: 16px;
   flex-shrink: 0;
-  width: 12px;
-  height: 12px;
-  opacity: 0.6; /* Напівпрозорість для легкості */
-  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.faq-trigger:hover .faq-plus,
-.faq-item.active .faq-plus {
-  opacity: 1;
 }
 
 .faq-plus::before,
@@ -1932,52 +1888,52 @@ section.reveal.active > .cta-fluid-shape {
   content: '';
   position: absolute;
   background-color: #485243;
-  border-radius: 1px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
-/* Тоненькі лінії (1px) */
+/* Горизонтальна лінія */
 .faq-plus::before {
-  top: 5px;
+  top: 7px;
   left: 0;
-  width: 12px;
-  height: 1px;
+  width: 16px;
+  height: 2px;
 }
 
+/* Вертикальна лінія */
 .faq-plus::after {
   top: 0;
-  left: 5px;
-  width: 1px;
-  height: 12px;
+  left: 7px;
+  width: 2px;
+  height: 16px;
 }
 
-/* Тランスформація плюса в мінус */
-.faq-item.active .faq-plus {
+/* Перетворення + на − при відкритті */
+.faq-trigger[aria-expanded="true"] .faq-plus::after {
+  transform: rotate(90deg);
+  opacity: 0;
+}
+
+.faq-trigger[aria-expanded="true"] .faq-plus::before {
   transform: rotate(180deg);
 }
 
-.faq-item.active .faq-plus::after {
-  opacity: 0;
-  transform: scaleY(0);
-}
-
-/* 6. Випадаючий текст (Відповідь) */
+/* Контент відповіді */
 .faq-content {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), padding 0.4s ease;
 }
 
 .faq-content-inner {
-  padding: 0 8px 26px 8px;
+  padding-bottom: 24px;
 }
 
-.faq-content p {
-  margin: 0;
-  font-size: 14.5px;
-  font-weight: 300;
+.faq-content-inner p {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
   line-height: 1.8;
-  color: #7A746E; /* Повітряний, приємний для читання текст */
+  color: #8E857B;
+  font-weight: 300;
 }
 
 /* 7. Адаптивність під мобільні пристрої */
