@@ -164,28 +164,32 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // 5. FAQ АКОРДЕОН
   // ==========================================
-  document.querySelectorAll('.faq-trigger').forEach(trigger => {
-  trigger.addEventListener('click', () => {
-    const parent = trigger.parentElement;
-    const content = parent.querySelector('.faq-content');
+  const faqTriggers = document.querySelectorAll('.faq-trigger');
 
-    // Закрити інші відкриті елементи (за бажанням)
-    document.querySelectorAll('.faq-item').forEach(item => {
-      if (item !== parent) {
-        item.classList.remove('active');
-        item.querySelector('.faq-content').style.maxHeight = null;
+  faqTriggers.forEach(trigger => {
+    trigger.addEventListener('click', () => {
+      const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+      const content = trigger.nextElementSibling;
+
+      // Закриваємо всі інші вкладки FAQ (якщо потрібен режим класичного аккордеона)
+      faqTriggers.forEach(otherTrigger => {
+        if (otherTrigger !== trigger) {
+          otherTrigger.setAttribute('aria-expanded', 'false');
+          const otherContent = otherTrigger.nextElementSibling;
+          if (otherContent) otherContent.style.maxHeight = null;
+        }
+      });
+
+      // Перемикаємо стан поточної вкладки
+      trigger.setAttribute('aria-expanded', !isExpanded);
+
+      if (!isExpanded) {
+        content.style.maxHeight = content.scrollHeight + 'px';
+      } else {
+        content.style.maxHeight = null;
       }
     });
-
-    // Перемикання поточного елемента
-    parent.classList.toggle('active');
-    if (parent.classList.contains('active')) {
-      content.style.maxHeight = content.scrollHeight + "px";
-    } else {
-      content.style.maxHeight = null;
-    }
   });
-});
 
 
   // ==========================================

@@ -171,6 +171,8 @@ section.reveal > .cta-fluid-shape {
   will-change: opacity, transform;
 }
 
+
+
 /* Стан, коли елемент з'являється на екрані */
 .reveal-item.active {
   opacity: 1;
@@ -207,6 +209,8 @@ section.reveal.active > .cta-fluid-shape {
   transform: translateY(0);
   filter: blur(0);
 }
+
+
 
 /* --- НАВІГАЦІЯ --- */
 .navbar {
@@ -1841,6 +1845,18 @@ section.reveal.active > .cta-fluid-shape {
 #faq.section-padding {
   padding: 100px 0;
   background-color: #F6F2EC;
+}
+
+/* Базовий стан контенту FAQ */
+.faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.25, 1, 0.5, 1), padding 0.4s ease;
+}
+
+/* Автоматичне розкриття, якщо висота не задається через JS */
+.faq-trigger[aria-expanded="true"] + .faq-content {
+  max-height: 300px; /* Або значення із запасом, якщо не використовуєте JS-обчислення */
 }
 
 .faq-accordion {
