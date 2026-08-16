@@ -749,6 +749,11 @@ section.reveal.active > .cta-fluid-shape {
 
 /* Адаптивність для мобільних екранів */
 @media (max-width: 768px) {
+
+  .hero-container{
+    left: -50px
+  }
+
   .hero-action {
     margin-top: 25px;
     width: 100%;
@@ -763,6 +768,8 @@ section.reveal.active > .cta-fluid-shape {
     letter-spacing: 2px;
   }
 }
+
+
 
 .hero-container { width: 100%; position: relative; z-index: 2; }
 .hero-footer { display: flex; justify-content: space-between; align-items: flex-end; }
@@ -1834,13 +1841,6 @@ section.reveal.active > .cta-fluid-shape {
 .btn-cta-order:hover::before { transform: scaleY(1); }
 
 /* --- FAQ АКОРДЕОН --- */
-/* ==========================================
-   FAQ SECTION (LIGHT & ELEGANT STYLE)
-   ========================================== */
-
-/* ==========================================
-   FAQ SECTION (LIGHT & ELEGANT STYLE)
-   ========================================== */
 
 #faq.section-padding {
   padding: 100px 0;
@@ -2101,6 +2101,7 @@ section.reveal.active > .cta-fluid-shape {
   .team-grid, .table-row, .contact-grid { flex-direction: column; gap: 45px; }
   .team-card, .team-card:last-child { padding: 40px 0; border-right: none; border-bottom: 1px solid rgba(201, 194, 189, 0.3); transform: none !important; }
   .team-grid-divider::before, .team-grid::after { display: none !important; }
+  .section-top-arch{ top: 85%}
   
   /* Секція геро */
   .hero-footer { flex-direction: column; align-items: flex-start; gap: 35px; }
@@ -2120,7 +2121,6 @@ section.reveal.active > .cta-fluid-shape {
   .col-text { font-size: 13px; }
 
   /* Секція СТА */
-  .cta-fluid-section { padding: 30px 0; }
   .cta-fluid-shape { min-height: 420px; clip-path: ellipse(100% 100% at 50% 50%); }
   .cta-fluid-content-wrapper { padding: 0 20px; }
   .cta-story-content { gap: 18px; }
@@ -2143,6 +2143,7 @@ section.reveal.active > .cta-fluid-shape {
   .team-photo-placeholder { height: 380px; border-radius: 80px 80px 20px 20px; }
   .contact-card-box { padding: 30px 20px; }
   .mobile-overlay-menu { max-width: 100%; } /* Меню на весь екран на маленьких смартфонах */
+  .section-top-arch{ top: 87%}
 }
 
 /* --- Додатковий базовий стиль для десктопної версії (збереження сітки) --- */
