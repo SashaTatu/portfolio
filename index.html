@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LIBRI INTERIORS — Studio für Innenarchitektur</title>
+  <title data-i18n="title">LIBRI INTERIORS — Studio für Innenarchitektur</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,9 +33,9 @@
 
       <!-- Десктопні лінки (автоматично ховаються на мобільних) -->
       <ul class="nav-links">
-        <li><a href="#" class="nav-item active" >Startseite</a></li>
-        <li><a href="portfolio.html" class="nav-item">Portfolio</a></li>
-        <li><a href="services.html" class="nav-item">Leistungen</a></li>
+        <li><a href="#" class="nav-item active" data-i18n="home-page">Startseite</a></li>
+        <li><a href="portfolio.html" class="nav-item" data-i18n="portfolio-page">Portfolio</a></li>
+        <li><a href="services.html" class="nav-item" data-i18n="services-page">Leistungen</a></li>
       </ul>
       
       <div class="nav-actions">
@@ -78,9 +78,9 @@
     <button class="close-mobile-menu" id="closeMobileMenuBtn">&times;</button>
     <div class="mobile-menu-content">
       <ul class="mobile-nav-links">
-        <li><a href="#" class="mobile-nav-item active" data-i18n="main">Startseite</a></li>
-        <li><a href="portfolio.html" class="mobile-nav-item" data-i18n="portfolio">Portfolio</a></li>
-        <li><a href="services.html" class="mobile-nav-item" data-i18n="services">Leistungen</a></li>
+        <li><a href="#" class="mobile-nav-item active" data-i18n="home-page">Startseite</a></li>
+        <li><a href="portfolio.html" class="mobile-nav-item" data-i18n="portfolio-page">Portfolio</a></li>
+        <li><a href="services.html" class="mobile-nav-item" data-i18n="services-page">Leistungen</a></li>
       </ul>
       
       <!-- Оновлений футер меню з виділеною кнопкою -->
@@ -100,15 +100,15 @@
     <div class="hero-bg-image"></div>
     <div class="hero-overlay"></div>
     <div class="container hero-container">
-      <h1 class="fade-in-up-blur" style="animation-delay: 0.4s;">
+      <h1 class="fade-in-up-blur" style="animation-delay: 0.4s;" data-i18n="hero-kredo">
         Zuhause <br>ist kein Ort.<br> 
         <i>Zuhause <br>ist ein Gefühl<i>
       </h1>
       <div class="hero-footer fade-in-up-blur" style="animation-delay: 0.8s;">
-        <p class="hero-p">Ukrainische Designseele trifft auf deutsche Perfektion:<br>Wir kreieren Räume mit lebendiger Ästhetik und kluger Funktionalität – für ein Zuhause, das voller Leben, Harmonie und Inspiration steckt.</p>
+        <p class="hero-p" data-i18n="hero-desc">Ukrainische Designseele trifft auf deutsche Perfektion:<br>Wir kreieren Räume mit lebendiger Ästhetik und kluger Funktionalität – für ein Zuhause, das voller Leben, Harmonie und Inspiration steckt.</p>
       </div>
       <div class="hero-action fade-in-up-blur" style="animation-delay: 1.2s;">
-        <a href="order.html" class="btn-hero-order" data-i18n="order-btn">Projekt starten</a>
+        <a href="order.html" class="btn-hero-order" data-i18n="order-btn-2">Projekt starten</a>
       </div>
     </div>
     <div class="hero-scroll-indicator" id="scrollTrigger">
@@ -151,15 +151,15 @@
           <img src="img/people/olena.webp" alt="Olena Suvorova" loading="lazy">
         </div>
         <div class="team-info">
-          <h3 id="h3-olena">Olena Suvorova</h3>
-          <p class="role-olena" data-i18n="role_olena">Die Seele hinter jedem Raum.</p>
+          <h3 class="name-olena" data-i18n="olena-name">Olena Suvorova</h3>
+          <p class="role" data-i18n="role_olena">Die Seele hinter jedem Raum.</p>
         </div>
       </div>
 
       <!-- Вужча плашка Glass Card -->
       <div class="glass-quote-card">
         <div class="quote-mark-top">“</div>
-        <p data-i18n="about_vision">
+        <p data-i18n="about_goal">
           Unser Ziel: Ihre Vision Wirklichkeit werden zu lassen. Denn für uns beginnt gutes Design dort, wo Schönheit und Machbarkeit Hand in Hand gehen.
         </p>
       </div>
@@ -170,7 +170,7 @@
           <img src="img/people/oleksander.webp" alt="Oleksandr Kruhletskyi" loading="lazy">
         </div>
         <div class="team-info">
-          <h3>Oleksandr Kruhletskyi</h3>
+          <h3 data-i18n="alex-name">Oleksandr Kruhletskyi</h3>
           <p class="role" data-i18n="role_alex">Der technische Kopf hinter den Ideen.</p>
         </div>
       </div>
@@ -193,12 +193,12 @@
         <div class="full-quote-symbol">“</div>
         
         <!-- Додаємо клас typewriter-text для ідентифікації -->
-        <blockquote class="full-quote-text typewriter-text" data-text="Wo andere Grenzen sehen, sehen wir Möglichkeiten. Gemeinsam verwandeln wir Ideen in Orte, an denen man gerne lebt.">
+        <blockquote class="full-quote-text typewriter-text" data-i18n="[data-text]quotes.hero_quote" data-text="Wo andere Grenzen sehen, sehen wir Möglichkeiten. Gemeinsam verwandeln wir Ideen in Orte, an denen man gerne lebt.">
           <!-- Тут буде порожньо, скрипт сам вставить текст -->
         </blockquote>
 
         <div class="full-quote-author">
-          <span class="author-title">— UNSERE PHILOSOPHIE</span>
+          <span class="author-title" data-i18n="about-vision">— UNSERE PHILOSOPHIE</span>
         </div>
       </div>
     </section>
@@ -273,7 +273,7 @@
 
       <div class="section-action-end">
         <a href="services.html" class="btn-shelnat">
-          <span>Detaillierte Bedingungen und Preise</span>
+          <span data-i18n="services-btn">Detaillierte Bedingungen und Preise</span>
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 13L13 1M13 1H4M13 1V10" stroke="currentColor" stroke-width="1.2"/></svg>
         </a>
       </div>
@@ -375,7 +375,7 @@
           <h2 data-i18n="cta_story_title">Lassen Sie uns <i>Ihre Geschichte</i> beginnen</h2>
           <p data-i18n="cta_story_description">Vielleicht tragen Sie Ihr zukünftiges Zuhause bereits in Gedanke mit sich.<br>Erzählen Sie mir davon.<br>Gemeinsam machen wir daraus einen Ort, an den sich jeden Tag gerne wiederfinden.</p>
           <div class="cta-story-action">
-            <a href="order.html" class="btn-cta-order" data-i18n="order-btn">Geschichte erzählen</a>
+            <a href="order.html" class="btn-cta-order" data-i18n="order-btn-3">Geschichte erzählen</a>
           </div>
         </div>
       </div>
@@ -394,72 +394,72 @@
       
       <div class="faq-item">
         <button class="faq-trigger" type="button" aria-expanded="false">
-          <span class="faq-title">Wie läuft die Zusammenarbeit ab?</span>
+          <span class="faq-title" data-i18n="question1">Wie läuft die Zusammenarbeit ab?</span>
           <span class="faq-plus" aria-hidden="true"></span>
         </button>
         <div class="faq-content">
           <div class="faq-content-inner">
-            <p>Keine Sorge, wir führen Sie durch den gesamten Prozess. Alles beginnt mit einer Tasse Kaffee (oder einem Video-Call), bei der wir Ihre Träume und Gewohnheiten entschlüsseln. Danach verwandeln wir Ihre Wünsche in ein durchdachtes 3D-Konzept – bis hin zum letzten Detail und der perfekten Umsetzung.</p>
+            <p data-i18n="answer1">Keine Sorge, wir führen Sie durch den gesamten Prozess. Alles beginnt mit einer Tasse Kaffee (oder einem Video-Call), bei der wir Ihre Träume und Gewohnheiten entschlüsseln. Danach verwandeln wir Ihre Wünsche in ein durchdachtes 3D-Konzept – bis hin zum letzten Detail und der perfekten Umsetzung.</p>
           </div>
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-trigger" type="button" aria-expanded="false">
-          <span class="faq-title">Bietet ihr auch Beratung für einzelne Räume an?</span>
+          <span class="faq-title" data-i18n="question2">Bietet ihr auch Beratung für einzelne Räume an?</span>
           <span class="faq-plus" aria-hidden="true"></span>
         </button>
         <div class="faq-content">
           <div class="faq-content-inner">
-            <p>Absolut. Große Veränderungen beginnen oft im Kleinen. Egal ob es sich um eine Neugestaltung Ihres Wohnzimmers, ein inspirierendes Homeoffice oder eine komplette Villa handelt – wir schenken jedem Quadratmeter die gleiche Liebe zum Detail.</p>
+            <p data-i18n="answer2">Absolut. Große Veränderungen beginnen oft im Kleinen. Egal ob es sich um eine Neugestaltung Ihres Wohnzimmers, ein inspirierendes Homeoffice oder eine komplette Villa handelt – wir schenken jedem Quadratmeter die gleiche Liebe zum Detail.</p>
           </div>
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-trigger" type="button" aria-expanded="false">
-          <span class="faq-title">Arbeitet ihr auch digital?</span>
+          <span class="faq-title" data-i18n="question3">Arbeitet ihr auch digital?</span>
           <span class="faq-plus" aria-hidden="true"></span>
         </button>
         <div class="faq-content">
           <div class="faq-content-inner">
-            <p>Gutes Design kennt keine Grenzen. Dank unseres durchdachten E-Design-Konzepts begleiten wir Ihr Projekt ortsunabhängig. Sie erhalten fotorealistische 3D-Visualisierungen, Grundrisse und eine fertige Shopping-Liste – egal, wo Sie sich befinden.</p>
+            <p data-i18n="answer3">Gutes Design kennt keine Grenzen. Dank unseres durchdachten E-Design-Konzepts begleiten wir Ihr Projekt ortsunabhängig. Sie erhalten fotorealistische 3D-Visualisierungen, Grundrisse und eine fertige Shopping-Liste – egal, wo Sie sich befinden.</p>
           </div>
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-trigger" type="button" aria-expanded="false">
-          <span class="faq-title">Was passiert, wenn mir der erste Entwurf nicht gefällt?</span>
+          <span class="faq-title" data-i18n="question4">Was passiert, wenn mir der erste Entwurf nicht gefällt?</span>
           <span class="faq-plus" aria-hidden="true"></span>
         </button>
         <div class="faq-content">
           <div class="faq-content-inner">
-            <p>Design ist ein Dialog, kein Monolog. Wir hören Ihnen genau zu, bevor wir den ersten Strich zeichnen. Sollte etwas noch nicht zu 100% Ihren Vorstellungen entsprechen, feilen wir gemeinsam am Konzept, bis Sie sagen: „Ja, genau das bin ich!“</p>
+            <p data-i18n="answer4">Design ist ein Dialog, kein Monolog. Wir hören Ihnen genau zu, bevor wir den ersten Strich zeichnen. Sollte etwas noch nicht zu 100% Ihren Vorstellungen entsprechen, feilen wir gemeinsam am Konzept, bis Sie sagen: „Ja, genau das bin ich!“</p>
           </div>
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-trigger" type="button" aria-expanded="false">
-          <span class="faq-title">Passt ihr euch unserem Budget an?</span>
+          <span class="faq-title" data-i18n="question5">Passt ihr euch unserem Budget an?</span>
           <span class="faq-plus" aria-hidden="true"></span>
         </button>
         <div class="faq-content">
           <div class="faq-content-inner">
-            <p>Transparenz ist unsere Priorität. Ästhetik ist keine Frage des unbegrenzten Budgets, sondern des klugen Designs. Wir planen von Anfang an realistisch, damit Ihre Vision ohne finanzielle Überraschungen Wirklichkeit wird.</p>
+            <p data-i18n="answer5">Transparenz ist unsere Priorität. Ästhetik ist keine Frage des unbegrenzten Budgets, sondern des klugen Designs. Wir planen von Anfang an realistisch, damit Ihre Vision ohne finanzielle Überraschungen Wirklichkeit wird.</p>
           </div>
         </div>
       </div>
 
       <div class="faq-item">
         <button class="faq-trigger" type="button" aria-expanded="false">
-          <span class="faq-title">Warum sollten wir genau mit Libri Interiors arbeiten?</span>
+          <span class="faq-title" data-i18n="question6">Warum sollten wir genau mit Libri Interiors arbeiten?</span>
           <span class="faq-plus" aria-hidden="true"></span>
         </button>
         <div class="faq-content">
           <div class="faq-content-inner">
-            <p>Weil Sie zwei Perspektiven für Ihr Projekt bekommen. Wir verbinden kreative Visionen mit technischer Präzision. Sie müssen sich nicht zwischen Schönheit und Funktionalität entscheiden – bei uns bekommen Sie beides aus einer Hand.</p>
+            <p data-i18n="answer6">Weil Sie zwei Perspektiven für Ihr Projekt bekommen. Wir verbinden kreative Visionen mit technischer Präzision. Sie müssen sich nicht zwischen Schönheit und Funktionalität entscheiden – bei uns bekommen Sie beides aus einer Hand.</p>
           </div>
         </div>
       </div>
@@ -477,9 +477,9 @@
       
       <!-- Ліва колонка: Заголовок та Опис -->
       <div class="contact-left">
-        <span class="section-tag" style="text-align: left;">Immer für Sie da</span>
-        <h2>Lassen Sie uns Ihre Vision <br><i>besprechen</i></h2>
-        <p class="contact-meta-text">
+        <span class="section-tag" style="text-align: left;" data-i18n="contact_tag">Immer für Sie da</span>
+        <h2 data-i18n="contact_title">Lassen Sie uns Ihre Vision <br><i>besprechen</i></h2>
+        <p class="contact-meta-text" data-i18n="contact_desc">
           Haben Sie Fragen zu unseren Leistungen, möchten Sie ein neues Projekt starten oder einfach Ihre ersten Ideen teilen? Wir freuen uns darauf, von Ihnen zu hören, und melden uns innerhalb von 24 Stunden bei Ihnen.
         </p>
       </div>
@@ -490,17 +490,17 @@
           
           <div class="input-row-numeric">
             <span class="field-num">01</span>
-            <input type="text" required placeholder="Ihr Name & Nachname">
+            <input type="text" data-i18n="[placeholder]form.name_placeholder" required placeholder="Ihr Name & Nachname">
           </div>
           
           <div class="input-row-numeric">
             <span class="field-num">02</span>
-            <input type="email" required placeholder="E-Mail-Adresse">
+            <input type="email" data-i18n="[placeholder]form.email_placeholder" required placeholder="E-Mail-Adresse">
           </div>
           
           <div class="input-row-numeric">
             <span class="field-num">03</span>
-            <textarea rows="3" required placeholder="Ihre Vision, Fragen oder Wünsche"></textarea>
+            <textarea rows="3" data-i18n="[placeholder]form.vision_placeholder" required placeholder="Ihre Vision, Fragen oder Wünsche"></textarea>
           </div>
           
 
@@ -518,7 +518,7 @@
 
           <div class="form-submit-row">
             <button type="submit" class="btn-shelnat submit-btn">
-              <span style="font-size: 15px; letter-spacing: 3px;">Nachricht senden</span>
+              <span style="font-size: 15px; letter-spacing: 3px;" data-i18n="submit-btn">Nachricht senden</span>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path d="M1 13L13 1M13 1H4M13 1V10" stroke="currentColor" stroke-width="1.2"/>
               </svg>

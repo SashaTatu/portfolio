@@ -996,10 +996,16 @@ section.reveal.active > .cta-fluid-shape {
   display: block;
 }
 
+/* Переконаємося, що на десктопі обидва блоки засновників стилізовані однаково */
+.team-info {
+  text-align: center;
+  margin-top: 15px;
+}
+
 .team-info h3 {
   font-family: 'Cormorant Garamond', serif;
   font-size: 30px;
-  color: #EAE6E1;
+  color: #F6F2EC; /* Основний темний колір для заголовка */
   margin-bottom: 4px;
   font-weight: 400;
 }
@@ -1008,7 +1014,7 @@ section.reveal.active > .cta-fluid-shape {
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: rgb(201, 194, 189);
+  color: #8E857B; /* М'який темний/шавлієвий колір для слогана/ролі */
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -2101,8 +2107,10 @@ section.reveal.active > .cta-fluid-shape {
   .team-grid, .table-row, .contact-grid { flex-direction: column; gap: 45px; }
   .team-card, .team-card:last-child { padding: 40px 0; border-right: none; border-bottom: 1px solid rgba(201, 194, 189, 0.3); transform: none !important; }
   .team-grid-divider::before, .team-grid::after { display: none !important; }
-  #h3-olena{color: #333C2E;}
-  .role-olena{ color: #666956;}
+  .team-info h3.name-olena {
+    color: #485243;
+  }
+
   .section-top-arch{ top: 85%}
   
   /* Секція геро */
