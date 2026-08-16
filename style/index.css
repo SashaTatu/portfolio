@@ -2101,6 +2101,8 @@ section.reveal.active > .cta-fluid-shape {
   .team-grid, .table-row, .contact-grid { flex-direction: column; gap: 45px; }
   .team-card, .team-card:last-child { padding: 40px 0; border-right: none; border-bottom: 1px solid rgba(201, 194, 189, 0.3); transform: none !important; }
   .team-grid-divider::before, .team-grid::after { display: none !important; }
+  #h3-olena{color: #333C2E;}
+  .role-olena{ color: #666956;}
   .section-top-arch{ top: 85%}
   
   /* Секція геро */
