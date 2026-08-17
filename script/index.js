@@ -23,10 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
-  // 1. ПОЕЛЕМЕНТНА АНІМАЦІЯ ПОЯВИ
+  // 1.1 ПОЕЛЕМЕНТНА АНІМАЦІЯ ПОЯВИ
   // ==========================================
   requestAnimationFrame(() => {
-    // 1. Елементи для поштучної появи
     const singleElements = document.querySelectorAll(`
       .section-tag,
       .section-title,
@@ -58,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     singleElements.forEach(el => observer.observe(el));
 
-    // 2. Окремий спостерігач для сітки Процесу (активує каскад)
     const processGrid = document.querySelector('.process-steps-grid');
     if (processGrid) {
       const processObserver = new IntersectionObserver((entries, obs) => {
@@ -76,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================
-  // 2. МOБІЛЬНЕ ВИЇЗНЕ МЕНЮ (МАТРИЧНИЙ КРУЖЕЧОК)
+  // 2. МOБІЛЬНЕ ВИЇЗНЕ МЕНЮ
   // ==========================================
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   const closeMobileMenuBtn = document.getElementById('closeMobileMenuBtn');
@@ -84,14 +82,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
 
   if (mobileMenuBtn && mobileOverlayMenu) {
-    // Відкрити меню
     mobileMenuBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       mobileOverlayMenu.classList.add('active');
-      document.body.style.overflow = 'hidden'; // забігаємо прокрутці тла
+      document.body.style.overflow = 'hidden';
     });
 
-    // Закрити через хрестик
     if (closeMobileMenuBtn) {
       closeMobileMenuBtn.addEventListener('click', () => {
         mobileOverlayMenu.classList.remove('active');
@@ -99,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Закривати панель при кліку на будь-яке посилання всередині
     mobileNavItems.forEach(item => {
       item.addEventListener('click', () => {
         mobileOverlayMenu.classList.remove('active');
@@ -107,7 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Закривати панель, якщо клікнули поза її межами
     document.addEventListener('click', (e) => {
       if (mobileOverlayMenu.classList.contains('active') && !mobileOverlayMenu.contains(e.target)) {
         mobileOverlayMenu.classList.remove('active');
@@ -118,10 +112,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================
-  // 3. ІНДИКАТОР СКРОЛУ HERO (Стрілка)
+  // 3. ІНДИКАТОР СКРОЛУ HERO
   // ==========================================
   const scrollTrigger = document.getElementById('scrollTrigger');
-  const firstSection = document.getElementById('first-section');
+  const firstSection = document.getElementById('about-us');
 
   if (scrollTrigger && firstSection) {
     scrollTrigger.addEventListener('click', () => {
@@ -171,7 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
       const content = trigger.nextElementSibling;
 
-      // Закриваємо всі інші вкладки FAQ (якщо потрібен режим класичного аккордеона)
       faqTriggers.forEach(otherTrigger => {
         if (otherTrigger !== trigger) {
           otherTrigger.setAttribute('aria-expanded', 'false');
@@ -180,7 +173,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      // Перемикаємо стан поточної вкладки
       trigger.setAttribute('aria-expanded', !isExpanded);
 
       if (!isExpanded) {
@@ -193,52 +185,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================
-  // 6. СЕЛЕКТОР МОВИ (Dropdown)
+  // 6. СЕЛЕКТОР МОВИ (Dropdown UI)
   // ==========================================
-const langBtn = document.getElementById('langBtn');
-const langSelector = document.querySelector('.lang-selector');
-const currentLangLabel = document.getElementById('current-lang');
-const langItems = document.querySelectorAll('.lang-dropdown-item');
+  const langBtn = document.getElementById('langBtn');
+  const langSelector = document.querySelector('.lang-selector');
+  const currentLangLabel = document.getElementById('current-lang');
+  const langItems = document.querySelectorAll('.lang-dropdown-item');
 
-if (langBtn && langSelector) {
-  // Відкриття / закриття меню
-  langBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    langSelector.classList.toggle('active');
-  });
+  if (langBtn && langSelector) {
+    langBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      langSelector.classList.toggle('active');
+    });
 
-  // Закриття при кліку поза меню
-  document.addEventListener('click', () => {
-    langSelector.classList.remove('active');
-  });
-
-  // Перемикання мов у списку
-  langItems.forEach((item) => {
-    item.addEventListener('click', (e) => {
-      e.preventDefault();
-
-      // Знімаємо active з усіх і додаємо обраному
-      langItems.forEach((el) => el.classList.remove('active'));
-      item.classList.add('active');
-
-      // Оновлюємо текст у кнопці (наприклад, "DE", "UK", "EN")
-      const langCode = item.getAttribute('data-lang').toUpperCase();
-      if (currentLangLabel) {
-        currentLangLabel.textContent = langCode;
-      }
-
-      // Закриваємо селектор
+    document.addEventListener('click', () => {
       langSelector.classList.remove('active');
     });
-  });
-}
+
+    langItems.forEach((item) => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        langItems.forEach((el) => el.classList.remove('active'));
+        item.classList.add('active');
+
+        const langCode = item.getAttribute('data-lang').toUpperCase();
+        if (currentLangLabel) {
+          currentLangLabel.textContent = langCode;
+        }
+
+        langSelector.classList.remove('active');
+      });
+    });
+  }
+
 
   // ==========================================
-  // 7. СИСТЕМА ЛОКАЛІЗАЦІЇ (i18n)
+  // 7. СИСТЕМА ЛОКАЛІЗАЦІЇ (i18n) — ВИПРАВЛЕНО
   // ==========================================
   const currentLangCodeEl = document.getElementById('current-lang');
   const langDropdownItems = document.querySelectorAll('.lang-dropdown-item');
-  
+
+  // Допоміжна функція для пошуку ключів (працює і з "quotes.hero_quote", і з { quotes: { hero_quote: "..." } })
+  function getTranslationValue(dataObj, pathKey) {
+    if (!pathKey) return null;
+    if (dataObj[pathKey] !== undefined) return dataObj[pathKey];
+    return pathKey.split('.').reduce((acc, part) => (acc && acc[part] !== undefined ? acc[part] : null), dataObj);
+  }
+
   async function loadLanguage(lang) {
     try {
       const response = await fetch(`./lang/${lang}.json`);
@@ -246,17 +239,27 @@ if (langBtn && langSelector) {
       const data = await response.json();
 
       document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (data[key]) {
-          el.innerHTML = data[key];
+        const rawKey = el.getAttribute('data-i18n');
+        if (!rawKey) return;
+
+        // Розпізнаємо синтаксис [data-text]quotes.hero_quote або стандартний quotes.hero_quote
+        const attrMatch = rawKey.match(/^\[(.*?)\](.*)$/);
+
+        if (attrMatch) {
+          const attrName = attrMatch[1];
+          const actualKey = attrMatch[2];
+          const val = getTranslationValue(data, actualKey);
+          if (val) el.setAttribute(attrName, val);
+        } else {
+          const val = getTranslationValue(data, rawKey);
+          if (val) el.innerHTML = val;
         }
       });
 
       document.querySelectorAll('[data-i18n-placeholder]').forEach(elem => {
         const key = elem.getAttribute('data-i18n-placeholder');
-        if (data[key]) {
-          elem.placeholder = data[key]; 
-        }
+        const val = getTranslationValue(data, key);
+        if (val) elem.placeholder = val;
       });
 
       document.documentElement.lang = lang;
@@ -271,6 +274,11 @@ if (langBtn && langSelector) {
       });
 
       localStorage.setItem('selectedLanguage', lang);
+
+      // Сповіщаємо скрипт друку про вибір нової мови
+      if (typeof window.onLanguageChangeForTypewriter === 'function') {
+        window.onLanguageChangeForTypewriter();
+      }
 
     } catch (error) {
       console.error("Помилка локалізації проекту:", error);
@@ -288,141 +296,154 @@ if (langBtn && langSelector) {
     });
   });
 
+  // ЗАВЖДИ викликаємо завантаження мови при старті сторінки
   const savedLang = localStorage.getItem('selectedLanguage') || 'uk';
-  if (savedLang !== 'uk') {
-    loadLanguage(savedLang);
+  loadLanguage(savedLang);
+
+
+// ==========================================
+  // 8. ІНТЕРАКТИВНЕ НАДСИЛАННЯ ФОРМИ
+  // ==========================================
+  const contactForm = document.getElementById('generalContactForm');
+  const fileInput = document.getElementById('fileUpload');
+  const fileNameDisplay = document.getElementById('fileNameDisplay');
+
+  if (fileInput && fileNameDisplay) {
+    fileInput.addEventListener('change', function () {
+      if (this.files && this.files[0]) {
+        fileNameDisplay.textContent = this.files[0].name;
+      }
+    });
+  }
+
+  if (contactForm) {
+    const formStatusMessages = {
+      de: { sending: "Wird gesendet...", success: "Nachricht gesendet ✓", fileDefault: "Grundriss oder Fotos hinzufügen (optional)" },
+      uk: { sending: "Надсилання...", success: "Повідомлення надіслано ✓", fileDefault: "Grundriss oder Fotos hinzufügen (optional)" }
+    };
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const submitBtn = contactForm.querySelector('.submit-btn');
+      if (!submitBtn) return;
+
+      const btnText = submitBtn.querySelector('span');
+      const btnIcon = submitBtn.querySelector('svg'); // Отримуємо елемент стрілочки
+      const currentLang = localStorage.getItem('selectedLanguage') || 'de';
+      const langMsgs = formStatusMessages[currentLang] || formStatusMessages['de'];
+
+      // Стан надсилання
+      if (btnText) {
+        btnText.setAttribute('data-i18n', 'form_sending');
+        btnText.textContent = langMsgs.sending;
+      }
+
+      submitBtn.style.pointerEvents = 'none';
+      submitBtn.style.opacity = '0.7';
+
+      setTimeout(() => {
+        // Стан успішного відправлення: міняємо текст і ховаємо стрілочку
+        if (btnText) {
+          btnText.setAttribute('data-i18n', 'form_success');
+          btnText.textContent = langMsgs.success;
+        }
+
+        if (btnIcon) {
+          btnIcon.style.display = 'none'; // Стрілочка зникає
+        }
+
+        contactForm.reset();
+
+        if (fileNameDisplay) {
+          fileNameDisplay.setAttribute('data-i18n', 'contact_file');
+          fileNameDisplay.textContent = langMsgs.fileDefault;
+        }
+
+        // Повернення до початкового стану через 4 секунди (4000 мс)
+        setTimeout(() => {
+          if (btnText) {
+            btnText.setAttribute('data-i18n', 'submit-btn');
+          }
+
+          if (btnIcon) {
+            btnIcon.style.display = ''; // Повертаємо стрілочку
+          }
+
+          if (typeof loadLanguage === 'function') {
+            loadLanguage(currentLang);
+          }
+
+          submitBtn.style.pointerEvents = 'all';
+          submitBtn.style.opacity = '1';
+        }, 4000); // Час у мілісекундах (наприклад, 4000 мс = 4 секунди)
+
+      }, 1500);
+    });
   }
 
 
   // ==========================================
-// 8. ІНТЕРАКТИВНЕ НАДСИЛАННЯ ФОРМИ ТА ЗАВАНТАЖЕННЯ ФАЙЛУ
-// ==========================================
-const contactForm = document.getElementById('generalContactForm');
-const fileInput = document.getElementById('fileUpload');
-const fileNameDisplay = document.getElementById('fileNameDisplay');
-
-// 1. Відстеження вибору файлу (відображення назви файлу)
-if (fileInput && fileNameDisplay) {
-  fileInput.addEventListener('change', function () {
-    if (this.files && this.files[0]) {
-      fileNameDisplay.textContent = this.files[0].name;
-    }
-  });
-}
-
-// 2. Обробка відправки форми
-if (contactForm) {
-  // Словник-заглушка на випадок, якщо в JSON немає ключів для стану відправки
-  const formStatusMessages = {
-    de: { sending: "Wird gesendet...", success: "Nachricht gesendet ✓", fileDefault: "Grundriss oder Fotos hinzufügen (optional)" }
-  };
-
-  contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const submitBtn = contactForm.querySelector('.submit-btn');
-    if (!submitBtn) return;
-
-    const btnText = submitBtn.querySelector('span');
-    const currentLang = localStorage.getItem('selectedLanguage') || 'de';
-    const langMsgs = formStatusMessages[currentLang] || formStatusMessages['de'];
-
-    // Крок А: Стан "Надсилання..."
-    if (btnText) {
-      btnText.setAttribute('data-i18n', 'form_sending');
-      btnText.textContent = langMsgs.sending; // Гарантована зміна тексту
-    }
-
-    submitBtn.style.pointerEvents = 'none';
-    submitBtn.style.opacity = '0.7';
-
-    if (typeof loadLanguage === 'function') {
-      loadLanguage(currentLang);
-    }
-
-    setTimeout(() => {
-      // Крок Б: Стан "Успішно надіслано"
-      if (btnText) {
-        btnText.setAttribute('data-i18n', 'form_success');
-        btnText.textContent = langMsgs.success; // Гарантована зміна тексту
-      }
-
-      if (typeof loadLanguage === 'function') {
-        loadLanguage(currentLang);
-      }
-
-      // Скидаємо форму
-      contactForm.reset();
-
-      // Очищаємо вибраний файл і повертаємо початковий текст підказки для файлу
-      if (fileNameDisplay) {
-        fileNameDisplay.setAttribute('data-i18n', 'contact_file');
-        fileNameDisplay.textContent = langMsgs.fileDefault;
-      }
-
-      setTimeout(() => {
-        // Крок В: Повертаємо кнопку в початковий стан через 4 секунди
-        if (btnText) {
-          btnText.setAttribute('data-i18n', 'contact_submit');
-        }
-
-        if (typeof loadLanguage === 'function') {
-          loadLanguage(currentLang);
-        }
-
-        submitBtn.style.pointerEvents = 'all';
-        submitBtn.style.opacity = '1';
-      }, 4000);
-
-    }, 1500);
-  });
-}
-
-
-});
-
-document.addEventListener("DOMContentLoaded", () => {
+  // 9. АНІМАЦІЯ ДРУКУ (Typewriter)
+  // ==========================================
   const quoteSection = document.querySelector("#quote-section");
   const textElement = document.querySelector(".typewriter-text");
-  
-  if (!quoteSection || !textElement) return;
+  let typeTimer = null;
+  let isSectionVisible = false;
 
-  const fullText = textElement.getAttribute("data-text");
-  let isAnimated = false;
+  function runTypewriter() {
+    if (!textElement) return;
 
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !isAnimated) {
-        isAnimated = true;
-        
-        // --- ФІКС СТРИБКА ФОНУ ---
-        // 1. Тимчасово вставляємо повний текст, щоб виміряти його реальну висоту
-        textElement.textContent = fullText;
-        const targetHeight = textElement.offsetHeight;
-        
-        // 2. Фіксуємо висоту контейнера
-        textElement.style.minHeight = `${targetHeight}px`;
-        
-        // 3. Очищаємо текст і запускаємо друк
-        textElement.textContent = "";
-        typeText(textElement, fullText, 30);
-      }
-    });
-  }, { threshold: 0.3 });
+    // Спочатку перевіряємо data-text, якщо його немає — беремо textContent
+    const fullText = textElement.getAttribute("data-text") || textElement.textContent.trim();
+    if (!fullText) return;
 
-  observer.observe(quoteSection);
+    if (typeTimer) clearTimeout(typeTimer);
 
-  function typeText(element, text, speed) {
+    // 1. Запобігаємо стрибку висоти
+    textElement.style.minHeight = '0px';
+    textElement.textContent = fullText;
+    const targetHeight = textElement.offsetHeight;
+    textElement.style.minHeight = `${targetHeight}px`;
+
+    // 2. Очищення перед друком
+    textElement.textContent = "";
+    textElement.classList.remove('finished');
+
     let i = 0;
     function nextChar() {
-      if (i < text.length) {
-        element.textContent += text.charAt(i);
+      if (i < fullText.length) {
+        textElement.textContent += fullText.charAt(i);
         i++;
-        setTimeout(nextChar, speed);
+        typeTimer = setTimeout(nextChar, 30);
       } else {
-        element.classList.add('finished');
+        textElement.classList.add('finished');
       }
     }
     nextChar();
   }
+
+  window.onLanguageChangeForTypewriter = () => {
+    // Перезапускаємо друк тільки якщо секція видима прямо зараз
+    if (isSectionVisible) {
+      runTypewriter();
+    }
+  };
+
+  if (quoteSection && textElement) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        isSectionVisible = entry.isIntersecting;
+
+        if (entry.isIntersecting) {
+          runTypewriter();
+        } else {
+          if (typeTimer) clearTimeout(typeTimer);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    observer.observe(quoteSection);
+  }
+
 });
