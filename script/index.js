@@ -319,7 +319,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (contactForm) {
     const formStatusMessages = {
       de: { sending: "Wird gesendet...", success: "Nachricht gesendet ✓", fileDefault: "Grundriss oder Fotos hinzufügen (optional)" },
-      uk: { sending: "Надсилання...", success: "Повідомлення надіслано ✓", fileDefault: "Grundriss oder Fotos hinzufügen (optional)" }
+      uk: { sending: "Надсилання...", success: "Повідомлення надіслано ✓", fileDefault: "Додати план приміщення або фотографії (за бажанням)" },
+      en: { sending: "Sending...", success: "Message sent ✓", fileDefault: "Upload a room plan or photos (optional)"},
+      ru: { sending: "Отправка...", success: "Сообщение отправлено ✓", fileDefault: "Добавить план помещения или фотографии (по желанию)"}
     };
 
     contactForm.addEventListener('submit', (e) => {
