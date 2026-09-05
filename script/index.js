@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
 
   // ==========================================
   // 1. АНІМАЦІЯ ПОЯВИ ЕЛЕМЕНТІВ (Reveal)
@@ -302,88 +302,243 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ==========================================
-  // 8. ІНТЕРАКТИВНЕ НАДСИЛАННЯ ФОРМИ
+  // 8. ІНТЕРАКТИВНЕ НАДСИЛАННЯ ФОРМИ (Google Apps Script)
   // ==========================================
   const contactForm = document.getElementById('generalContactForm');
   const fileInput = document.getElementById('fileUpload');
   const fileNameDisplay = document.getElementById('fileNameDisplay');
+  const fileListContainer = document.getElementById('fileList');
+  const clearFileBtn = document.getElementById('clearFileBtn');
 
-  if (fileInput && fileNameDisplay) {
-    fileInput.addEventListener('change', function () {
-      if (this.files && this.files[0]) {
-        fileNameDisplay.textContent = this.files[0].name;
+  let selectedFiles = [];
+
+  const MAX_FILE_SIZE_MB = 25; // Ліміт для Google Apps Script
+  const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
+
+  const fileSizeErrorMessages = {
+    de: `Gesamtgröße der Dateien zu groß (max. ${MAX_FILE_SIZE_MB} MB)`,
+    uk: `Загальний розмір файлів занадто великий (макс. ${MAX_FILE_SIZE_MB} МБ)`,
+    en: `Total file size too large (max. ${MAX_FILE_SIZE_MB} MB)`,
+    ru: `Общий размер файлов слишком большой (макс. ${MAX_FILE_SIZE_MB} МБ)`
+  };
+
+  const fileCountMessages = {
+    de: (count) => `${count} Dateien ausgewählt`,
+    uk: (count) => `Прикріплено файлів: ${count}`,
+    en: (count) => `${count} files selected`,
+    ru: (count) => `Прикреплено файлов: ${count}`
+  };
+
+  function resetFiles() {
+    selectedFiles = [];
+    if (fileInput) fileInput.value = '';
+    if (clearFileBtn) clearFileBtn.style.display = 'none';
+    renderFileList();
+  }
+
+  function renderFileList() {
+    if (fileListContainer) fileListContainer.innerHTML = '';
+
+    if (selectedFiles.length === 0) {
+      if (clearFileBtn) clearFileBtn.style.display = 'none';
+
+      if (fileNameDisplay) {
+        fileNameDisplay.style.color = '';
+        fileNameDisplay.setAttribute('data-i18n', 'contact_file');
+        const currentLang = localStorage.getItem('selectedLanguage') || 'de';
+        const defaultTexts = {
+          de: "Grundriss oder Fotos hinzufügen (optional)",
+          uk: "Додати план приміщення або фотографії (за бажанням)",
+          en: "Upload a room plan or photos (optional)",
+          ru: "Добавить план помещения или фотографии (по желанию)"
+        };
+        fileNameDisplay.textContent = defaultTexts[currentLang] || defaultTexts['de'];
       }
+      return;
+    }
+
+    if (clearFileBtn) clearFileBtn.style.display = 'inline-block';
+
+    if (fileNameDisplay) {
+      fileNameDisplay.removeAttribute('data-i18n');
+      fileNameDisplay.style.color = '';
+      const currentLang = localStorage.getItem('selectedLanguage') || 'de';
+
+      if (selectedFiles.length === 1) {
+        fileNameDisplay.textContent = selectedFiles[0].name;
+      } else {
+        const getMsg = fileCountMessages[currentLang] || fileCountMessages['de'];
+        fileNameDisplay.textContent = getMsg(selectedFiles.length);
+      }
+    }
+
+    if (fileListContainer) {
+      selectedFiles.forEach((file, index) => {
+        const item = document.createElement('div');
+        item.style.cssText = 'display: flex; align-items: center; justify-content: space-between; background: rgba(0,0,0,0.03); padding: 5px 10px; margin-bottom: 5px; border-radius: 4px; border: 1px solid rgba(0,0,0,0.08);';
+
+        const nameSpan = document.createElement('span');
+        nameSpan.textContent = `${file.name} (${(file.size / (1024 * 1024)).toFixed(1)} MB)`;
+        nameSpan.style.cssText = 'overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 80%;';
+
+        const removeBtn = document.createElement('span');
+        removeBtn.innerHTML = '&times;';
+        removeBtn.style.cssText = 'cursor: pointer; color: #d9534f; font-weight: bold; font-size: 16px; margin-left: 10px; padding: 0 5px;';
+        removeBtn.title = 'Видалити цей файл';
+
+        removeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          selectedFiles.splice(index, 1);
+          renderFileList();
+        });
+
+        item.appendChild(nameSpan);
+        item.appendChild(removeBtn);
+        fileListContainer.appendChild(item);
+      });
+    }
+  }
+
+  if (clearFileBtn) {
+    clearFileBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      resetFiles();
+    });
+  }
+
+  if (fileInput) {
+    fileInput.addEventListener('change', function () {
+      if (this.files && this.files.length > 0) {
+        const newFiles = Array.from(this.files);
+
+        newFiles.forEach(newFile => {
+          const isDuplicate = selectedFiles.some(f => f.name === newFile.name && f.size === newFile.size);
+          if (!isDuplicate) {
+            selectedFiles.push(newFile);
+          }
+        });
+
+        let totalSize = selectedFiles.reduce((sum, f) => sum + f.size, 0);
+
+        if (totalSize > MAX_FILE_SIZE_BYTES) {
+          const currentLang = localStorage.getItem('selectedLanguage') || 'de';
+          const errorMsg = fileSizeErrorMessages[currentLang] || fileSizeErrorMessages['de'];
+
+          alert(errorMsg);
+          selectedFiles = selectedFiles.filter(f => !newFiles.includes(f));
+        }
+
+        renderFileList();
+        this.value = '';
+      }
+    });
+  }
+
+  // Функція конвертації файлу у Base64
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64String = reader.result.split(',')[1];
+        resolve({
+          name: file.name,
+          type: file.type,
+          base64: base64String
+        });
+      };
+      reader.onerror = error => reject(error);
+      reader.readAsDataURL(file);
     });
   }
 
   if (contactForm) {
     const formStatusMessages = {
-      de: { sending: "Wird gesendet...", success: "Nachricht gesendet ✓", fileDefault: "Grundriss oder Fotos hinzufügen (optional)" },
-      uk: { sending: "Надсилання...", success: "Повідомлення надіслано ✓", fileDefault: "Додати план приміщення або фотографії (за бажанням)" },
-      en: { sending: "Sending...", success: "Message sent ✓", fileDefault: "Upload a room plan or photos (optional)"},
-      ru: { sending: "Отправка...", success: "Сообщение отправлено ✓", fileDefault: "Добавить план помещения или фотографии (по желанию)"}
+      de: { sending: "Wird gesendet...", success: "Nachricht gesendet ✓", error: "Fehler beim Senden" },
+      uk: { sending: "Надсилання...", success: "Повідомлення надіслано ✓", error: "Помилка надсилання" },
+      en: { sending: "Sending...", success: "Message sent ✓", error: "Sending error" },
+      ru: { sending: "Отправка...", success: "Сообщение отправлено ✓", error: "Ошибка отправки" }
     };
 
-    contactForm.addEventListener('submit', (e) => {
+    contactForm.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      let totalSize = selectedFiles.reduce((sum, f) => sum + f.size, 0);
+      if (totalSize > MAX_FILE_SIZE_BYTES) {
+        const currentLang = localStorage.getItem('selectedLanguage') || 'de';
+        alert(fileSizeErrorMessages[currentLang] || fileSizeErrorMessages['de']);
+        return;
+      }
 
       const submitBtn = contactForm.querySelector('.submit-btn');
       if (!submitBtn) return;
 
       const btnText = submitBtn.querySelector('span');
-      const btnIcon = submitBtn.querySelector('svg'); // Отримуємо елемент стрілочки
+      const btnIcon = submitBtn.querySelector('svg');
       const currentLang = localStorage.getItem('selectedLanguage') || 'de';
       const langMsgs = formStatusMessages[currentLang] || formStatusMessages['de'];
 
-      // Стан надсилання
       if (btnText) {
-        btnText.setAttribute('data-i18n', 'form_sending');
+        btnText.removeAttribute('data-i18n');
         btnText.textContent = langMsgs.sending;
       }
 
       submitBtn.style.pointerEvents = 'none';
       submitBtn.style.opacity = '0.7';
+      try {
+        // Конвертуємо прикріплені файли в Base64
+        const filesData = await Promise.all(selectedFiles.map(fileToBase64));
 
-      setTimeout(() => {
-        // Стан успішного відправлення: міняємо текст і ховаємо стрілочку
+        const payload = {
+          name: contactForm.querySelector('[name="Client Name"]')?.value || '',
+          email: contactForm.querySelector('[name="Client Email"]')?.value || '',
+          message: contactForm.querySelector('[name="Project Details"]')?.value || '',
+          files: filesData
+        };
+
+        const scriptUrl = "https://script.google.com/macros/s/AKfycby7XoBkxifqVlBXpmTg4TbXORMPO3K84_pz9CVsURyiH8jmxhZ5o3jSg6Xzm_TP7BTr/exec";
+
+        await fetch(scriptUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify(payload)
+        });
+
         if (btnText) {
-          btnText.setAttribute('data-i18n', 'form_success');
           btnText.textContent = langMsgs.success;
         }
-
         if (btnIcon) {
-          btnIcon.style.display = 'none'; // Стрілочка зникає
+          btnIcon.style.display = 'none';
         }
 
         contactForm.reset();
+        resetFiles();
 
-        if (fileNameDisplay) {
-          fileNameDisplay.setAttribute('data-i18n', 'contact_file');
-          fileNameDisplay.textContent = langMsgs.fileDefault;
+      } catch (err) {
+        console.error('Google Apps Script Error:', err);
+        if (btnText) {
+          btnText.textContent = langMsgs.error;
         }
-
-        // Повернення до початкового стану через 4 секунди (4000 мс)
+      } finally {
         setTimeout(() => {
           if (btnText) {
             btnText.setAttribute('data-i18n', 'submit-btn');
           }
-
           if (btnIcon) {
-            btnIcon.style.display = ''; // Повертаємо стрілочку
+            btnIcon.style.display = '';
           }
-
           if (typeof loadLanguage === 'function') {
             loadLanguage(currentLang);
           }
-
           submitBtn.style.pointerEvents = 'all';
           submitBtn.style.opacity = '1';
-        }, 4000); // Час у мілісекундах (наприклад, 4000 мс = 4 секунди)
-
-      }, 1500);
+        }, 4000);
+      }
     });
   }
-
 
   // ==========================================
   // 9. АНІМАЦІЯ ДРУКУ (Typewriter)

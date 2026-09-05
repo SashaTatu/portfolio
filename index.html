@@ -486,35 +486,41 @@
 
       <!-- Права колонка: Форма -->
       <div class="contact-right">
-        <form class="shelnat-form" id="generalContactForm" enctype="multipart/form-data">
+        <form class="shelnat-form" id="generalContactForm">
           
           <div class="input-row-numeric">
             <span class="field-num">01</span>
-            <input type="text" data-i18n="[placeholder]form.name_placeholder" required placeholder="Ihr Name & Nachname">
+            <input type="text" name="Client Name" data-i18n="[placeholder]form.name_placeholder" required placeholder="Ihr Name & Nachname">
           </div>
           
           <div class="input-row-numeric">
             <span class="field-num">02</span>
-            <input type="email" data-i18n="[placeholder]form.email_placeholder" required placeholder="E-Mail-Adresse">
+            <input type="email" name="Client Email" data-i18n="[placeholder]form.email_placeholder" required placeholder="E-Mail-Adresse">
           </div>
           
           <div class="input-row-numeric">
             <span class="field-num">03</span>
-            <textarea rows="3" data-i18n="[placeholder]form.vision_placeholder" required placeholder="Ihre Vision, Fragen oder Wünsche"></textarea>
+            <textarea rows="3" name="Project Details" data-i18n="[placeholder]form.vision_placeholder" required placeholder="Ihre Vision, Fragen oder Wünsche"></textarea>
           </div>
           
-
-          <!-- 04: Поле завантаження файлу (план/фото) -->
+          <!-- Поле файлів з кнопкою видалення -->
           <div class="input-row-numeric input-file-row">
             <span class="field-num">04</span>
-            <label for="fileUpload" class="file-upload-label">
+            <label for="fileUpload" class="file-upload-label" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
               <span id="fileNameDisplay" data-i18n="contact_file">Grundriss oder Fotos hinzufügen (optional)</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
-              </svg>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <!-- Кнопка очищення (за замовчуванням прихована) -->
+                <span id="clearFileBtn" style="display: none; cursor: pointer; color: #d9534f; font-weight: bold; font-size: 18px; line-height: 1; padding: 2px 6px;" title="Очистити файли">&times;</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+                </svg>
+              </div>
             </label>
-            <input type="file" id="fileUpload" name="attachment" accept="image/*,.pdf" style="display: none;">
+            <input type="file" id="fileUpload" name="attachment" accept="image/*,.pdf" multiple style="display: none;">
           </div>
+
+          <!-- Список прикріплених файлів -->
+          <div id="fileList" class="file-list-container" style="margin-top: 10px; font-size: 13px;"></div>
 
           <div class="form-submit-row">
             <button type="submit" class="btn-shelnat submit-btn">
