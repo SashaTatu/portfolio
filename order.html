@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="title">LIBRI INTERIORS — Studio für Innenarchitektur</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap">
+  <link rel="preload" as="image" href="img/background/credo-back.webp" type="image/webp">
+
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="style/portfolio.css">
+  <link rel="icon" type="image/png" href="img/favicon/kolibri2.png">
+</head>
+<body>
+
+  <div class="bg-grid-lines">
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+    <div class="grid-line"></div>
+  </div>
+
+  <nav class="navbar">
+    <div class="container nav-container">
+      <div class="nav-left-brand">
+        <img src="img/favicon/kolibri2.png" alt="Kolibri Logo" class="nav-logo-img-kolibri" width="40" height="40">
+        <a href="index.html" class="nav-logo">LIBRI<br>INTERIORS</a>
+      </div>
+
+      <!-- Десктопні лінки (автоматично ховаються на мобільних) -->
+      <ul class="nav-links">
+        <li><a href="#" class="nav-item" data-i18n="home-page">Startseite</a></li>
+        <li><a href="portfolio.html" class="nav-item active" data-i18n="portfolio-page">Portfolio</a></li>
+        <li><a href="services.html" class="nav-item" data-i18n="services-page">Leistungen</a></li>
+      </ul>
+      
+      <div class="nav-actions">
+        <a href="order.html" class="btn-nav-order" data-i18n="order-btn">Designer kontaktieren</a>
+        
+        <div class="lang-selector">
+          <button class="lang-btn" id="langBtn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 2a14.5 14.5 0 0 0 0 20M12 2a14.5 14.5 0 0 1 0 20M2 12h20"/>
+            </svg>
+            <span id="current-lang">DE</span>
+          </button>
+          
+          <div class="lang-dropdown" id="langDropdown">
+              <a href="#" class="lang-dropdown-item active" data-lang="de">Deutsch</a>
+              <a href="#" class="lang-dropdown-item" data-lang="uk">Українська</a>
+              <a href="#" class="lang-dropdown-item" data-lang="en">English</a>
+              <a href="#" class="lang-dropdown-item" data-lang="ru">Русский</a>
+          </div>
+        </div>
+
+        <!-- Мобільна кнопка-меню (Кружечок як на референсі) -->
+        <div class="mobile-menu-trigger-wrapper">
+          <button class="burger-menu" id="mobileMenuBtn" aria-label="Toggle Menu">
+            <div class="burger-dot-grid">
+              <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
+              <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
+              <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
+            </div>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- Виїзне мобільне меню -->
+  <div class="mobile-overlay-menu" id="mobileOverlayMenu">
+    <button class="close-mobile-menu" id="closeMobileMenuBtn">&times;</button>
+    <div class="mobile-menu-content">
+      <ul class="mobile-nav-links">
+        <li><a href="#" class="mobile-nav-item" data-i18n="home-page">Startseite</a></li>
+        <li><a href="portfolio.html" class="mobile-nav-item active" data-i18n="portfolio-page">Portfolio</a></li>
+        <li><a href="services.html" class="mobile-nav-item" data-i18n="services-page">Leistungen</a></li>
+      </ul>
+      
+      <!-- Оновлений футер меню з виділеною кнопкою -->
+      <div class="mobile-menu-footer">
+        <div class="mobile-action-wrapper">
+          <a href="order.html" class="btn-mobile-menu-order" data-i18n="order-btn">Designer kontaktieren</a>
+        </div>
+        <div class="mobile-menu-meta">
+          <p>© 2026 LIBRI INTERIORS</p>
+          <a href="https://instagram.com/libri.interiors" target="_blank">@libri.interiors</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <footer class="footer">
+      <div class="container footer-container">
+        <!-- Блок 1: Назва та філософія -->
+        <div class="footer-brand-col">
+          <div class="f-logo" style="font-family: 'Cormorant Garamond', serif; font-size: 24px;">LIBRI<br>INTERIORS</div>
+          <p class="f-brand-philosophy" data-i18n="footer_philosophy">Räume mit charakter. <br>Für menschen mit geschichten</p>
+        </div>
+        
+        <!-- Контейнер для зручного групування в дві колонки на мобілці -->
+   
+
+
+          <!-- Колонка Зв'язку -->
+          <div class="footer-contacts-col">
+            <span class="f-column-label" data-i18n="contact_heading">// Kontakt</span>
+            <div class="footer-contacts-grid">
+              <div class="f-contact-item">
+                <span class="f-contact-label" data-i18n="contact_phone">Telefon</span>
+                <a href="tel:+4917661059883" class="f-contact-link">+49 176 61059883</a>
+              </div>
+              <div class="f-contact-item">
+                <span class="f-contact-label" data-i18n="contact_email2">Email</span>
+                <a href="mailto:hello@libri-interiors.com" class="f-contact-link">hello@libri-interiors.com</a>
+              </div>
+              <div class="f-contact-item">
+                <span class="f-contact-label" data-i18n="contact_social">Soziale Netzwerke</span>
+                <a href="https://instagram.com/libri.interiors" target="_blank" rel="noopener" class="f-contact-link">@libri.interiors</a>
+              </div>
+              <div class="f-contact-item">
+                <span class="f-contact-label" data-i18n="contact_location">Grafik / Lage</span>
+                <span class="f-contact-text" data-i18n="contact_hours">Mo — Fr : 09:00 — 18:00<br> Deutschland</span>
+              </div>
+            </div>
+          </div>
+
+        
+        <!-- Блок 3: Копірайт (винесено окремо для правильного позиціонування на мобільних) -->
+        <div class="f-copy">&copy; 2026. ALL RIGHTS RESERVED.</div>
+      </div>
+    </footer>
+
+  <script src="script/portfolio.js" defer></script>
+</body>
+</html>

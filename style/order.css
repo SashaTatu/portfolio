@@ -1,0 +1,613 @@
+/* --- ІМПОРТ ШРИФТІВ (Google Fonts: Cormorant Garamond & Montserrat) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
+
+/* --- ОСНОВА & СКИДАННЯ --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  scroll-behavior: smooth;
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: clip; /* Замість hidden, щоб sticky працював */
+}
+
+body {
+  background-color: #F9F6F4;
+  font-family: 'Montserrat', sans-serif;
+  color: #8E857B;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Приклад додавання елегантного шуму на тло */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  opacity: 0.03; /* Дуже тонкий ефект */
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,..."); /* SVG noise */
+  z-index: 9999;
+}
+
+h1, h2, h3, h4, i {
+  font-family: 'Cormorant Garamond', serif;
+  color: #485243;
+  font-weight: 400;
+}
+/* Збільшуємо міжрядковий інтервал та розрядку букв */
+h1, h2, h3 {
+  letter-spacing: 0.02em;
+}
+
+h2 {
+  line-height: 1.25; /* Робимо заголовок легшим для сприйняття */
+}
+
+p, .about-story p, .col-text p {
+  line-height: 1.85; /* Повітряний міжрядковий інтервал для тексту */
+  letter-spacing: 0.3px;
+}
+
+a { text-decoration: none; color: inherit; }
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 50px;
+}
+
+.section-padding {
+  padding: 150px 0;
+  border-bottom: none;
+  position: relative;
+}
+
+/* Уніфіковані стилі для заголовків секцій */
+.section-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px auto;
+}
+
+.section-tag {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #8E857B;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4.2vw, 48px);
+  font-weight: 300;
+  color: #485243;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.section-title i {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+}
+
+/* Тонкий "видих" замість жорсткої лінії — лише де потрібно акцентувати межу */
+.section-padding::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 10%; right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,194,189,0.35), transparent);
+}
+
+.luxury-tag {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #8E857B;
+}
+
+/* --- BACKGROUND LINED GRID --- */
+.bg-grid-lines {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 50px;
+  z-index: 0;
+}
+.grid-line {
+  width: 1px; height: 100%;
+  background-color: rgba(201, 194, 189, 0.15);
+}
+
+/* --- НАВІГАЦІЯ --- */
+.navbar {
+  z-index: 1000 !important;
+  position: fixed;
+  width: 100%; top: 0; left: 0;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(201, 194, 189, 0.3);
+  background-color: rgba(249, 246, 244, 0.85);
+  backdrop-filter: blur(12px);
+  transition: padding 0.3s, background-color 0.3s;
+
+  /* Початковий прихований стан */
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+
+  /* Анімація появи з затримкою */
+  animation: navbarFadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 2s; /* 1.2s (кнопка) + 0.2s (пара мілісекунд) */
+}
+
+@keyframes navbarFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+  }
+}
+
+.nav-container {
+  display: flex; 
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.nav-left-brand {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo-img-kolibri {
+  width: 40px;
+  height: auto;
+  margin-right: 15px;
+  flex-shrink: 0;
+}   
+
+.nav-logo {
+  font-size: 14px; 
+  font-weight: 500; 
+  letter-spacing: 5px; 
+  color: #485243;
+  text-align: left;
+  line-height: 1.2;
+  flex-shrink: 0;
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.nav-links { 
+  display: flex; 
+  list-style: none; 
+  gap: 50px; 
+  margin-left: auto;
+  margin-right: 40px;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-shrink: 0;
+}
+
+.nav-item {
+  font-size: 11px; 
+  text-transform: uppercase; 
+  letter-spacing: 2px;
+  position: relative;
+  padding: 8px 0;
+  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.nav-links:hover .nav-item { opacity: 0.35; }
+.nav-links .nav-item:hover { opacity: 1; color: #485243; }
+.nav-item.active { opacity: 1; color: #485243; }
+
+.nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 50%; width: 0; height: 1px;
+  background-color: #485243;
+  transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1), left 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.nav-item:hover::after, .nav-item.active::after { width: 100%; left: 0; }
+
+.btn-nav-order {
+  border: 1px solid #485243;
+  padding: 12px 25px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #485243;
+  background: transparent;
+  border-radius: 40px;
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  display: inline-block;
+  transition: color 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.btn-nav-order::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-color: #485243;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: -1;
+}
+.btn-nav-order:hover { color: #F9F6F4; border-color: #485243; transform: translateY(-2px); }
+.btn-nav-order:hover::before { transform: scaleY(1); }
+.btn-nav-order:active { transform: translateY(0); }
+
+/* --- СЕЛЕКТОР МОВ --- */
+.lang-selector {
+  position: relative;
+  display: inline-block;
+}
+
+.lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(201, 194, 189, 0.6);
+  background: transparent;
+  padding: 12px 20px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #485243;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.lang-btn:hover, .lang-selector.active .lang-btn {
+  border-color: #485243;
+  background-color: rgba(102, 105, 86, 0.05);
+}
+
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 260px;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(201, 194, 189, 0.4);
+  padding: 15px 0;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 15px 35px rgba(142, 133, 123, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 200;
+}
+
+.lang-selector.active .lang-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+
+.lang-dropdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 25px;
+  font-size: 14px;
+  color: #2c2c2c;
+  font-weight: 400;
+  transition: background 0.2s ease;
+}
+.lang-dropdown-item:hover { background-color: #F9F6F4; }
+.lang-dropdown-item.active { color: #485243; font-weight: 500; }
+
+/* --- МОБІЛЬНА КНОПКА-КРУЖЕЧОК (Зображення референсу) --- */
+.mobile-menu-trigger-wrapper {
+  display: none; /* За замовчуванням приховано на ПК */
+  align-items: center;
+  gap: 12px;
+}
+
+.burger-text {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #485243;
+  font-weight: 400;
+}
+
+.burger-menu {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Налаштування під стиль перемикача мови з твоїми кольорами */
+  background-color: transparent; 
+  border: 1px solid rgba(201, 194, 189, 0.4);    /* Колір обводки */
+  
+  /* Плавні транзиції */
+  transition: 
+    background-color 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+    border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+    transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Елементи всередині (лінії або крапки бургера) */
+.burger-menu span {
+  background-color: #485243;    /* Колір внутрішніх елементів */
+  transition: background-color 0.3s ease;
+}
+
+/* Ефект при взаємодії (якщо при наведенні потрібна інверсія) */
+.burger-menu:hover,
+.burger-menu:active {
+  background-color: #8E857B;    /* Кружечок заливається кольором обводки */
+}
+
+/* При ховері внутрішні елементи стають світлими для контрасту */
+.burger-menu:hover span,
+.burger-menu:active span {
+  background-color: #ffffff;    
+}
+
+/* Матриця точок всередині кружечка */
+.burger-dot-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 3px);
+  gap: 3px;
+}
+
+.burger-dot-grid span {
+  width: 3px;
+  height: 3px;
+  background-color: #485243; /* Білі точки */
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+/* --- ВИЇЗНЕ ОВЕРЛЕЙ МЕНЮ --- */
+.mobile-overlay-menu {
+  position: fixed;
+  top: 0; right: 0;
+  width: 100%;
+  max-width: 400px;
+  height: 100vh;
+  background-color: #F9F6F4;
+  box-shadow: -10px 0 40px rgba(18, 16, 15, 0.1);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  padding: 40px;
+  transform: translateX(100%);
+  transition: transform 0.5s cubic-bezier(0.32, 1, 0.24, 1);
+}
+
+.mobile-overlay-menu.active {
+  transform: translateX(0);
+}
+
+.close-mobile-menu {
+  position: absolute;
+  top: 25px; right: 30px;
+  background: transparent;
+  border: none;
+  font-size: 38px;
+  color: #485243;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.mobile-menu-content {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.mobile-nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.mobile-nav-item {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  color: #485243;
+  display: block;
+  transition: padding-left 0.3s ease;
+}
+.mobile-nav-item:hover, .mobile-nav-item.active {
+  padding-left: 10px;
+  font-style: italic;
+}
+
+.mobile-menu-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #C9C2BD;
+  border-top: 1px solid rgba(201, 194, 189, 0.3);
+  padding-top: 25px;
+}
+
+/* --- СТИЛІ ДЛЯ ВИДІЛЕНОЇ КНОПКИ В МОБІЛЬНОМУ МЕНЮ --- */
+.mobile-action-wrapper {
+  width: 100%;
+  padding: 0 10px;
+  margin-bottom: 45px; /* Відступ до копірайту */
+}
+
+.btn-mobile-menu-order {
+  display: block;
+  width: 100%;
+  text-align: center;
+  border: 1px solid #485243;
+  background-color: #485243; /* Акцентне залиття для мобілки */
+  color: #F9F6F4; /* Світлий текст на темному тлі */
+  padding: 16px 25px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+  border-radius: 40px;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  box-shadow: 0 4px 15px rgba(102, 105, 86, 0.15);
+}
+
+.btn-mobile-menu-order:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 8px rgba(102, 105, 86, 0.15);
+}
+
+
+/* --- ВЕРИФІКАЦІЯ ТА ВИПРАВЛЕННЯ МЕДІА-ЗАПИТІВ --- */
+
+@media (max-width: 992px) {
+  /* Переконайтеся, що стара інлайн-стилізована кнопка не заважає */
+  .mobile-menu-content .btn-nav-order {
+    display: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  h2 { font-size: 28px; }
+  .hero-image-bg h1 { font-size: 38px; }
+  
+  .team-photo-placeholder { 
+    height: 380px; 
+    border-radius: 80px 80px 20px 20px; 
+  }
+  
+  .contact-card-box { padding: 30px 20px; }
+  .mobile-overlay-menu { max-width: 100%; }
+}
+
+
+/* --- ФУТЕР --- */
+.footer { padding: 100px 0 60px; border-top: 1px solid rgba(201, 194, 189, 0.35); background-color: #F9F6F4; position: relative; z-index: 100; }
+.footer-container { display: grid; grid-template-columns: 1.2fr 0.8fr 1.5fr; gap: 80px; width: 100%; align-items: flex-start; }
+.footer-brand-col { display: flex; flex-direction: column; gap: 25px; }
+.f-logo { font-style: normal; font-size: 16px; font-weight: 500; letter-spacing: 5px; color: #485243; line-height: 1.2; }
+.f-brand-philosophy { font-size: 13px; font-weight: 300; line-height: 1.6; color: #8E857B; max-width: 280px; }
+.f-copy { font-size: 10px; font-weight: 400; letter-spacing: 2px; color: #C9C2BD; text-transform: uppercase; margin-top: auto; padding-top: 20px; }
+.footer-nav-col { display: flex; flex-direction: column; gap: 25px; }
+.f-column-label { font-size: 10px; text-transform: uppercase; letter-spacing: 3px; color: #8E857B; font-weight: 400; border-bottom: 1px solid rgba(201, 194, 189, 0.2); padding-bottom: 10px; }
+.f-nav-list { list-style: none; display: flex; flex-direction: column; gap: 15px; }
+.f-nav-list .f-nav-link { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #8E857B; transition: color 0.3s ease, padding-left 0.3s ease; display: inline-block; }
+.f-nav-list .f-nav-link:hover { color: #485243; padding-left: 6px; }
+.footer-contacts-col { display: flex; flex-direction: column; gap: 25px; }
+.footer-contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 35px 25px; }
+.f-contact-item { display: flex; flex-direction: column; gap: 6px; }
+.f-contact-label { font-size: 9px; text-transform: uppercase; letter-spacing: 2px; color: #C9C2BD; }
+.f-contact-link { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: #485243; font-weight: 300; transition: color 0.3s ease, transform 0.3s ease; display: inline-block; }
+.f-contact-link:hover { color: #8E857B; transform: translateY(-1px); }
+.f-contact-text { font-size: 13px; font-weight: 300; line-height: 1.5; color: #8E857B; }
+
+
+
+@media (max-width: 992px) {
+  .container, .bg-grid-lines { padding: 0 25px; }
+  
+  /* Перебудова навігації під мобільну матричну кнопку */
+  .nav-links, .btn-nav-order { display: none !important; } /* Сховали десктопні посилання та кнопку */
+  .mobile-menu-trigger-wrapper { display: flex; } /* Увімкнули обгортку бургер-кружечка */
+ /* Футер */
+  .footer { padding: 70px 0 40px; }
+  .footer-container { grid-template-columns: 1fr; gap: 50px; text-align: left; }
+  .f-brand-philosophy { max-width: 100%; }
+  .footer-contacts-grid { grid-template-columns: 1fr; gap: 25px; }
+  .f-copy { margin-top: 20px; }
+}
+
+@media (max-width: 480px) {
+  h2 { font-size: 28px; }
+}
+
+@media (min-width: 993px) {
+  .footer-container {
+    display: grid;
+    /* Повертаємо оригінальні пропорції трьох колонок, де копірайт лежить всередині першої */
+    grid-template-columns: 1.2fr 2.3fr; 
+    gap: 80px;
+  }
+  .footer-links-wrapper {
+    display: grid;
+    grid-template-columns: 0.8fr 1.5fr;
+    gap: 80px;
+  }
+  .f-copy {
+    grid-column: 1;
+    margin-top: 40px;
+  }
+}
+
+@media (max-width: 992px) {
+  /* Переводимо контейнер футера у вертикальний flex-потік */
+  .footer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    text-align: left;
+  }
+
+  /* Блок 1: Назва та філософія */
+  .footer-brand-col {
+    gap: 15px;
+  }
+  .f-brand-philosophy {
+    max-width: 100%;
+  }
+
+  /* Блок 2: Обгортка навігації та зв'язку, що ділить екран на дві колонки */
+  .footer-links-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Дві рівні колонки */
+    gap: 30px 20px;
+    width: 100%;
+  }
+
+  /* Скидаємо десктопну сітку контактів всередині правої колонки, робимо їх в один стовпчик */
+  .footer-contacts-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Фіксуємо розміри шрифтів посилань на мобільних пристроях для кращої читабельності */
+  .f-contact-link {
+    font-size: 15px;
+    word-break: break-word; /* Запобігає виходу довгих email-адрес за межі екрана */
+  }
+
+  /* Блок 3: Копірайт завжди залишається в самому низу */
+  .f-copy {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(201, 194, 189, 0.2); /* Візуальна лінія над копірайтом */
+    width: 100%;
+  }
+}
