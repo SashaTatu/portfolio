@@ -605,7 +605,7 @@ section.reveal.active > .cta-fluid-shape {
 .hero-bg-image {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background-image: url('../img/background/credo-back.webp');
+  background-image: url('../img/background/credo-back1.webp');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -618,9 +618,20 @@ section.reveal.active > .cta-fluid-shape {
   position: absolute;
   inset: 0;
   z-index: 1;
+  /* Градієнт переміщено праворуч для покращення читабельності тексту */
   background:
-    linear-gradient(90deg, rgba(18,16,15,0.58) 0%, rgba(18,16,15,0.40) 28%, rgba(18,16,15,0.18) 55%, rgba(18,16,15,0.05) 100%),
-    radial-gradient(circle at 18% 72%, rgba(18,16,15,0.40) 0%, rgba(18,16,15,0.18) 45%, transparent 80%);
+    linear-gradient(270deg, rgba(18,16,15,0.58) 0%, rgba(18,16,15,0.40) 28%, rgba(18,16,15,0.18) 55%, rgba(18,16,15,0.05) 100%),
+    radial-gradient(circle at 82% 72%, rgba(18,16,15,0.40) 0%, rgba(18,16,15,0.18) 45%, transparent 80%);
+}
+
+.hero-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Вирівнює вміст по правому краю */
+  z-index: 2;
+  width: 100%;
+  margin-left: 0;
+  margin-right: auto; /* Контейнер притискається праворуч */
 }
 
 .hero-image-bg h1 {
@@ -630,20 +641,13 @@ section.reveal.active > .cta-fluid-shape {
   margin-top: auto;
   color: #FFFFFF;
   font-weight: 300;
-  text-align: left;
+  text-align: right; /* Текст заголовка за правою межею */
   text-shadow: 0 0 40px rgba(255, 255, 255, 0.15); 
 }
 
-.hero-container {
-  position: relative;
-  z-index: 2;
-  max-width: 800px;
-  margin-left: 70px;
+.hero-image-bg h1 i { 
+  color: #F9F6F4; 
 }
-
-.hero-image-bg h1 i { color: #F9F6F4; }
-
-
 
 .hero-p {
   font-size: 16px;
@@ -651,11 +655,12 @@ section.reveal.active > .cta-fluid-shape {
   max-width: 650px;
   line-height: 1.7;
   color: #E5E2DC;
-  text-align: left;
+  text-align: right; /* Вирівнювання абзацу праворуч */
   letter-spacing: 0.5px;
   position: relative;
   padding: 15px 20px;
-  margin-left: -20px;
+  margin-left: auto; /* Зміщує блок абзацу вправо */
+  margin-right: -20px;
   z-index: 2;
 }
 
@@ -667,9 +672,11 @@ section.reveal.active > .cta-fluid-shape {
   background: rgba(20, 18, 17, 0.4); 
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  -webkit-mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 100%);
-  mask-image: linear-gradient(to right, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 100%);
+  /* Маска розмиття розвернена зліва направо */
+  -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 100%);
 }
+
 .hero-subtext {
   font-family: 'Montserrat', sans-serif;
   font-size: 16px;
@@ -679,14 +686,6 @@ section.reveal.active > .cta-fluid-shape {
   letter-spacing: 0.5px;
 }
 
-/* --- СТИЛІЗАЦІЯ КНОПКИ В HERO СЕКЦІЇ --- */
-.hero-action {
-  margin-top: 15px;
-  display: flex;
-  justify-content: flex-start;
-  position: relative;
-  z-index: 5;
-}
 
 .btn-hero-order {
   display: inline-flex;
@@ -750,13 +749,10 @@ section.reveal.active > .cta-fluid-shape {
 /* Адаптивність для мобільних екранів */
 @media (max-width: 768px) {
 
-  .hero-container{
-    left: -50px
-  }
 
   .hero-action {
     margin-top: 25px;
-    width: 100%;
+    align-items: right; /* Вирівнювання кнопки по правому краю */
   }
 
   .btn-hero-order {
@@ -766,7 +762,10 @@ section.reveal.active > .cta-fluid-shape {
     text-align: center;
     font-size: 10px;
     letter-spacing: 2px;
+    
+    
   }
+  
 }
 
 
@@ -2290,3 +2289,5 @@ section.reveal.active > .cta-fluid-shape {
 .process-steps-grid.active .process-step-item:nth-child(4) {
   transition-delay: 0.75s;
 }
+
+
