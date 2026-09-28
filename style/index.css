@@ -1336,142 +1336,147 @@ section.reveal.active > .cta-fluid-shape {
     margin-top: 30px;
   }
 }
-/* --- ТАБЛИЦЯ ПОСЛУГ --- */
+/* --- ТАБЛИЦЯ ПОСЛУГ (СТИЛЬ ЛЮКС) --- */
 
 #services { 
-  padding: 120px 0 0 0;
+  padding: 100px 0;
   position: relative;
-  background-color: #F9F6F4;
+  background-color: #FAF6F0; /* М'який загальний бежевий фон */
 }
 
 .shelnat-table { 
-  border-top: 1px solid rgba(201, 194, 189, 0.6);
-  margin-top: 20px;
+  border-top: 1px solid rgba(142, 133, 123, 0.25);
+  border-bottom: 1px solid rgba(142, 133, 123, 0.25);
+  margin-top: 30px;
 }
 
 .table-row { 
   display: flex; 
   align-items: center;
-  padding: 48px 24px; 
-  border-bottom: 1px solid rgba(201, 194, 189, 0.4); 
+  padding: 45px 20px; 
+  border-bottom: 1px solid rgba(142, 133, 123, 0.25); 
   position: relative;
-  border-radius: 4px;
-  transition: background-color 0.4s ease, padding-left 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-bottom-color 0.4s ease; 
+  transition: background-color 0.4s ease; 
   cursor: pointer; 
 }
 
+/* Прибираємо нижню бордер-лінію у останнього елемента */
+.table-row:last-child {
+  border-bottom: none;
+}
+
 .table-row:hover { 
-  background-color: rgba(72, 82, 67, 0.025);
-  padding-left: 36px; 
-  border-bottom-color: #485243; 
+  background-color: rgba(92, 29, 36, 0.015);
 }
 
-/* Акцентна лінія зліва при наведенні */
+/* Прибираємо старі псевдокласи ліній, замінюємо на чистий дизайн зі зразка */
 .table-row::before { 
-  content: ''; 
-  position: absolute; 
-  left: 0; 
-  top: 0; 
-  bottom: 0; 
-  width: 0; 
-  background-color: #485243; 
-  transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
-}
-
-.table-row:hover::before { 
-  width: 3px; 
+  display: none; 
 }
 
 /* Колонка з номером */
 .col-num { 
-  flex: 0 0 80px; 
+  flex: 0 0 90px; 
   font-family: 'Cormorant Garamond', serif;
-  font-size: 16px; 
-  font-style: italic;
-  color: #8E857B;
-  transition: color 0.4s ease;
+  font-size: 20px; 
+  color: #5c1d24; /* Бордовий акцент для цифр */
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
 }
 
-.table-row:hover .col-num {
-  color: #485243;
+.col-num .slash {
+  font-style: italic;
+  color: #8E857B;
+  font-size: 16px;
 }
 
 /* Колонка з назвою */
 .col-name { 
-  flex: 0 0 320px; 
+  flex: 0 0 340px; 
   padding-right: 30px;
 }
 
 .col-name h3 { 
   font-size: 32px; 
   font-weight: 300;
-  color: #485243;
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
+  font-family: 'Cormorant Garamond', serif;
+  color: #2c2c2c;
+  margin: 0;
+  transition: transform 0.4s ease; 
 }
 
 .table-row:hover .col-name h3 { 
-  transform: translateX(6px); 
+  transform: translateX(4px); 
 }
 
 /* Колонка з описом */
 .col-text { 
   flex: 1; 
-  font-size: 14px; 
+  font-size: 13.5px; 
   font-weight: 300; 
-  line-height: 1.85; 
+  line-height: 1.7; 
   color: #8E857B;
   padding-right: 40px;
 }
 
+.service-item-tag {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #5c1d24; /* Бордовий акцент для мітки над описом */
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
 .col-text p {
   margin: 0;
+  color: #6b635b;
 }
 
-/* Декоративна стрілка праворуч */
+/* Кругла стрілка праворуч */
 .col-arrow {
-  flex: 0 0 30px;
+  flex: 0 0 50px;
   display: flex;
   justify-content: flex-end;
-  color: #C9C2BD;
-  transition: color 0.4s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-.col-arrow svg {
-  display: block;
-}
-
-.table-row:hover .col-arrow {
-  color: #485243;
-  transform: translate(4px, -4px);
-}
-
-/* Кнопка внизу секції */
-#services .section-action-end {
+.service-arrow-circle {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(92, 29, 36, 0.3);
+  border-radius: 50%;
   display: flex;
-  justify-content: flex-start;
-  margin-top: 60px;
+  align-items: center;
+  justify-content: center;
+  color: #5c1d24;
+  transition: all 0.4s ease;
+}
+
+.table-row:hover .service-arrow-circle {
+  background-color: #5c1d24;
+  color: #FFFFFF;
+  border-color: #5c1d24;
+  transform: scale(1.05);
 }
 
 /* --- АДАПТИВНІСТЬ ПОСЛУГ НА МОБІЛЬНИХ ПРИСТРОЯХ --- */
 @media (max-width: 992px) {
   #services {
-    padding: 80px 0 0 0;
+    padding: 60px 0;
   }
 
   .table-row { 
     flex-direction: column; 
     align-items: flex-start;
-    padding: 32px 16px; 
+    padding: 30px 15px; 
     gap: 12px;
-  }
-
-  .table-row:hover {
-    padding-left: 20px;
   }
 
   .col-num { 
     flex: none;
-    font-size: 14px; 
+    font-size: 18px; 
   }
 
   .col-name { 
@@ -1487,13 +1492,11 @@ section.reveal.active > .cta-fluid-shape {
   .col-text { 
     flex: none;
     width: 100%;
-    font-size: 13.5px; 
     padding-right: 0;
-    margin-top: 4px;
   }
 
   .col-arrow {
-    display: none; /* Ховаємо стрілку на мобільних для чистоти інтерфейсу */
+    display: none; /* Приховуємо стрілку на мобільних для лаконічності */
   }
 }
 
