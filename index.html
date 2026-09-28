@@ -26,77 +26,78 @@
     <div class="grid-line"></div>
   </div>
 
-  <nav class="navbar">
-    <div class="container nav-container">
-      <div class="nav-left-brand">
-        <img src="img/favicon/kolibri2.png" alt="Kolibri Logo" class="nav-logo-img-kolibri" width="40" height="40">
-        <a href="index.html" class="nav-logo">LIBRI<br>INTERIORS</a>
-      </div>
-
-      <!-- Десктопні лінки (автоматично ховаються на мобільних) -->
-      <ul class="nav-links">
-        <li><a href="#" class="nav-item active" data-i18n="home-page">Startseite</a></li>
-        <li><a href="portfolio.html" class="nav-item" data-i18n="portfolio-page">Portfolio</a></li>
-        <li><a href="services.html" class="nav-item" data-i18n="services-page">Leistungen</a></li>
-      </ul>
-      
-      <div class="nav-actions">
-        <a href="order.html" class="btn-nav-order" data-i18n="order-btn">Designer kontaktieren</a>
-        
-        <div class="lang-selector">
-          <button class="lang-btn" id="langBtn">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M12 2a14.5 14.5 0 0 0 0 20M12 2a14.5 14.5 0 0 1 0 20M2 12h20"/>
-            </svg>
-            <span id="current-lang">DE</span>
-          </button>
-          
-          <div class="lang-dropdown" id="langDropdown">
-              <a href="#" class="lang-dropdown-item active" data-lang="de">Deutsch</a>
-              <a href="#" class="lang-dropdown-item" data-lang="uk">Українська</a>
-              <a href="#" class="lang-dropdown-item" data-lang="en">English</a>
-              <a href="#" class="lang-dropdown-item" data-lang="ru">Русский</a>
-          </div>
-        </div>
-
-        <!-- Мобільна кнопка-меню (Кружечок як на референсі) -->
-        <div class="mobile-menu-trigger-wrapper">
-          <button class="burger-menu" id="mobileMenuBtn" aria-label="Toggle Menu">
-            <div class="burger-dot-grid">
-              <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
-              <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
-              <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
-            </div>
-          </button>
-        </div>
-
-      </div>
+<!-- ОНОВЛЕНИЙ НАВБАР -->
+<nav class="navbar">
+  <div class="container nav-container">
+    <div class="nav-left-brand">
+      <img src="img/favicon/kolibri2.png" alt="Kolibri Logo" class="nav-logo-img-kolibri" width="40" height="40">
+      <a href="index.html" class="nav-logo">LIBRI<br>INTERIORS</a>
     </div>
-  </nav>
 
-  <!-- Виїзне мобільне меню -->
-  <div class="mobile-overlay-menu" id="mobileOverlayMenu">
-    <button class="close-mobile-menu" id="closeMobileMenuBtn">&times;</button>
-    <div class="mobile-menu-content">
-      <ul class="mobile-nav-links">
-        <li><a href="#" class="mobile-nav-item active" data-i18n="home-page">Startseite</a></li>
-        <li><a href="portfolio.html" class="mobile-nav-item" data-i18n="portfolio-page">Portfolio</a></li>
-        <li><a href="services.html" class="mobile-nav-item" data-i18n="services-page">Leistungen</a></li>
-      </ul>
+    <!-- Десктопні лінки (автоматично ховаються на мобільних пристроях) -->
+    <ul class="nav-links">
+      <li><a href="#" class="nav-item active" data-i18n="home-page">Startseite</a></li>
+      <li><a href="portfolio.html" class="nav-item" data-i18n="portfolio-page">Portfolio</a></li>
+      <li><a href="services.html" class="nav-item" data-i18n="services-page">Leistungen</a></li>
+    </ul>
+    
+    <div class="nav-actions">
+      <a href="order.html" class="btn-nav-order" data-i18n="order-btn">Designer kontaktieren</a>
       
-      <!-- Оновлений футер меню з виділеною кнопкою -->
-      <div class="mobile-menu-footer">
-        <div class="mobile-action-wrapper">
-          <a href="order.html" class="btn-mobile-menu-order" data-i18n="order-btn">Designer kontaktieren</a>
+      <!-- Селектор мов -->
+      <div class="lang-selector">
+        <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 2a14.5 14.5 0 0 0 0 20M12 2a14.5 14.5 0 0 1 0 20M2 12h20"/>
+          </svg>
+          <span id="current-lang">DE</span>
+        </button>
+        
+        <div class="lang-dropdown" id="langDropdown">
+          <a href="#" class="lang-dropdown-item active" data-lang="de">Deutsch</a>
+          <a href="#" class="lang-dropdown-item" data-lang="uk">Українська</a>
+          <a href="#" class="lang-dropdown-item" data-lang="en">English</a>
+          <a href="#" class="lang-dropdown-item" data-lang="ru">Русский</a>
         </div>
-        <div class="mobile-menu-meta">
-          <p>© 2026 LIBRI INTERIORS</p>
-          <a href="https://instagram.com/libri.interiors" target="_blank">@libri.interiors</a>
-        </div>
+      </div>
+
+      <!-- Мобільна кнопка-меню (Кружечок-бургер) -->
+      <div class="mobile-menu-trigger-wrapper">
+        <button class="burger-menu" id="mobileMenuBtn" aria-label="Toggle Menu">
+          <div class="burger-dot-grid">
+            <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
+            <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
+            <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
+          </div>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<!-- ВІДПОВІДНЕ ВИЇЗНЕ МОБІЛЬНЕ МЕНЮ -->
+<div class="mobile-overlay-menu" id="mobileOverlayMenu" aria-hidden="true">
+  <button class="close-mobile-menu" id="closeMobileMenuBtn" aria-label="Close Menu">&times;</button>
+  <div class="mobile-menu-content">
+    <ul class="mobile-nav-links">
+      <li><a href="#" class="mobile-nav-item active" data-i18n="home-page">Startseite</a></li>
+      <li><a href="portfolio.html" class="mobile-nav-item" data-i18n="portfolio-page">Portfolio</a></li>
+      <li><a href="services.html" class="mobile-nav-item" data-i18n="services-page">Leistungen</a></li>
+    </ul>
+    
+    <div class="mobile-menu-footer">
+      <div class="mobile-action-wrapper">
+        <a href="order.html" class="btn-mobile-menu-order" data-i18n="order-btn">Designer kontaktieren</a>
+      </div>
+      <div class="mobile-menu-meta">
+        <p>© 2026 LIBRI INTERIORS</p>
+        <a href="https://instagram.com/libri.interiors" target="_blank" rel="noopener">@libri.interiors</a>
       </div>
     </div>
   </div>
+</div>
 
   <header class="hero-image-bg">
     <div class="hero-bg-image"></div>
@@ -477,63 +478,75 @@
   <div class="container contact-container-luxury">
     <div class="contact-card-box">
       
-      <!-- Ліва колонка: Заголовок та Опис -->
+      <!-- Ліва колонка: Фото у рамці (НЕ ЗМІНЕНА) -->
       <div class="contact-left">
-        <span class="section-tag" style="text-align: left;" data-i18n="contact_tag">Immer für Sie da</span>
-        <h2 data-i18n="contact_title">Lassen Sie uns Ihre Vision <br><i>besprechen</i></h2>
-        <p class="contact-meta-text" data-i18n="contact_desc">
-          Haben Sie Fragen zu unseren Leistungen, möchten Sie ein neues Projekt starten oder einfach Ihre ersten Ideen teilen? Wir freuen uns darauf, von Ihnen zu hören, und melden uns innerhalb von 24 Stunden bei Ihnen.
-        </p>
+        <div class="contact-image-wrapper">
+          <div class="contact-image-frame"></div>
+          <!-- Замініть шлях у src на реальне зображення вашої команди -->
+          <img src="img/people/team.webp" alt="Team" class="contact-photo" />
+        </div>
       </div>
 
-      <!-- Права колонка: Форма -->
+      <!-- Права колонка: Заголовок, опис, форма та переваги -->
       <div class="contact-right">
+        <span class="section-tag" style="text-align: left;" data-i18n="contact_tag">— &nbsp; KONTAKT &nbsp; —</span>
+        <h2 data-i18n="contact_title">Lassen Sie uns<br>Ihr <i style="font-family: 'Cormorant Garamond', serif; color: #5c1d24;">Zuhause</i><br>gestalten.</h2>
+        <p class="contact-meta-text" data-i18n="contact_desc">
+          Erzählen Sie uns von Ihren Ideen, Wünschen und Räumen. Gemeinsam entwickeln wir ein individuelles Konzept, das zu Ihrem Leben passt.
+        </p>
+
         <form class="shelnat-form" id="generalContactForm">
           
           <div class="input-row-numeric">
-            <span class="field-num">01</span>
-            <input type="text" name="Client Name" data-i18n="[placeholder]form.name_placeholder" required placeholder="Ihr Name & Nachname">
+            <span class="field-num">01 <span class="slash">/</span></span>
+            <input type="text" name="Client Name" data-i18n="[placeholder]form.name_placeholder" required placeholder="IHR NAME & NACHNAME">
           </div>
           
           <div class="input-row-numeric">
-            <span class="field-num">02</span>
-            <input type="email" name="Client Email" data-i18n="[placeholder]form.email_placeholder" required placeholder="E-Mail-Adresse">
+            <span class="field-num">02 <span class="slash">/</span></span>
+            <input type="email" name="Client Email" data-i18n="[placeholder]form.email_placeholder" required placeholder="E-MAIL-ADRESSE">
           </div>
           
           <div class="input-row-numeric">
-            <span class="field-num">03</span>
-            <textarea rows="3" name="Project Details" data-i18n="[placeholder]form.vision_placeholder" required placeholder="Ihre Vision, Fragen oder Wünsche"></textarea>
+            <span class="field-num">03 <span class="slash">/</span></span>
+            <textarea rows="2" name="Project Details" data-i18n="[placeholder]form.vision_placeholder" required placeholder="ERZÄHLEN SIE UNS VON IHREM PROJEKT"></textarea>
           </div>
           
-          <!-- Поле файлів з кнопкою видалення -->
-          <div class="input-row-numeric input-file-row">
-            <span class="field-num">04</span>
-            <label for="fileUpload" class="file-upload-label" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-              <span id="fileNameDisplay" data-i18n="contact_file">Grundriss oder Fotos hinzufügen (optional)</span>
-              <div style="display: flex; align-items: center; gap: 8px;">
-                <!-- Кнопка очищення (за замовчуванням прихована) -->
-                <span id="clearFileBtn" style="display: none; cursor: pointer; color: #d9534f; font-weight: bold; font-size: 18px; line-height: 1; padding: 2px 6px;" title="Очистити файли">&times;</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                  <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
-                </svg>
-              </div>
+          <!-- Поле файлів у вигляді кнопки з рамкою -->
+          <div class="input-file-block">
+            <div class="input-file-top">
+              <span class="field-num">04 <span class="slash">/</span></span>
+              <span class="file-label-text" data-i18n="contact_file">GRUNDRISSE ODER INSPIRATIONEN HOCHLADEN (OPTIONAL)</span>
+            </div>
+            <label for="fileUpload" class="file-upload-box">
+              <span id="fileNameDisplay" data-i18n="contact_file_btn">DATEIEN AUSWÄHLEN</span>
             </label>
             <input type="file" id="fileUpload" name="attachment" accept="image/*,.pdf" multiple style="display: none;">
           </div>
 
           <!-- Список прикріплених файлів -->
-          <div id="fileList" class="file-list-container" style="margin-top: 10px; font-size: 13px;"></div>
+          <div id="fileList" class="file-list-container" style="font-size: 13px;"></div>
 
           <div class="form-submit-row">
             <button type="submit" class="btn-shelnat submit-btn">
-              <span style="font-size: 15px; letter-spacing: 3px;" data-i18n="submit-btn">Nachricht senden</span>
+              <span data-i18n="submit-btn">ANFRAGE SENDEN</span>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M1 13L13 1M13 1H4M13 1V10" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M1 7H13M13 7L7 1M13 7L7 13" stroke="currentColor" stroke-width="1.2"/>
               </svg>
             </button>
           </div>
 
         </form>
+
+        <!-- Нижній рядок з часу відповіді -->
+        <div class="contact-bottom-info">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          <span>Wir antworten innerhalb von 24 Stunden.</span>
+        </div>
+
       </div>
 
     </div>
