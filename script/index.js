@@ -142,13 +142,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   // 4. ДИНАМІЧНИЙ НАВБАР
   // ==========================================
     const navbar = document.querySelector('.navbar');
-
+    const navLogoImg = document.querySelector('.nav-logo-img-kolibri');
+    const navLogoImg1 = document.querySelector('.nav-logo-img-kolibri1');
+    const navLogoText = document.querySelector('.nav-logo');
       if (navbar) {
         window.addEventListener('scroll', () => {
           if (window.scrollY > 30) {
             navbar.classList.add('scrolled');
+            navLogoImg.classList.add('scrolled');
+            navLogoText.classList.add('scrolled');
+            navLogoImg1.classList.remove('scrolled');
           } else {
             navbar.classList.remove('scrolled');
+            navLogoImg.classList.remove('scrolled');
+            navLogoText.classList.remove('scrolled');
+            navLogoImg1.classList.add('scrolled');
           }
         });
       }

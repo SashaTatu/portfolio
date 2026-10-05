@@ -1,6 +1,14 @@
 /* --- ІМПОРТ ШРИФТІВ (Google Fonts: Cormorant Garamond & Montserrat) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
-
+/* Підключення локального файлу шрифту */
+@font-face {
+  font-family: 'Imprint MT Shadow';
+  src:
+       url('../fonts/imprint-mt-shadow.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 /* --- ОСНОВА & СКИДАННЯ --- */
 * {
   margin: 0;
@@ -213,47 +221,20 @@ section.reveal.active > .cta-fluid-shape {
 
 
 /* --- НАВІГАЦІЯ --- */
-.navbar {
-  z-index: 1000 !important;
-  position: fixed;
-  width: 100%; top: 0; left: 0;
-  padding: 15px 0;
-  border-bottom: 1px solid rgba(201, 194, 189, 0.3);
-  background-color: rgba(249, 246, 244, 0.85);
-  backdrop-filter: blur(12px);
-  transition: padding 0.3s, background-color 0.3s;
+/* ==========================================================================
 
-  /* Початковий прихований стан */
-  opacity: 0;
-  transform: translateY(-20px);
-  pointer-events: none;
 
-  /* Анімація появи з затримкою */
-  animation: navbarFadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  animation-delay: 2s; /* 1.2s (кнопка) + 0.2s (пара мілісекунд) */
-}
-
-.navbar.scrolled {
-  background-color: rgba(249, 246, 244, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(201, 194, 189, 0.3);
-  padding: 12px 0;
-}
-
-@keyframes navbarFadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: all;
-  }
-}
-
+/* ==========================================================================
+   НАВІГАЦІЯ: ПЛАВНИЙ ПЕРЕХІД ВІД СТАРТУ ДО СКРОЛУ
+   ========================================================================== */
 .nav-container {
   display: flex; 
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
 }
 
 .nav-left-brand {
@@ -261,163 +242,298 @@ section.reveal.active > .cta-fluid-shape {
   align-items: center;
 }
 
-.nav-logo-img-kolibri {
-  width: 40px;
-  height: auto;
-  margin-right: 15px;
-  flex-shrink: 0;
-}   
+.navbar {
+  z-index: 1000 !important;
+  position: fixed;
+  width: 100%; 
+  top: 0; 
+  left: 0;
+  padding: 28px 0;
+  
+  background-color: transparent;
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border-bottom: 1px solid rgba(201, 194, 189, 0);
+  
+  /* Збільшений час і плавніша крива для всіх елементів навбару */
+  transition: padding 0.7s cubic-bezier(0.16, 1, 0.3, 1), 
+              background-color 0.7s cubic-bezier(0.16, 1, 0.3, 1), 
+              backdrop-filter 0.7s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 
-
-/* Підключення локального файлу шрифту */
-@font-face {
-  font-family: 'Imprint MT Shadow';
-  src:
-       url('../fonts/imprint-mt-shadow.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+  opacity: 0;
+  transform: translateY(-20px);
+  pointer-events: none;
+  animation: navbarFadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 1.2s;
 }
- 
 
-.nav-logo {
+@keyframes navbarFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+/* Логотипи з плавним зникненням/появою */
+.nav-logo-img-kolibri {
+  width: 42px;
+  height: auto;
+  margin-right: 18px;
+  flex-shrink: 0;
+  display: block; 
+  opacity: 1;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.nav-logo-img-kolibri1 {
+  width: 42px;
+  height: auto;
+  margin-right: 18px;
+  flex-shrink: 0;
+  display: block; 
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.navbar.scrolled .nav-logo-img-kolibri {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+}
+
+.navbar.scrolled .nav-logo-img-kolibri1 {
+  opacity: 1;
+  visibility: visible;
+  position: relative;
+}
+
+/* Стан ПРИ СКРОЛІ (м'яке розмиття і плавна поява фону) */
+.navbar.scrolled {
+  background-color: rgba(249, 246, 244, 0.90);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(201, 194, 189, 0.35);
+  padding: 16px 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+
+/* Текст логотипа */
+.navbar .nav-logo {
   font-size: 14px; 
-  font-weight: 500; 
-  letter-spacing: 5px; 
-  color: #485243;
+  font-weight: 400; 
+  letter-spacing: 6px; 
+  color: #FFFFFF;
   text-align: left;
   line-height: 1.2;
   flex-shrink: 0;
   display: block;
   font-family: 'Imprint MT Shadow', serif;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  transition: color 0.6s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.6s ease;
+  text-decoration: none;
+}
+.navbar.scrolled .nav-logo {
+  color: #5c1d24; 
+  text-shadow: none;
 }
 
-.nav-links { 
+/* Посилання (сторінки) */
+.navbar .nav-links { 
   display: flex; 
   list-style: none; 
-  gap: 50px; 
+  gap: 45px; 
   margin-left: auto;
-  margin-right: 40px;
-}
-
-.nav-actions {
-  display: flex;
+  margin-right: 35px;
+  padding: 0;
   align-items: center;
-  gap: 20px;
-  flex-shrink: 0;
+  margin-bottom: 0;
 }
 
-.nav-item {
+.navbar .nav-item {
   font-size: 11px; 
   text-transform: uppercase; 
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
   position: relative;
-  padding: 8px 0;
-  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  padding: 6px 0;
+  display: inline-flex;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.92); 
+  text-decoration: none;
+  font-family: 'Montserrat', sans-serif;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.15);
+  transition: opacity 0.5s ease, color 0.6s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.6s ease;
+}
+.navbar.scrolled .nav-item {
+  color: #5c1d24; 
+  text-shadow: none;
 }
 
-.nav-links:hover .nav-item { opacity: 0.35; }
-.nav-links .nav-item:hover { opacity: 1; color: #485243; }
-.nav-item.active { opacity: 1; color: #485243; }
+.navbar .nav-links:hover .nav-item { opacity: 0.35; }
+.navbar .nav-links .nav-item:hover { opacity: 1; color: #FFFFFF; }
+.navbar.scrolled .nav-links .nav-item:hover { color: #5c1d24; }
 
-.nav-item::after {
+.navbar .nav-item.active { opacity: 1; color: #FFFFFF; }
+.navbar.scrolled .nav-item.active { color: #5c1d24; }
+
+.navbar .nav-item::after {
   content: '';
   position: absolute;
   bottom: 0; left: 50%; width: 0; height: 1px;
-  background-color: #485243;
-  transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1), left 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  background-color: #FFFFFF; 
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1), left 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.6s ease;
 }
-.nav-item:hover::after, .nav-item.active::after { width: 100%; left: 0; }
+.navbar.scrolled .nav-item::after {
+  background-color: #5c1d24; 
+  box-shadow: none;
+}
+.navbar .nav-item:hover::after, .navbar .nav-item.active::after { width: 100%; left: 0; }
 
-.btn-nav-order {
-  border: 1px solid #485243;
-  padding: 12px 25px;
+/* Правий блок дій */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Кнопка зв'язку */
+/* ---------- Кнопка зв'язку та Селектор мов (Спільна база) ---------- */
+.navbar .btn-nav-order,
+.navbar .lang-btn {
+  border: 1px solid rgba(255, 255, 255, 0.35); 
+  background: rgba(255, 255, 255, 0.03); 
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 11px 26px;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #485243;
-  background: transparent;
+  color: #FFFFFF; 
   border-radius: 40px;
   font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
   position: relative;
   overflow: hidden;
   z-index: 1;
-  display: inline-block;
-  transition: color 0.4s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  /* Чіткий та однаковий transition для всіх властивостей */
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
 }
 
-.btn-nav-order::before {
+.navbar .lang-btn {
+  padding: 11px 20px; /* Свої падінги для мов */
+}
+
+/* ---------- Псевдоелемент для анімації кнопки замовлення ---------- */
+.navbar .btn-nav-order::before {
   content: '';
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background-color: #485243;
+  background-color: #FFFFFF; 
   transform: scaleY(0);
   transform-origin: bottom;
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.4s ease;
   z-index: -1;
 }
-.btn-nav-order:hover { color: #F9F6F4; border-color: #485243; transform: translateY(-2px); }
-.btn-nav-order:hover::before { transform: scaleY(1); }
-.btn-nav-order:active { transform: translateY(0); }
 
-/* --- СЕЛЕКТОР МОВ --- */
-.lang-selector {
-  position: relative;
-  display: inline-block;
+/* ---------- Стан SCROLLED (Коли навігація прокручена) ---------- */
+.navbar.scrolled .btn-nav-order,
+.navbar.scrolled .lang-btn {
+  border-color: rgba(92, 29, 36, 0.3); 
+  color: #5c1d24; 
+  background: transparent; /* Одразу прозорі, без білого тла */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
 }
 
-.lang-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  border: 1px solid rgba(201, 194, 189, 0.6);
-  background: transparent;
-  padding: 12px 20px;
-  font-size: 12px;
-  font-weight: 500;
-  color: #485243;
-  border-radius: 40px;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.navbar.scrolled .btn-nav-order::before {
+  background-color: #5c1d24; /* Змінюємо колір бекграунду для ховеру на бордовий */
 }
 
-.lang-btn:hover, .lang-selector.active .lang-btn {
-  border-color: #485243;
-  background-color: rgba(102, 105, 86, 0.05);
+/* ---------- Ховери ---------- */
+.navbar .btn-nav-order:hover { 
+  color: #5c1d24; 
+  border-color: #FFFFFF; 
+  transform: translateY(-2px); 
+}
+.navbar.scrolled .btn-nav-order:hover { 
+  color: #F9F6F4; 
+  border-color: #5c1d24; 
+}
+.navbar .btn-nav-order:hover::before { 
+  transform: scaleY(1); 
 }
 
-.lang-dropdown {
+.navbar .lang-btn:hover {
+  border-color: #5c1d24;
+  background: rgba(92, 29, 36, 0.05);
+  transform: translateY(-2px);
+}
+
+.navbar .lang-btn:hover, .navbar .lang-selector.active .lang-btn {
+  border-color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+.navbar.scrolled .lang-btn:hover, .navbar.scrolled .lang-selector.active .lang-btn {
+  border-color: #5c1d24;
+  background-color: rgba(92, 29, 36, 0.06);
+}
+
+.navbar .lang-dropdown {
   position: absolute;
-  top: calc(100% + 10px);
+  top: calc(100% + 12px);
   right: 0;
-  width: 260px;
+  width: 200px;
   background-color: #FFFFFF;
   border: 1px solid rgba(201, 194, 189, 0.4);
-  padding: 15px 0;
+  padding: 10px 0;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 15px 35px rgba(142, 133, 123, 0.1);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
   transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
   z-index: 200;
+  border-radius: 14px;
 }
 
-.lang-selector.active .lang-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+.navbar .lang-selector.active .lang-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
 
-.lang-dropdown-item {
+.navbar .lang-dropdown-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 25px;
-  font-size: 14px;
+  padding: 10px 22px;
+  font-size: 12px;
   color: #2c2c2c;
   font-weight: 400;
+  font-family: 'Montserrat', sans-serif;
   transition: background 0.2s ease;
+  text-decoration: none;
 }
-.lang-dropdown-item:hover { background-color: #F9F6F4; }
-.lang-dropdown-item.active { color: #485243; font-weight: 500; }
+.navbar .lang-dropdown-item:hover { background-color: #F9F6F4; }
+.navbar .lang-dropdown-item.active { color: #5c1d24; font-weight: 500; }
+
+
+
+
+
+
+
+
+
 
 /* --- МОБІЛЬНА КНОПКА-КРУЖЕЧОК (Зображення референсу) --- */
 .mobile-menu-trigger-wrapper {
@@ -609,7 +725,27 @@ section.reveal.active > .cta-fluid-shape {
   .mobile-overlay-menu { max-width: 100%; }
 }
 
-/* --- HERO ЕКРАН --- */
+/* --- HERO ЕКРАН (ТОЧНО В ТОЧКУ З ФОТО) --- */
+/* ==========================================================
+   HERO
+   ========================================================== */
+
+:root {
+  --burgundy: #6b212a;
+  --burgundy-dark: #551921;
+  --ink: #1a1514;
+  --text: #4a3f3c;
+  --muted: #5a4f4c;
+  --cream: 245, 242, 238; /* RGB для rgba() */
+
+  --font-serif: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-sans: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --gutter: 40px;
+}
+
+/* ---------- Основний блок ---------- */
 .hero-image-bg {
   position: sticky;
   top: 0;
@@ -622,261 +758,246 @@ section.reveal.active > .cta-fluid-shape {
   z-index: 1;
 }
 
+/* ---------- Фон ---------- */
 .hero-bg-image {
   position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background-image: url('../img/background/credo-back1.webp');
-  background-size: auto 120%;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: 0;
-  will-change: transform;
-  animation: kenBurnsEffect 15s ease-in-out infinite alternate;
+  inset: 0;
+  z-index: -2;
+  background: url('../img/background/credo-back1.webp') center / cover no-repeat;
+  filter: saturate(1.25) contrast(1.04); /* насиченість фону: 1 = без змін */
 }
 
+.hero-overlay {
+  display: none; /* замінено розтушованою плямою .hero-container::before */
+}
 
+/* ---------- Контейнер ---------- */
 .hero-container {
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: flex-end; /* Вирівнює вміст по правому краю */
-  z-index: 2;
+  align-items: flex-start;
+  justify-content: center;
   width: 100%;
-  margin-left: 0;
-  margin-right: auto; /* Контейнер притискається праворуч */
+  max-width: 1300px;
+  height: 80%;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
 }
 
-.hero-image-bg h1 {
-  font-size: 50px;
-  line-height: 0.9;
-  margin-bottom: 30px;
-  margin-top: auto;
-  color: #FFFFFF;
+/* Біла розтушована пляма тільки під текстом.
+   Прив'язана до контейнера, тож рухається разом з текстом. */
+.hero-container::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 0;
+  width: min(800px, 100%);
+  aspect-ratio: 1.35;
+  transform: translate(-8%, -50%);
+  background: radial-gradient(
+    closest-side,
+    rgba(var(--cream), 0.92) 0%,
+    rgba(var(--cream), 0.8) 40%,
+    rgba(var(--cream), 0.4) 70%,
+    rgba(var(--cream), 0) 100%
+  );
+  pointer-events: none;
+}
+
+/* ---------- Заголовок ---------- */
+.hero-container h1 {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4.6vw, 4rem);
   font-weight: 300;
-  text-align: right; /* Текст заголовка за правою межею */
-  text-shadow: 0 0 40px rgba(255, 255, 255, 0.15); 
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  color: var(--ink);
+  text-wrap: balance;
 }
 
-.hero-image-bg h1 i { 
-  color: #F9F6F4; 
+/* Другий рядок: бордовий, окремим рядком, без курсиву (як на фото) */
+.hero-container h1 i {
+  display: block;
+  font-style: normal;
+  font-weight: 300;
+  color: var(--burgundy);
+}
+
+/* Тонка лінія-розділювач */
+.hero-container h1::after {
+  content: '';
+  display: block;
+  width: 44px;
+  height: 1px;
+  margin: 26px 0 24px;
+  background: var(--burgundy);
+  opacity: 0.5;
+}
+
+/* ---------- Опис ---------- */
+.hero-footer {
+  margin-bottom: 32px;
 }
 
 .hero-p {
-  font-size: 16px;
+  max-width: 28em;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: clamp(0.9rem, 1vw, 1rem);
   font-weight: 400;
-  max-width: 650px;
-  line-height: 1.7;
-  color: #E5E2DC;
-  text-align: right; /* Вирівнювання абзацу праворуч */
-  letter-spacing: 0.5px;
-  position: relative;
-  padding: 15px 20px;
-  margin-left: auto; /* Зміщує блок абзацу вправо */
-  margin-right: -20px;
-  z-index: 2;
+  line-height: 1.65;
+  color: var(--ink);
 }
 
-.hero-p::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  z-index: -1;
-  background: rgba(20, 18, 17, 0.4); 
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  /* Маска розмиття розвернена зліва направо */
-  -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 100%);
-  mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 30%, rgba(0, 0, 0, 0) 100%);
-}
-
-.hero-subtext {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
-  font-weight: 300;
-  color: #8E857B;
-  font-style: italic;
-  letter-spacing: 0.5px;
-}
-
-
+/* ---------- Кнопка ---------- */
 .btn-hero-order {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 16px 38px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
+  gap: 16px;
+  padding: 15px 34px;
+  border-radius: 999px;
+  background-color: var(--burgundy);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
   font-weight: 500;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  letter-spacing: 2.5px;
-  color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 40px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  z-index: 1;
-  transition: color 0.4s cubic-bezier(0.25, 1, 0.5, 1),
-              border-color 0.4s cubic-bezier(0.25, 1, 0.5, 1),
-              transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
-              box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(107, 33, 42, 0.28);
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Анімований фон при наведенні */
-.btn-hero-order::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #FFFFFF;
-  transform: scaleY(0);
-  transform-origin: bottom;
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-  z-index: -1;
+.btn-hero-order .btn-arrow {
+  transition: transform 0.3s ease;
 }
 
-/* Ефекти при наведенні (Hover) */
 .btn-hero-order:hover {
-  color: #12100F;
-  border-color: #FFFFFF;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  background-color: var(--burgundy-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(107, 33, 42, 0.38);
 }
 
-.btn-hero-order:hover::before {
-  transform: scaleY(1);
+.btn-hero-order:hover .btn-arrow {
+  transform: translateX(4px);
 }
 
-/* Натискання (Active) */
 .btn-hero-order:active {
-  transform: translateY(-1px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(0);
 }
 
-/* Адаптивність для мобільних екранів */
+.btn-hero-order:focus-visible {
+  outline: 2px solid var(--burgundy);
+  outline-offset: 3px;
+}
+
+/* ---------- Індикатор скролу ---------- */
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  color: var(--ink);
+  cursor: pointer; /* Показує, що елемент клікабельний */
+  user-select: none;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s ease;
+}
+
+.hero-scroll-indicator:hover {
+  opacity: 0.65;
+  transform: translateY(2px); /* Легкий відгук на наведення */
+}
+
+/* Клас для плавного зникнення */
+.hero-scroll-indicator.fade-out {
+  opacity: 0;
+  pointer-events: none; /* Запобігає клікам після зникнення */
+}
+
+.scroll-text {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 1000;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.scroll-arrow-line svg {
+  display: block;
+  stroke: currentColor;
+  stroke-width: 1;
+  animation: bounceArrow 2s ease-in-out infinite;
+}
+
+@keyframes bounceArrow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+/* ---------- Анімації ---------- */
+.fade-in-up-blur {
+  opacity: 0;
+  animation: fadeInUpBlur 1s var(--ease-out) forwards;
+}
+
+@keyframes fadeInUpBlur {
+  from { opacity: 0; transform: translateY(20px); filter: blur(4px); }
+  to   { opacity: 1; transform: none;             filter: blur(0); }
+}
+
+@keyframes bounceArrow {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(5px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-up-blur {
+    opacity: 1;
+    animation: none;
+  }
+  .scroll-arrow-line svg {
+    animation: none;
+  }
+}
+
+/* ---------- Планшет / мобільні ---------- */
 @media (max-width: 768px) {
+  :root { --gutter: 20px; }
 
+  .hero-image-bg {
+    min-height: 560px;
+  }
 
-  .hero-action {
-    margin-top: 25px;
-    align-items: right; /* Вирівнювання кнопки по правому краю */
+  .hero-container::before {
+    width: 150%;
+    aspect-ratio: 1;
+    transform: translate(-20%, -50%);
+  }
+
+  .hero-container h1 {
+    font-size: clamp(1.9rem, 8.6vw, 2.75rem);
   }
 
   .btn-hero-order {
-    width: 100%;
-    max-width: 320px;
-    padding: 15px 25px;
-    text-align: center;
-    font-size: 10px;
-    letter-spacing: 2px;
-    
-    
+    padding: 14px 26px;
+    font-size: 0.62rem;
+    gap: 12px;
   }
-  
-}
 
-
-
-.hero-container { width: 100%; position: relative; z-index: 2; }
-.hero-footer { display: flex; justify-content: space-between; align-items: flex-end; }
-
-/* КНОПКА SHELNAT СТРІЛКА */
-.btn-shelnat { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #485243; padding: 10px 0; position: relative; border: none; background: transparent; cursor: pointer; }
-.btn-shelnat svg { transition: transform 0.3s ease; }
-.btn-shelnat::after { content: ''; position: absolute; bottom: 4px; left: 0; width: 100%; height: 1px; background-color: #485243; transform: scaleX(0); transform-origin: right; transition: transform 0.3s ease; }
-.btn-shelnat:hover::after { transform: scaleX(1); transform-origin: left; }
-.btn-shelnat:hover svg { transform: translate(3px, -3px); }
-
-/* --- ІНДИКАТОР СКРОЛУ --- */
-.hero-scroll-indicator {
-  position: absolute;
-  bottom: 40px; left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  color: rgba(255, 255, 255, 0.55);
-  transition: color 0.4s ease, opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
-  opacity: 0;
-  filter: blur(4px);
-  will-change: transform, opacity, filter;
-  animation: fadeInUpBlurAnim 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  animation-delay: 1.2s;
-}
-
-.hero-scroll-indicator:hover { color: #FFFFFF; }
-.hero-scroll-indicator.fade-out { opacity: 0 !important; transform: translate(-50%, 15px) !important; pointer-events: none; }
-.scroll-text { font-size: 9px; text-transform: uppercase; letter-spacing: 3px; font-weight: 300; user-select: none; }
-.scroll-arrow-line { display: inline-flex; will-change: transform; animation: subtleScrollBounce 2s cubic-bezier(0.45, 0, 0.55, 1) infinite; }
-
-@keyframes subtleScrollBounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
-}
-
-/* ==========================================================================
-   --- ОНОВЛЕНА СЕКЦІЯ "ПРО НАС" (ABOUT & TEAM) ---
-   ========================================================================== */
-
-/* ВІДРЕФАКТОРЕНИЙ БЛОК ABOUT-SECTION */
-.about-section {
-  width: 100%;
-  margin-bottom: -100px;
-  padding: 120px 0 60px 0; /* Зменшено нижній падінг секції */
-  position: relative;
-  z-index: 2;
-  border-radius: 60px 60px 0 0;
-  box-shadow: 0 -25px 50px rgba(0, 0, 0, 0.15);
-}
-
-/* 1. Header & Typography */
-.about-header {
-  text-align: center;
-  margin-bottom: 90px; /* Відступ до гріда */
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.section-tag {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: #8E857B;
-  display: block;
-  margin-bottom: 15px;
-  font-weight: 500;
-}
-
-.hero-slogan {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(36px, 5vw, 56px); /* Адаптивний розмір */
-  font-weight: 300;
-  color: #485243;
-  margin-bottom: 15px;
-  line-height: 1.1;
-}
-
-.hero-slogan i {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-}
-
-.hero-subtext {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
-  font-weight: 300;
-  color: #8E857B;
-  font-style: italic;
-  letter-spacing: 0.5px;
+  .hero-scroll-indicator {
+    bottom: 24px;
+  }
 }
 
 /* --- ABOUT SECTION --- */
