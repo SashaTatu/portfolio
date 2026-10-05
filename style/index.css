@@ -233,6 +233,14 @@ section.reveal.active > .cta-fluid-shape {
   animation-delay: 2s; /* 1.2s (кнопка) + 0.2s (пара мілісекунд) */
 }
 
+.navbar.scrolled {
+  background-color: rgba(249, 246, 244, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201, 194, 189, 0.3);
+  padding: 12px 0;
+}
+
 @keyframes navbarFadeIn {
   to {
     opacity: 1;
@@ -1523,73 +1531,40 @@ section.reveal.active > .cta-fluid-shape {
 }
 
 /* 1. Секція Process */
-.process-section {
-  position: relative;
-  background-color: #485243;
-  padding-top: 40px;
-  padding-bottom: 120px;
-  overflow: visible !important; /* Необхідно, щоб тінь та хвиля виходили за межі */
-  margin-bottom: 0;
-  z-index: 10;
-}
-
-.process-bottom-wave {
-  position: absolute;
-  bottom: -170px;
-  left: 0;
+/* Верхня хвиля */
+.services-bottom-wave {
   width: 100%;
-  height: 200px;
+  height: 120px;
+  margin-top: -5px;
+  line-height: 0;
   z-index: 10;
+  position: relative;
   pointer-events: none;
-
-  /* Зсув тіні більше вниз (Y: 18px) при меншому розмитті (10px) */
-  filter: drop-shadow(0px 18px 10px rgba(0, 0, 0, 0.25));
-
-  /* Обрізаємо тінь зверху (0px), але залишаємо відкритим простір знизу (-60px) */
-  clip-path: inset(0px -30px -60px -30px);
+  background-color: #FAF6F0;
 }
-.process-bottom-wave svg {
+.services-bottom-wave svg {
   width: 100%;
   height: 100%;
   display: block;
 }
 
-
-
+/* Секція Process */
+.process-section {
+  position: relative;
+  background-color: #5c1d24; /* Глибокий бордовий фон */
+  padding-top: 30px;
+  padding-bottom: 160px;
+  overflow: visible !important;
+  margin-bottom: 0;
+  z-index: 10;
+}
 
 .process-content-relative {
   position: relative;
   z-index: 2;
+  max-width: 1350px;
+  margin: 0 auto;
 }
-
-/* Кольори тексті та елементів на темному фоні */
-.process-section .process-tag-line {
-  color: #C9C2BD;
-}
-
-.process-section .process-title,
-.process-section .step-title {
-  color: #FFFFFF;
-}
-
-.process-section .step-desc {
-  color: #E2DDD9;
-}
-
-.process-section .step-icon {
-  filter: brightness(0) invert(1);
-}
-
-.process-section .step-badge {
-  background-color: #F9F6F4;
-  color: #485243;
-  box-shadow: 0 0 0 6px #485243;
-}
-
-.process-section .process-connecting-line {
-  background-color: rgba(255, 255, 255, 0.3);
-}
-
 
 .process-header {
   text-align: center;
@@ -1597,42 +1572,25 @@ section.reveal.active > .cta-fluid-shape {
 }
 
 .process-tag-line {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 11px;
-  font-weight: 500;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 14px;
+  font-weight: 400;
   letter-spacing: 4px;
   text-transform: uppercase;
-  color: #8E857B;
+  color: rgba(255, 255, 255, 0.65);
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
 }
 
 .process-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(28px, 3.5vw, 42px);
+  font-size: clamp(36px, 4.2vw, 52px);
   font-weight: 300;
-  color: #485243;
+  color: #FFFFFF;
+  letter-spacing: 0.5px;
 }
 
-/* Обгортка таймлайну */
-.process-timeline-wrapper {
-  position: relative;
-  max-width: 1300px;
-  margin: 0 auto;
-}
-
-/* Суцільна горизонтальна лінія за кругльами */
-.process-connecting-line {
-  position: absolute;
-  top: 21px; /* По центру кружечка 42px / 2 */
-  left: 60px;
-  right: 60px;
-  height: 1px;
-  background-color: rgba(201, 194, 189, 0.6);
-  z-index: 0;
-}
-
-/* Сітка на 4 колонки */
+/* Сітка на 4 колонки із суворим мікро-дизайном */
 .process-steps-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1641,51 +1599,66 @@ section.reveal.active > .cta-fluid-shape {
   z-index: 1;
 }
 
-/* Окремий крок */
-.process-step-item {
+.process-step-col {
+  display: flex;
+}
+
+/* Картка в редакційному стилі зі зразка */
+.step-card-editorial {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 0 10px;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px 0 10px 25px; /* Відступ зліва для створення простору під тонку лінію */
+  border-left: 1px solid rgba(255, 255, 255, 0.25); /* Елегантна вертикальна лінія зліва */
+  transition: border-color 0.4s ease, transform 0.4s ease;
 }
 
-/* Темно-зелений кружечок з номером */
-.step-badge {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background-color: #485243;
-  color: #FFFFFF;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
+.step-card-editorial:hover {
+  border-left-color: rgba(255, 255, 255, 0.9);
+  transform: translateX(4px);
+}
+
+.step-content-top {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 25px;
-  box-shadow: 0 0 0 8px #F9F6F4; /* Створює білий простір навколо лінії */
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.4s ease;
+  flex-direction: column;
 }
 
-.process-step-item:hover .step-badge {
-  transform: scale(1.1);
-  background-color: #666956;
+/* Рядок заголовка та іконки */
+.step-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 18px;
 }
 
 /* Заголовок кроку */
 .step-title {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: #485243;
-  margin-bottom: 12px;
-  min-height: 28px; /* Однакова висота блоку для вирівнювання опису */
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: #FFFFFF;
+  line-height: 1.25;
+}
+
+/* Іконка кроку */
+.step-icon-wrapper {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.step-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.step-card-editorial:hover .step-icon {
+  opacity: 1;
 }
 
 /* Опис кроку */
@@ -1693,100 +1666,52 @@ section.reveal.active > .cta-fluid-shape {
   font-family: 'Montserrat', sans-serif;
   font-size: 13px;
   font-weight: 300;
-  line-height: 1.65;
-  color: #8E857B;
-  max-width: 260px;
-}
-/* Іконка над кроком */
-.step-icon-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  margin-bottom: 15px;
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.7);
 }
 
-.step-icon {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-  transition: transform 0.4s ease;
+/* Велика цифра внизу (як на референсі) */
+.step-number-big {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 40px;
+  line-height: 1;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
 }
 
-.process-step-item:hover .step-icon {
-  transform: translateY(-3px);
+.step-card-editorial:hover .step-number-big {
+  color: #FFFFFF;
 }
 
-/* Оновлення висоти лінії для врахування іконок (40px висота + 15px margin + 21px центр бейджа = 76px) */
-.process-connecting-line {
+/* Нижня бордова хвиля секції */
+.process-bottom-wave {
   position: absolute;
-  top: 76px;
-  left: 60px;
-  right: 60px;
-  height: 1px;
-  background-color: rgba(201, 194, 189, 0.6);
-  z-index: 0;
+  bottom: -130px;
+  left: 0;
+  width: 100%;
+  height: 150px;
+  z-index: 10;
+  pointer-events: none;
+  filter: drop-shadow(0px 15px 10px rgba(0, 0, 0, 0.25));
+  clip-path: inset(0px -30px -50px -30px);
+}
+.process-bottom-wave svg {
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-/* Адаптивність для мобільних пристроїв */
+/* Адаптивність для мобільних */
 @media (max-width: 992px) {
-  .step-icon-wrapper {
-    justify-content: flex-start;
-    margin-bottom: 10px;
-    height: auto;
-  }
-  
-  .step-icon {
-    width: 28px;
-    height: 28px;
-  }
-
-  .process-connecting-line {
-    top: 0;
-  }
-}
-
-/* --- МОБІЛЬНА АДАПТИВНІСТЬ --- */
-@media (max-width: 992px) {
-  .process-timeline-wrapper {
-    padding-left: 20px;
-  }
-
-  .process-connecting-line {
-    top: 0;
-    bottom: 0;
-    left: 40px;
-    width: 1px;
-    height: 100%;
-    right: auto;
-  }
-
   .process-steps-grid {
     grid-template-columns: 1fr;
     gap: 40px;
   }
-
-  .process-step-item {
-    align-items: flex-start;
-    text-align: left;
-    padding-left: 60px;
-    position: relative;
-  }
-
-  .step-badge {
-    position: absolute;
-    left: 0;
-    top: -4px;
-    margin-bottom: 0;
-  }
-
-  .step-title {
-    justify-content: flex-start;
-    min-height: auto;
-  }
-
-  .step-desc {
-    max-width: 100%;
+  .step-card-editorial {
+    padding-left: 20px;
   }
 }
 

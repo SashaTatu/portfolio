@@ -141,19 +141,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   // ==========================================
   // 4. ДИНАМІЧНИЙ НАВБАР
   // ==========================================
-  const navbar = document.querySelector('.navbar');
-  if (navbar) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.style.padding = '10px 0';
-        navbar.style.backgroundColor = 'rgba(249, 246, 244, 0.95)';
-      } else {
-        navbar.style.padding = '15px 0';
-        navbar.style.backgroundColor = 'rgba(249, 246, 244, 0.85)';
-      }
-    }, { passive: true });
-  }
+    const navbar = document.querySelector('.navbar');
 
+      if (navbar) {
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 30) {
+            navbar.classList.add('scrolled');
+          } else {
+            navbar.classList.remove('scrolled');
+          }
+        });
+      }
 
   // ==========================================
   // 5. FAQ АКОРДЕОН
