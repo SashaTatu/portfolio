@@ -1,0 +1,110 @@
+/* ===== Спільні стилі юридичних сторінок (Impressum, Datenschutz) ===== */
+.legal-body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #F9F6F4;
+  color: #3B3B3B;
+}
+
+/* Шапка: логотип + повернення на головну */
+.legal-header {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 36px 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.legal-logo {
+  font-family: 'Imprint MT Shadow', 'Cormorant Garamond', serif;
+  font-size: 16px;
+  letter-spacing: 5px;
+  color: #1F1F1F;
+}
+
+.legal-back {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #3B3B3B;
+  padding-bottom: 4px;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: color 0.3s ease, background-size 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.legal-back:hover,
+.legal-back:focus-visible { color: #8F2F45; background-size: 100% 1px; }
+
+/* Контент */
+.legal-page {
+  flex: 1;
+  width: 100%;
+  margin: 0 auto;
+  padding: 60px 24px 100px;
+}
+
+.legal-page h1,
+.legal-page h2,
+.legal-page h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  color: #1F1F1F;
+}
+
+.legal-page h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1F1F1F;
+  margin: 24px 0 8px;
+}
+
+.legal-page p,
+.legal-page li {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.85;
+  letter-spacing: 0.2px;
+  color: #3B3B3B;
+}
+
+.legal-page p { margin: 0 0 16px; }
+
+.legal-page a {
+  color: #8F2F45;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.3s ease;
+}
+.legal-page a:hover { color: #742739; }
+
+/* Нижній рядок сторінки */
+.legal-footer {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 24px 48px;
+  display: flex;
+  gap: 28px;
+  border-top: 1px solid rgba(201, 194, 189, 0.4);
+}
+.legal-footer a {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #3B3B3B;
+  transition: color 0.3s ease;
+}
+.legal-footer a:hover { color: #742739; }
+
+@media (max-width: 768px) {
+  .legal-header { padding-top: 24px; }
+  .legal-page { padding: 40px 20px 70px; }
+}

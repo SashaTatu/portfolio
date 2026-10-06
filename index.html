@@ -129,49 +129,40 @@
 
 <section id="about-us" class="about-section reveal">
   <div class="container">
-    
-    <!-- 1. Header -->
-    <div class="about-header">
-      <span class="section-tag" data-i18n="about_tag">— ÜBER UNS —</span>
-      <h2 class="hero-slogan" data-i18n="about_slogan">
-        Zwei Perspektiven.<br> Ein <i>gemeinsames</i> Ziel.
-      </h2>
-      <p class="hero-subtext" data-i18n="about_subtext">Die Verbindung aus Kreativität und technischer Expertise.</p>
-    </div>
+    <div class="about-grid">
 
-    <!-- 2. Текст "Ein Zuhause..." зверху на всю ширину -->
-    <div class="about-story-fullwidth">
-      <p class="lead-paragraph" data-i18n="about_lead">
-        Ein Zuhause erzählt immer eine Geschichte. Ich bin Olena Suvorova, Gründerin von <strong>Libri Interiors</strong>. Meine Leidenschaft für Interior Design begleitet mich seit vielen Jahren – von den kreativen Wurzeln in der Ukraine bis nach Deutschland.
-      </p>
-      <p data-i18n="about_p2">
-        Für uns entsteht gutes Design dort, wo Ästhetik, Funktion und Individualität im Einklang sind. Jedes Zuhause ist so einzigartig wie die Menschen, die darin leben. Deshalb denken wir nicht in Standards, sondern in Lösungen.
-      </p>
-    </div>
-
-    <!-- 3. Команда з вужчою плашкою без підпису LIBRI -->
-    <div class="about-team-quote-wrapper glass-poster-layout">
-      
-      <!-- Olena -->
+      <!-- Olena (ліворуч) -->
       <div class="team-card card-left">
         <div class="photo-wrapper">
           <img src="img/people/olena.webp" alt="Olena Suvorova" loading="lazy">
         </div>
         <div class="team-info">
-          <h3 class="name-olena" data-i18n="olena-name">Olena Suvorova</h3>
+          <h3 data-i18n="olena-name">Olena Suvorova</h3>
           <p class="role" data-i18n="role_olena">Die Seele hinter jedem Raum.</p>
         </div>
       </div>
 
-      <!-- Вужча плашка Glass Card -->
-      <div class="glass-quote-card">
-        <div class="quote-mark-top">“</div>
-        <p data-i18n="about_goal">
-          Unser Ziel: Ihre Vision Wirklichkeit werden zu lassen. Denn für uns beginnt gutes Design dort, wo Schönheit und Machbarkeit Hand in Hand gehen.
-        </p>
+      <!-- Центр: заголовок + текст -->
+      <div class="about-center">
+        <div class="about-header">
+          <span class="section-tag" data-i18n="about_tag">— ÜBER UNS —</span>
+          <h2 class="hero-slogan" data-i18n="about_slogan">
+            Zwei Perspektiven.<br> <i>Ein gemeinsames Ziel.</i>
+          </h2>
+          <p class="hero-subtext" data-i18n="about_subtext">Die Verbindung aus Kreativität und technischer Expertise.</p>
+        </div>
+
+        <div class="about-story-fullwidth">
+          <p class="lead-paragraph" data-i18n="about_lead">
+            Ein Zuhause erzählt immer eine Geschichte. Ich bin Olena Suvorova, Gründerin von <strong>Libri Interiors</strong>. <br> Meine Leidenschaft für Interior Design begleitet mich seit vielen Jahren – von den kreativen Wurzeln in der Ukraine bis nach Deutschland.
+          </p>
+          <p data-i18n="about_p2">
+            Für uns entsteht gutes Design dort, wo Ästhetik, Funktion und Individualität im Einklang sind. Jedes Zuhause ist so einzigartig wie die Menschen, die darin leben. Deshalb denken wir nicht in Standards, sondern in Lösungen.
+          </p>
+        </div>
       </div>
 
-      <!-- Oleksandr -->
+      <!-- Oleksandr (праворуч) -->
       <div class="team-card card-right">
         <div class="photo-wrapper">
           <img src="img/people/oleksander.webp" alt="Oleksandr Kruhletskyi" loading="lazy">
@@ -183,71 +174,84 @@
       </div>
 
     </div>
-
-    <!-- 4. Фонові елементи -->
-    <div class="section-top-arch">
-      <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-        <path d="M0,0 C360,100 1080,100 1440,0 L1440,100 L0,100 Z" fill="#485243"></path>
-      </svg>
-    </div>
-    <div class="section-bottom-about"></div>
-
   </div>
 </section>
+<section class="full-quote-section" id="quote-section">
+  <div class="full-quote-container">
+    <div class="full-quote-symbol">“</div>
 
-    <section class="full-quote-section" id="quote-section">
-      <div class="full-quote-container">
-        <div class="full-quote-symbol">“</div>
-        
-        <!-- Додаємо клас typewriter-text для ідентифікації -->
-        <blockquote class="full-quote-text typewriter-text" data-i18n="[data-text]quotes.hero_quote">
-      <!-- Порожньо: текст вставиться автоматично при завантаженні мови -->
-        </blockquote>
+    <blockquote class="full-quote-text typewriter-text"
+                data-i18n="[data-text]quotes.hero_quote"></blockquote>
 
-        <div class="full-quote-author">
-          <span class="author-title" data-i18n="about-vision">— UNSERE PHILOSOPHIE</span>
-        </div>
-      </div>
-    </section>
+    <div class="full-quote-author">
+      <span class="author-title" data-i18n="about-vision">— UNSERE PHILOSOPHIE</span>
+    </div>
+  </div>
+</section>
 
 
    
 
 <!-- SECTION: PORTFOLIO -->
-  <section id="portfolio" class="section-padding reveal portfolio-capsule-section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag" data-i18n="portfolio_tag">— PORTFOLIO —</span>
-        <h2 class="section-title" data-i18n="portfolio_title">Räume, die wir gestaltet haben</h2>
-      </div>
-      <div class="portfolio-capsule-grid">
-        <div class="portfolio-capsule-item item-top-left">
-          <div class="capsule-image-wrapper horizontal-capsule">
-            <img src="img/project/office.webp" alt="Das Spiel von Feuer und Schatten" loading="lazy">
-          </div>
-          <p class="capsule-description" data-i18n="portfolio_description_1">Das Spiel von Feuer und Schatten</p>
-        </div>
-        <div class="portfolio-capsule-item item-right-vertical">
-          <div class="capsule-image-wrapper vertical-capsule">
-            <img src="img/project/bathroom.webp" alt="Das Entrée – der erste Eindruck mit Seele" loading="lazy">
-          </div>
-          <p class="capsule-description" data-i18n="portfolio_description_2">Das Entrée – der erste Eindruck mit Seele</p>
-        </div>
-        <div class="portfolio-capsule-item item-bottom-wide">
-          <div class="capsule-image-wrapper wide-capsule">
-            <img src="img/project/bedroom.webp" alt="Stuck in modernem Kontext" loading="lazy">
-          </div>
-          <p class="capsule-description" data-i18n="portfolio_description_3">Stuck in modernem Kontext</p>
-        </div>
-      </div>
-      <div class="section-action-end" style="margin-top: 50px;">
-        <a href="portfolio.html" class="btn-shelnat">
-          <span style="font-size: 11px; letter-spacing: 3px;" data-i18n="portfolio_action">Alle Projekte anzeigen</span>
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 13L13 1M13 1H4M13 1V10" stroke="currentColor" stroke-width="1.2"/></svg>
-        </a>
+<section id="portfolio" class="section-padding reveal portfolio-capsule-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag" data-i18n="portfolio_tag">— PORTFOLIO —</span>
+      <h2 class="section-title" data-i18n="portfolio_title">Räume, die wir gestaltet haben</h2>
+
+      <!-- Название проекта + вступительный текст -->
+      <div class="project-intro">
+        <h3 class="project-name" data-i18n="portfolio_project_name">Ukrainian Soul</h3>
+        <p class="project-lead" data-i18n="portfolio_project_text">
+          Ein Zuhause, das Erinnerungen bewahrt. Inspiriert von ukrainischen Symbolen und neu interpretiert für modernes Wohnen.
+        </p>
       </div>
     </div>
-  </section>
+
+    <div class="portfolio-capsule-grid">
+
+      <!-- Фото 1: гостиная / столовая с картиной калины -->
+      <div class="portfolio-capsule-item item-top-left">
+        <div class="capsule-image-wrapper horizontal-capsule">
+          <img src="img/project/office.webp" alt="Wohn- und Essbereich – Das Herz von Ukrainian Soul" loading="lazy">
+        </div>
+        <div class="capsule-caption">
+          <h4 class="capsule-title" data-i18n="portfolio_title_1">Wohn- und Essbereich – Das Herz von Ukrainian Soul</h4>
+          <p class="capsule-description" data-i18n="portfolio_description_1">Wo Tradition auf modernes Wohnen trifft.</p>
+        </div>
+      </div>
+
+      <!-- Фото 2: спальня с барельефом колосьев -->
+      <div class="portfolio-capsule-item item-right-vertical">
+        <div class="capsule-image-wrapper vertical-capsule">
+          <img src="img/project/bathroom.webp" alt="Schlafzimmer – Ruhe mit ukrainischen Wurzeln" loading="lazy">
+        </div>
+        <div class="capsule-caption">
+          <h4 class="capsule-title" data-i18n="portfolio_title_2">Schlafzimmer – Ruhe mit ukrainischen Wurzeln</h4>
+          <p class="capsule-description" data-i18n="portfolio_description_2">Ein Rückzugsort voller Wärme und Erinnerungen.</p>
+        </div>
+      </div>
+
+      <!-- Фото 3: зеркало и бетонная стена -->
+      <div class="portfolio-capsule-item item-bottom-wide">
+        <div class="capsule-image-wrapper wide-capsule">
+          <img src="img/project/bedroom.webp" alt="Details mit Bedeutung" loading="lazy">
+        </div>
+        <div class="capsule-caption">
+          <h4 class="capsule-title" data-i18n="portfolio_title_3">Details mit Bedeutung</h4>
+          <p class="capsule-description" data-i18n="portfolio_description_3">Jedes Detail trägt die Seele des Konzepts.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-action-end" style="margin-top: 50px;">
+      <a href="portfolio.html" class="btn-shelnat">
+        <span style="font-size: 11px; letter-spacing: 3px;" data-i18n="portfolio_action">Alle Projekte anzeigen</span>
+      </a>
+    </div>
+  </div>
+</section>
 
 <!-- SECTION: SERVICES -->
 <section id="services" class="section-padding reveal">
@@ -255,7 +259,7 @@
     <div class="section-header" style="text-align: center; margin-bottom: 50px;">
       <span class="section-tag" data-i18n="services_tag">— &nbsp; LEISTUNGEN &nbsp; —</span>
       <h2 class="section-title" data-i18n="services_title" style="font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 4.5vw, 54px); font-weight: 300; color: #2c2c2c; margin-top: 15px;">
-        Unsere <i style="font-family: 'Cormorant Garamond', serif; color: #5c1d24;">Expertise</i>
+        Unsere <i style="font-family: 'Cormorant Garamond', serif; color: #742739;">Expertise</i>
       </h2>
       <p style="font-size: 13px; text-transform: uppercase; letter-spacing: 2.5px; color: #8E857B; margin-top: 10px;">Ganzheitliche Interior Lösungen</p>
       <p style="font-size: 14px; color: #8E857B; font-weight: 300; margin-top: 5px;">Durchdacht. Ästhetisch. Individuell.</p>
@@ -324,7 +328,7 @@
 <!-- Верхня бордова хвиля -->
 <div class="services-bottom-wave">
     <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-      <path fill="#5c1d24" d="M0,40 C 360,100 1080,0 1440,50 L1440,100 L0,100 Z"></path>
+      <path fill="#742739" d="M0,40 C 360,100 1080,0 1440,50 L1440,100 L0,100 Z"></path>
     </svg>
 </div>
 
@@ -420,7 +424,7 @@
   <!-- Нижня бордова хвиля -->
   <div class="process-bottom-wave">
     <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
-      <path fill="#5c1d24" d="M0,0 L1440,0 L1440,95 C 1020,-15 420,135 0,20 Z"></path>
+      <path fill="#742739" d="M0,0 L1440,0 L1440,95 C 1020,-15 420,135 0,20 Z"></path>
     </svg>
   </div>
 </section>
@@ -442,7 +446,7 @@
     </div>
   </section>
 
- <section id="faq" class="section-padding reveal" style="background-color: #F6F2EC;">
+ <section id="faq" class="section-padding reveal">
   <div class="container" style="position: relative; z-index: 2;">
     
     <div class="section-header">
@@ -546,8 +550,8 @@
 
       <!-- Права колонка: Заголовок, опис, форма та переваги -->
       <div class="contact-right">
-        <span class="section-tag" style="text-align: left;" data-i18n="contact_tag">— &nbsp; KONTAKT &nbsp; —</span>
-        <h2 data-i18n="contact_title">Lassen Sie uns<br>Ihr <i style="font-family: 'Cormorant Garamond', serif; color: #5c1d24;">Zuhause</i><br>gestalten.</h2>
+        <span class="section-tag" style="text-align: left;" data-i18n="contact_tag" style="font-family: 'Montserrat', sans-serif;">— &nbsp; KONTAKT &nbsp; —</span>
+        <h2 data-i18n="contact_title">Lassen Sie uns<br>Ihr <i style="font-family: 'Cormorant Garamond', serif; color: #742739; font-style: normal;">Zuhause</i><br>gestalten.</h2>
         <p class="contact-meta-text" data-i18n="contact_desc">
           Erzählen Sie uns von Ihren Ideen, Wünschen und Räumen. Gemeinsam entwickeln wir ein individuelles Konzept, das zu Ihrem Leben passt.
         </p>
@@ -657,9 +661,15 @@
           </div>
         </div>
         
-        <!-- Блок 3: Копірайт (винесено окремо для правильного позиціонування на мобільних) -->
-        <div class="f-copy">&copy; 2026. ALL RIGHTS RESERVED.</div>
-      </div>
+<!-- Блок 3: Копірайт та юридичні посилання -->
+<div class="f-copy-wrapper">
+    <div class="f-copy">&copy; 2026. ALL RIGHTS RESERVED.</div>
+    <div class="f-legal-links">
+        <a href="impressum.html" class="f-legal-link">Impressum</a>
+        <span class="f-legal-divider">/</span>
+        <a href="datenschutz.html" class="f-legal-link">Datenschutz</a>
+    </div>
+</div>
     </footer>
 
   <script src="script/index.js" defer></script>

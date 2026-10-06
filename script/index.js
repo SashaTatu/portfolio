@@ -114,27 +114,33 @@ document.addEventListener('DOMContentLoaded', async () => {
   // ==========================================
   // 3. ІНДИКАТОР СКРОЛУ HERO
   // ==========================================
-  const scrollTrigger = document.getElementById('scrollTrigger');
+const scrollTrigger = document.getElementById('scrollTrigger');
   const firstSection = document.getElementById('about-us');
 
   if (scrollTrigger && firstSection) {
+    // Зберігаємо ID таймера у змінну, щоб можна було видалити
+    let autoHideTimeout = setTimeout(() => {
+      scrollTrigger.classList.add('fade-out');
+    }, 10000);
+
     scrollTrigger.addEventListener('click', () => {
       firstSection.scrollIntoView({ 
         behavior: 'smooth', 
         block: 'start' 
       });
+      scrollTrigger.classList.add('fade-out');
+      clearTimeout(autoHideTimeout);
     });
 
-    const autoHideTimeout = setTimeout(() => {
-      scrollTrigger.classList.add('fade-out');
-    }, 5000);
-
-    window.addEventListener('scroll', () => {
+    const handleScroll = () => {
       if (window.scrollY > 20) {
         scrollTrigger.classList.add('fade-out');
         clearTimeout(autoHideTimeout);
+        window.removeEventListener('scroll', handleScroll);
       }
-    }, { passive: true });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
   }
 
 
