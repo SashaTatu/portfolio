@@ -2,46 +2,23 @@
 .page-impressum .legal-page { max-width: 640px; }
 
 .page-impressum .legal-page h1 {
-  font-size: clamp(38px, 6vw, 56px);
+  font-size: clamp(40px, 6vw, 60px);
   line-height: 1.1;
-  margin: 0 0 36px;
+  margin: 0 0 40px;
 }
 
 /* Тонка бордова лінія під заголовком */
 .page-impressum .legal-page h1::after {
   content: "";
   display: block;
-  width: 40px;
+  width: 48px;
   height: 1px;
-  margin-top: 22px;
-  background: #8F2F45;
+  margin-top: 24px;
+  background: var(--burgundy);
 }
 
 .page-impressum .legal-page h2 {
-  font-size: 26px;
-  margin: 44px 0 14px;
+  font-size: 27px;
+  line-height: 1.25;
+  margin: 46px 0 14px;
 }
-
-.page-impressum .legal-page p { font-size: 15px; }
-
-
-/* Контейнер для логотипу та назви, що забезпечує ідеальне вирівнювання */
-.brand-logo-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px; /* Відстань між іконкою та текстом */
-  text-decoration: none;
-  transition: opacity 0.3s ease;
-}
-
-.brand-logo-link:hover {
-  opacity: 0.85; /* Легке затемнення при наведенні */
-}
-
-/* Стилі для іконки колібрі */
-.brand-logo-img {
-  width: 36px;
-  height: 36px;
-  object-fit: contain;
-}
-

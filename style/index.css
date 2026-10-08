@@ -1,5 +1,4 @@
-/* --- ІМПОРТ ШРИФТІВ (Google Fonts: Cormorant Garamond & Montserrat) --- */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap');
+/* Шрифти (Cormorant Garamond & Montserrat) підключаються в index.html через <link> */
 /* Підключення локального файлу шрифту */
 @font-face {
   font-family: 'Imprint MT Shadow';
@@ -531,9 +530,9 @@ section.reveal.active > .cta-fluid-shape {
 
 
 
-/* --- МОБІЛЬНА КНОПКА-КРУЖЕЧОК (Зображення референсу) --- */
+/* --- МОБІЛЬНА КНОПКА-КРУЖЕЧОК (в стилі селектора мов) --- */
 .mobile-menu-trigger-wrapper {
-  display: none; /* За замовчуванням приховано на ПК */
+  display: none; /* На ПК приховано */
   align-items: center;
   gap: 12px;
 }
@@ -542,11 +541,14 @@ section.reveal.active > .cta-fluid-shape {
   font-size: 13px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: #1F1F1F;
+  color: #FFFFFF;
   font-weight: 400;
+  transition: color 0.4s ease;
 }
+.navbar.scrolled .burger-text { color: #1F1F1F; }
 
-.burger-menu {
+/* Звичайний стан (як .lang-btn) */
+.navbar .burger-menu {
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -554,38 +556,37 @@ section.reveal.active > .cta-fluid-shape {
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  /* Налаштування під стиль перемикача мови з твоїми кольорами */
-  background-color: transparent; 
-  border: 1px solid rgba(201, 194, 189, 0.4);    /* Колір обводки */
-  
-  /* Плавні транзиції */
-  transition: 
-    background-color 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
-    border-color 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
-    transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  transition: background-color 0.4s ease, border-color 0.4s ease,
+              box-shadow 0.4s ease, transform 0.4s ease;
 }
 
-/* Елементи всередині (лінії або крапки бургера) */
-.burger-menu span {
-  background-color: #485243;    /* Колір внутрішніх елементів */
-  transition: background-color 0.3s ease;
+/* Стан SCROLLED */
+.navbar.scrolled .burger-menu {
+  border-color: rgba(92, 29, 36, 0.3);
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
 }
 
-/* Ефект при взаємодії (якщо при наведенні потрібна інверсія) */
-.burger-menu:hover,
-.burger-menu:active {
-  background-color: #8F2F45;    /* Акцентний бордовий при наведенні */
+/* Ховер / активний стан */
+.navbar .burger-menu:hover,
+.navbar .burger-menu.active {
+  border-color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+}
+.navbar.scrolled .burger-menu:hover,
+.navbar.scrolled .burger-menu.active {
   border-color: #8F2F45;
+  background-color: rgba(143, 47, 69, 0.06);
 }
 
-/* При ховері внутрішні елементи стають світлими для контрасту */
-.burger-menu:hover span,
-.burger-menu:active span {
-  background-color: #ffffff;    
-}
-
-/* Матриця точок всередині кружечка */
+/* Матриця точок */
 .burger-dot-grid {
   display: grid;
   grid-template-columns: repeat(3, 3px);
@@ -595,9 +596,14 @@ section.reveal.active > .cta-fluid-shape {
 .burger-dot-grid span {
   width: 3px;
   height: 3px;
-  background-color: #485243; /* Білі точки */
   border-radius: 50%;
-  transition: transform 0.3s ease;
+  background-color: #FFFFFF; /* звичайний стан */
+  transition: background-color 0.4s ease, transform 0.3s ease;
+}
+
+/* Точки в scrolled */
+.navbar.scrolled .burger-dot-grid span {
+  background-color: #8F2F45;
 }
 
 /* --- ВИЇЗНЕ ОВЕРЛЕЙ МЕНЮ --- */
@@ -810,6 +816,9 @@ section.reveal.active > .cta-fluid-shape {
   pointer-events: none;
 }
 
+
+
+
 /* ---------- Заголовок ---------- */
 .hero-container h1 {
   margin: 0;
@@ -985,8 +994,16 @@ section.reveal.active > .cta-fluid-shape {
   }
 
   .hero-container::before {
-    width: 150%;
-    aspect-ratio: 1;
+    width: 500px;
+    aspect-ratio: 1.35;
+
+    background: radial-gradient(
+      closest-side,
+      rgba(var(--cream), 0.65) 0%,
+      rgba(var(--cream), 0.5) 40%,
+      rgba(var(--cream), 0.2) 70%,
+      rgba(var(--cream), 0) 100%
+    );
     transform: translate(-20%, -50%);
   }
 
@@ -1665,12 +1682,18 @@ section.reveal.active > .cta-fluid-shape {
 /* Секція Process */
 .process-section {
   position: relative;
-  background-color: #742739; /* Акцентний бордовий фон */
+  background-color: #B9AEA3; /* Акцентний бордовий фон */
   padding-top: 30px;
   padding-bottom: 160px;
   overflow: visible !important;
   margin-bottom: 0;
   z-index: 10;
+}
+
+@media (max-width: 992px) {
+  .process-section {
+    padding-bottom: 100px;
+  }
 }
 
 .process-content-relative {
@@ -1805,6 +1828,21 @@ section.reveal.active > .cta-fluid-shape {
   filter: drop-shadow(0px 15px 10px rgba(0, 0, 0, 0.25));
   clip-path: inset(0px -30px -50px -30px);
 }
+
+@media (max-width: 992px) {
+  .process-bottom-wave {
+    bottom: -118px;
+    height: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .process-bottom-wave {
+    bottom: -65px;
+    height: 120px;
+  }
+}
+
 .process-bottom-wave svg {
   width: 100%;
   height: 100%;
@@ -1815,7 +1853,7 @@ section.reveal.active > .cta-fluid-shape {
 .process-bottom-wave svg path,
 .process-bottom-wave svg polygon,
 .process-bottom-wave svg rect {
-  fill: #742739;
+  fill: #B9AEA3;
 }
 
 /* Адаптивність для мобільних */
@@ -1836,7 +1874,18 @@ section.reveal.active > .cta-fluid-shape {
   width: 100%;
   position: relative;
   z-index: 1;
+
 }
+
+@media (max-width: 992px) {
+  .cta-fluid-section {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: -65px;
+  }
+}
+
+
 
 .cta-fluid-shape { 
   position: relative; /* Змінено з static на relative, щоб bg та overlay обмежувалися цією фігурою */
@@ -2174,6 +2223,7 @@ section.reveal.active > .cta-fluid-shape {
   letter-spacing: 2px;
   color: #3B3B3B;
   transition: all 0.3s ease;
+  border-radius: 40px;
 }
 .file-upload-box:hover {
   border-color: #8F2F45;
@@ -2197,6 +2247,7 @@ section.reveal.active > .cta-fluid-shape {
   letter-spacing: 3px;
   text-transform: uppercase;
   transition: background 0.3s ease;
+  border-radius: 40px;
 }
 .submit-btn:hover {
   background: #742739;
@@ -2233,6 +2284,7 @@ section.reveal.active > .cta-fluid-shape {
   height: auto;
   display: block;
   object-fit: cover;
+  border-radius: 40px;
 }
 .contact-image-frame {
   position: absolute;
@@ -2243,6 +2295,7 @@ section.reveal.active > .cta-fluid-shape {
   border: 2px solid rgba(0, 0, 0, 0.2);
   z-index: 1;
   pointer-events: none;
+  border-radius: 40px;
 }
 
 /* --- ФУТЕР --- */
@@ -2322,6 +2375,7 @@ section.reveal.active > .cta-fluid-shape {
   .cta-story-content { gap: 18px; }
 
   /* Форма зворотного зв'язку */
+  .contact-left { flex: 1; display:none; } /* Приховуємо ліву частину з фото на мобільних */
   .contact-section-luxury { padding-top: 100px; padding-bottom: 100px; }
   .contact-card-box { flex-direction: column; padding: 40px 30px; gap: 50px; }
 
@@ -2558,7 +2612,7 @@ section.reveal.active > .cta-fluid-shape {
   color: #3B3B3B;
   text-transform: uppercase;
   margin-top: 0; /* Скидаємо старий margin-top */
-  padding-top: 0;
+  padding-top: 10px;
 }
 
 /* Блок посилань Impressum та Datenschutz */
@@ -2590,12 +2644,186 @@ section.reveal.active > .cta-fluid-shape {
   color: rgba(59, 59, 59, 0.4);
 }
 
-/* --- АДАПТИВНІСТЬ ДЛЯ МОБІЛЬНИХ --- */
 @media (max-width: 768px) {
   .f-copy-wrapper {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
-    padding-top: 15px;
+    padding-top: 5px;
+    border-top: none;
   }
+}
+
+/* ==========================================================================
+   ПОКРАЩЕННЯ: доступність, продуктивність, форма
+   ========================================================================== */
+.skip-link { position: absolute; left: 16px; top: -100px; z-index: 2000; padding: 12px 20px; background: #742739; color: #fff; font-size: 13px; letter-spacing: 1px; text-decoration: none; transition: top 0.2s ease; }
+.skip-link:focus { top: 16px; }
+
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+.input-file-block:focus-within .file-upload-box { border-color: #8F2F45; outline: 2px solid #8F2F45; outline-offset: 3px; }
+
+/* Поле файлів доступне з клавіатури (замість display:none) */
+.input-file-block { position: relative; }
+#fileUpload { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Honeypot проти спам-ботів */
+.hp-field { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* Список прикріплених файлів */
+.file-item { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: rgba(0,0,0,0.03); padding: 5px 10px; margin-bottom: 5px; border-radius: 4px; border: 1px solid rgba(0,0,0,0.08); }
+.file-item-name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.file-item-remove { background: none; border: 0; cursor: pointer; color: #b94441; font-size: 18px; line-height: 1; padding: 2px 8px; }
+
+/* will-change лише під час анімації */
+.reveal-item.active,
+section.reveal.active > .container,
+section.reveal.active > .full-quote-container,
+section.reveal.active > .cta-fluid-shape { will-change: auto; }
+
+/* Мобільні браузери: висота з урахуванням адресного рядка */
+.hero-image-bg { height: 100vh; height: 100svh; }
+.mobile-overlay-menu { height: 100vh; height: 100dvh; }
+
+/* Повага до prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  html, * { scroll-behavior: auto; }
+  .reveal-item,
+  section.reveal > .container,
+  section.reveal > .full-quote-container,
+  section.reveal > .cta-fluid-shape { opacity: 1; transform: none; filter: none; transition: none; }
+  .hero-bg-image { animation: none; }
+}
+
+/* ==========================================================================
+   МОБІЛЬНА АДАПТАЦІЯ — фінальний шар (перекриває старі медіа-запити вище)
+   Брейкпоінти: 992px (планшет), 768px (телефон), 480px (малий телефон)
+   ========================================================================== */
+
+/* --- Базове: без горизонтального скролу, без зуму шрифтів --- */
+html { -webkit-text-size-adjust: 100%; }
+body { overflow-x: clip; }
+img, svg, video { max-width: 100%; }
+
+@media (max-width: 992px) {
+  :root { --gutter: 22px; }
+  .container, .bg-grid-lines { padding: 0 22px; }
+  .section-padding { padding-top: 80px; padding-bottom: 80px; }
+
+  /* Навігація */
+  .navbar { padding: 16px 0; }
+  .nav-container { padding: 0 22px; }
+  .nav-logo-img-kolibri, .nav-logo-img-kolibri1 { width: 34px; height: 34px; }
+  .nav-actions { gap: 10px; }
+  .lang-btn { min-height: 40px; padding: 0 12px; }
+  .burger-menu { width: 44px; height: 44px; }
+
+  /* Про нас: текст зверху, два фото в ряд під ним */
+  .about-section { padding: 80px 0 40px; border-radius: 40px 40px 0 0; }
+  .about-grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 18px;
+    row-gap: 40px;
+    margin-bottom: 0;
+    padding: 0 22px;
+  }
+  .about-center { grid-column: 1 / -1; grid-row: 1; }
+  .about-header { margin-bottom: 30px; }
+  .about-story-fullwidth { margin-bottom: 0; }
+  .photo-wrapper { max-width: 280px; border-radius: 100px; }
+  .team-info h3 { font-size: 22px; }
+  .team-info .role { font-size: 10px; letter-spacing: 1.5px; }
+
+  /* Процес: 2 колонки на планшеті */
+  .process-steps-grid { grid-template-columns: 1fr 1fr; gap: 24px; }
+}
+
+@media (max-width: 768px) {
+  .section-padding { padding-top: 64px; padding-bottom: 64px; }
+  h2, .section-title { line-height: 1.15; }
+  .section-header { margin-bottom: 36px; }
+  .section-tag, .process-tag-line { font-size: 12px; letter-spacing: 2.5px; }
+
+  /* Hero */
+  .hero-image-bg { min-height: 520px; }
+  .hero-container { height: auto; justify-content: center; padding-top: 70px; }
+  .hero-container h1 { font-size: clamp(2rem, 9vw, 2.6rem); line-height: 1.1; }
+  .hero-p { font-size: 15px; line-height: 1.6; }
+  .hero-action { width: 100%; }
+  .btn-hero-order { width: 100%; justify-content: center; padding: 16px 20px; min-height: 52px; }
+  .hero-scroll-indicator { display: none; }
+
+  /* Цитата-смуга: резервуємо висоту, щоб друкарська машинка не стрибала */
+  .full-quote-section { padding: 36px 0; }
+  .full-quote-container { grid-template-columns: auto 1fr; column-gap: 10px; row-gap: 18px; padding: 0 22px; }
+  .full-quote-text { font-size: 19px; line-height: 1.35; min-height: 5.4em; }
+  .full-quote-author { grid-column: 1 / -1; justify-self: end; }
+
+  /* Портфоліо */
+  .project-intro { margin-top: 22px; padding: 0 4px; }
+  .portfolio-capsule-grid { gap: 40px; }
+  .horizontal-capsule, .vertical-capsule, .wide-capsule { height: auto; aspect-ratio: 4 / 3; border-radius: 120px; }
+  .vertical-capsule { aspect-ratio: 3 / 4; border-radius: 140px; }
+  .capsule-caption { padding: 0 6px; text-align: center; }
+  .capsule-title { font-size: 20px; }
+  .section-action-end { display: flex; justify-content: center; margin-top: 36px !important; }
+
+  /* Послуги */
+  #services { padding: 56px 0; }
+  .table-row { padding: 28px 4px; gap: 10px; }
+  .col-name h3 { font-size: 26px; line-height: 1.15; }
+  .col-text p, .col-text { font-size: 14px; line-height: 1.7; }
+  .services-bottom-wave { height: 60px; }
+
+  /* Процес */
+  .process-steps-grid { grid-template-columns: 1fr; gap: 18px; }
+  .step-card-editorial { padding: 26px 22px; }
+  .step-title { font-size: 24px; }
+  .step-desc { font-size: 14px; line-height: 1.65; }
+  .process-bottom-wave { height: 70px; }
+
+  /* CTA */
+  .cta-fluid-shape { min-height: 440px; clip-path: ellipse(120% 100% at 50% 50%); }
+  .cta-story-content h2 { font-size: 28px; letter-spacing: 1px; }
+  .cta-story-content p { font-size: 15px; line-height: 1.65; }
+  .cta-story-action, .btn-cta-order { width: 100%; justify-content: center; text-align: center; }
+
+  /* FAQ */
+  .faq-trigger { min-height: 56px; }
+
+  /* Контакти */
+  .contact-section-luxury { padding-top: 70px; padding-bottom: 70px; }
+  .contact-card-box { padding: 30px 20px; gap: 32px; }
+  .contact-image-wrapper { max-width: 100%; }
+  .contact-photo { width: 100%; height: auto; max-height: 340px; object-fit: cover; }
+  .contact-right h2 { font-size: 30px; line-height: 1.15; }
+  /* 16px — інакше iOS Safari збільшує сторінку при фокусі */
+  .shelnat-form input, .shelnat-form textarea { font-size: 16px; }
+  .input-row-numeric { gap: 12px; }
+  .file-upload-box { min-height: 52px; padding: 14px 16px; }
+  .form-submit-row, .submit-btn { width: 100%; }
+  .submit-btn { justify-content: center; min-height: 54px; }
+  .contact-bottom-info { font-size: 12px; }
+
+  /* Футер */
+  .footer { padding: 56px 0 32px; }
+  .footer-container { gap: 34px; }
+  .f-logo { font-size: 22px !important; }
+  .footer-links-wrapper { grid-template-columns: 1fr 1fr; gap: 28px 18px; }
+  .f-nav-list { gap: 12px; }
+  .f-copy-wrapper { gap: 12px; padding-top: 18px; }
+}
+
+@media (max-width: 480px) {
+  .container, .bg-grid-lines, .nav-container { padding-left: 18px; padding-right: 18px; }
+  .nav-left-brand .nav-logo { font-size: 11px; letter-spacing: 2.5px; }
+  .about-grid { column-gap: 12px; padding: 0 18px; }
+  .photo-wrapper { border-radius: 70px; }
+  .team-info h3 { font-size: 18px; }
+  .team-info .role { font-size: 9px; letter-spacing: 1px; line-height: 1.5; }
+  .full-quote-text { font-size: 17px; }
+  .contact-card-box { padding: 26px 16px; }
+  /* Футер у одну колонку, щоб довгий e-mail не ламав верстку */
+  .footer-links-wrapper { grid-template-columns: 1fr; gap: 34px; }
+  .f-contact-link { font-size: 14px; overflow-wrap: anywhere; }
 }

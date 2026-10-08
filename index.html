@@ -3,21 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="title">LIBRI INTERIORS — Studio für Innenarchitektur</title>
+  <title data-i18n="title">LIBRI INTERIORS — Interior Design Studio</title>
 
+  <meta name="description" content="LIBRI INTERIORS – Studio für Innenarchitektur: E-Design, 3D-Visualisierungen und Raumkonzepte für Räume mit Charakter.">
+  <meta name="theme-color" content="#F9F6F4">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="LIBRI INTERIORS — Studio für Innenarchitektur">
+  <meta property="og:description" content="Design mit Seele. Räume mit Charakter.">
+  <meta property="og:url" content="https://libri-interiors.com/">
+  <meta property="og:image" content="https://libri-interiors.com/img/background/credo-back.webp">
   <link rel="canonical" href="https://libri-interiors.com/">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap">
+
   <link rel="preload" as="image" href="img/background/credo-back.webp" type="image/webp">
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>section.reveal>.container,section.reveal>.full-quote-container,section.reveal>.cta-fluid-shape{opacity:1!important;transform:none!important;filter:none!important}.fade-in-up-blur{opacity:1;transform:none;filter:none;animation:none}</style>
+  </noscript>
   <link rel="stylesheet" href="style/index.css">
   <link rel="icon" type="image/png" href="img/favicon/kolibri1.png">
 </head>
 <body>
+  <a href="#main" class="skip-link" data-i18n="skip_link">Zum Inhalt springen</a>
 
   <div class="bg-grid-lines">
     <div class="grid-line"></div>
@@ -27,17 +39,17 @@
   </div>
 
 <!-- ОНОВЛЕНИЙ НАВБАР -->
-<nav class="navbar">
+<nav class="navbar" data-i18n="[aria-label]nav_label" aria-label="Hauptnavigation">
   <div class="container nav-container">
     <div class="nav-left-brand">
-      <img src="img/favicon/kolibri2.png" alt="Kolibri Logo" class="nav-logo-img-kolibri" width="40" height="40">
-      <img src="img/favicon/kolibri1.png" alt="Kolibri Logo" class="nav-logo-img-kolibri1" width="40" height="40" display="none">
+      <img src="img/favicon/kolibri2.png" alt="" class="nav-logo-img-kolibri" width="40" height="40">
+      <img src="img/favicon/kolibri1.png" alt="" aria-hidden="true" class="nav-logo-img-kolibri1" width="40" height="40">
       <a href="index.html" class="nav-logo">LIBRI<br>INTERIORS</a>
     </div>
 
     <!-- Десктопні лінки (автоматично ховаються на мобільних пристроях) -->
     <ul class="nav-links">
-      <li><a href="#" class="nav-item active" data-i18n="home-page">Startseite</a></li>
+      <li><a href="index.html" class="nav-item active" aria-current="page" data-i18n="home-page">Startseite</a></li>
       <li><a href="portfolio.html" class="nav-item" data-i18n="portfolio-page">Portfolio</a></li>
       <li><a href="services.html" class="nav-item" data-i18n="services-page">Leistungen</a></li>
     </ul>
@@ -65,7 +77,7 @@
 
       <!-- Мобільна кнопка-меню (Кружечок-бургер) -->
       <div class="mobile-menu-trigger-wrapper">
-        <button class="burger-menu" id="mobileMenuBtn" aria-label="Toggle Menu">
+        <button class="burger-menu" id="mobileMenuBtn" aria-label="Menu" aria-expanded="false" aria-controls="mobileOverlayMenu">
           <div class="burger-dot-grid">
             <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
             <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
@@ -79,11 +91,11 @@
 </nav>
 
 <!-- ВІДПОВІДНЕ ВИЇЗНЕ МОБІЛЬНЕ МЕНЮ -->
-<div class="mobile-overlay-menu" id="mobileOverlayMenu" aria-hidden="true">
+<div class="mobile-overlay-menu" id="mobileOverlayMenu" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true" inert>
   <button class="close-mobile-menu" id="closeMobileMenuBtn" aria-label="Close Menu">&times;</button>
   <div class="mobile-menu-content">
     <ul class="mobile-nav-links">
-      <li><a href="#" class="mobile-nav-item active" data-i18n="home-page">Startseite</a></li>
+      <li><a href="index.html" class="mobile-nav-item active" aria-current="page" data-i18n="home-page">Startseite</a></li>
       <li><a href="portfolio.html" class="mobile-nav-item" data-i18n="portfolio-page">Portfolio</a></li>
       <li><a href="services.html" class="mobile-nav-item" data-i18n="services-page">Leistungen</a></li>
     </ul>
@@ -117,8 +129,8 @@
         </a>
       </div>
     </div>
-    <div class="hero-scroll-indicator fade-in-up-blur" style="animation-delay: 1.4s;" id="scrollTrigger">
-      <span class="scroll-text">Scrollen</span>
+    <div class="hero-scroll-indicator fade-in-up-blur" style="animation-delay: 1.4s;" id="scrollTrigger" role="button" tabindex="0">
+      <span class="scroll-text" data-i18n="scroll_text">Scrollen</span>
       <div class="scroll-arrow-line">
         <svg width="10" height="20" viewBox="0 0 12 24" fill="none">
           <path d="M6 0V22M6 22L1 17M6 22L11 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -126,6 +138,8 @@
       </div>
     </div>
 </header>
+
+<main id="main">
 
 <section id="about-us" class="about-section reveal">
   <div class="container">
@@ -261,8 +275,8 @@
       <h2 class="section-title" data-i18n="services_title" style="font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 4.5vw, 54px); font-weight: 300; color: #2c2c2c; margin-top: 15px;">
         Unsere <i style="font-family: 'Cormorant Garamond', serif; color: #742739;">Expertise</i>
       </h2>
-      <p style="font-size: 13px; text-transform: uppercase; letter-spacing: 2.5px; color: #8E857B; margin-top: 10px;">Ganzheitliche Interior Lösungen</p>
-      <p style="font-size: 14px; color: #8E857B; font-weight: 300; margin-top: 5px;">Durchdacht. Ästhetisch. Individuell.</p>
+      <p data-i18n="services_subtitle" style="font-size: 13px; text-transform: uppercase; letter-spacing: 2.5px; color: #8E857B; margin-top: 10px;">Ganzheitliche Interior Lösungen</p>
+      <p data-i18n="services_tagline" style="font-size: 14px; color: #8E857B; font-weight: 300; margin-top: 5px;">Durchdacht. Ästhetisch. Individuell.</p>
     </div>
     
     <div class="shelnat-table">
@@ -328,7 +342,7 @@
 <!-- Верхня бордова хвиля -->
 <div class="services-bottom-wave">
     <svg viewBox="0 0 1440 100" preserveAspectRatio="none">
-      <path fill="#742739" d="M0,40 C 360,100 1080,0 1440,50 L1440,100 L0,100 Z"></path>
+      <path fill="#B9AEA3" d="M0,40 C 360,100 1080,0 1440,50 L1440,100 L0,100 Z"></path>
     </svg>
 </div>
 
@@ -352,7 +366,7 @@
             <div class="step-header-row">
               <h3 class="step-title" data-i18n="process_step1_title">Analyse & Erstgespräch</h3>
               <div class="step-icon-wrapper">
-                <img src="img/icons/dialog.png" alt="Analyse & Erstgespräch" class="step-icon">
+                <img src="img/icons/dialog.png" alt="" class="step-icon" loading="lazy" decoding="async">
               </div>
             </div>
             <p class="step-desc" data-i18n="process_step1_desc">
@@ -370,7 +384,7 @@
             <div class="step-header-row">
               <h3 class="step-title" data-i18n="process_step2_title">Konzept & Visualisierung</h3>
               <div class="step-icon-wrapper">
-                <img src="img/icons/edit.png" alt="Konzept & Visualisierung" class="step-icon">
+                <img src="img/icons/edit.png" alt="" class="step-icon" loading="lazy" decoding="async">
               </div>
             </div>
             <p class="step-desc" data-i18n="process_step2_desc">
@@ -388,7 +402,7 @@
             <div class="step-header-row">
               <h3 class="step-title" data-i18n="process_step3_title">Ausarbeitung & Detaillierung</h3>
               <div class="step-icon-wrapper">
-                <img src="img/icons/measuring.png" alt="Ausarbeitung & Detaillierung" class="step-icon">
+                <img src="img/icons/measuring.png" alt="" class="step-icon" loading="lazy" decoding="async">
               </div>
             </div>
             <p class="step-desc" data-i18n="process_step3_desc">
@@ -406,7 +420,7 @@
             <div class="step-header-row">
               <h3 class="step-title" data-i18n="process_step4_title">Umsetzung & Begleitung</h3>
               <div class="step-icon-wrapper">
-                <img src="img/icons/home.png" alt="Umsetzung & Begleitung" class="step-icon">
+                <img src="img/icons/home.png" alt="" class="step-icon" loading="lazy" decoding="async">
               </div>
             </div>
             <p class="step-desc" data-i18n="process_step4_desc">
@@ -424,7 +438,7 @@
   <!-- Нижня бордова хвиля -->
   <div class="process-bottom-wave">
     <svg viewBox="0 0 1440 140" preserveAspectRatio="none">
-      <path fill="#742739" d="M0,0 L1440,0 L1440,95 C 1020,-15 420,135 0,20 Z"></path>
+      <path fill="#B9AEA3" d="M0,0 L1440,0 L1440,95 C 1020,-15 420,135 0,20 Z"></path>
     </svg>
   </div>
 </section>
@@ -437,7 +451,7 @@
       <div class="cta-fluid-content-wrapper">
         <div class="cta-story-content">
           <h2 data-i18n="cta_story_title">Lassen Sie uns <i>Ihre Geschichte</i> beginnen</h2>
-          <p data-i18n="cta_story_description">Vielleicht tragen Sie Ihr zukünftiges Zuhause bereits in Gedanke mit sich.<br>Erzählen Sie uns davon.<br>Gemeinsam machen wir daraus einen Ort, an den sich jeden Tag gerne wiederfinden.</p>
+          <p data-i18n="cta_story_description">Vielleicht tragen Sie Ihr zukünftiges Zuhause bereits in Gedanken mit sich.<br>Erzählen Sie uns davon.<br>Gemeinsam machen wir daraus einen Ort, an dem Sie sich jeden Tag gerne wiederfinden.</p>
           <div class="cta-story-action">
             <a href="order.html" class="btn-cta-order" data-i18n="order-btn-3">Geschichte erzählen</a>
           </div>
@@ -550,27 +564,28 @@
 
       <!-- Права колонка: Заголовок, опис, форма та переваги -->
       <div class="contact-right">
-        <span class="section-tag" style="text-align: left;" data-i18n="contact_tag" style="font-family: 'Montserrat', sans-serif;">— &nbsp; KONTAKT &nbsp; —</span>
+        <span class="section-tag" style="text-align: left;" data-i18n="contact_tag">— &nbsp; KONTAKT &nbsp; —</span>
         <h2 data-i18n="contact_title">Lassen Sie uns<br>Ihr <i style="font-family: 'Cormorant Garamond', serif; color: #742739; font-style: normal;">Zuhause</i><br>gestalten.</h2>
         <p class="contact-meta-text" data-i18n="contact_desc">
           Erzählen Sie uns von Ihren Ideen, Wünschen und Räumen. Gemeinsam entwickeln wir ein individuelles Konzept, das zu Ihrem Leben passt.
         </p>
 
         <form class="shelnat-form" id="generalContactForm">
+          <div class="hp-field" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
           
           <div class="input-row-numeric">
             <span class="field-num">01 <span class="slash">/</span></span>
-            <input type="text" name="Client Name" data-i18n="[placeholder]form.name_placeholder" required placeholder="IHR NAME & NACHNAME">
+            <input type="text" name="Client Name" autocomplete="name" aria-label="IHR NAME &amp; NACHNAME" data-i18n="[placeholder]form.name_placeholder" required placeholder="IHR NAME & NACHNAME">
           </div>
           
           <div class="input-row-numeric">
             <span class="field-num">02 <span class="slash">/</span></span>
-            <input type="email" name="Client Email" data-i18n="[placeholder]form.email_placeholder" required placeholder="E-MAIL-ADRESSE">
+            <input type="email" name="Client Email" autocomplete="email" aria-label="E-MAIL-ADRESSE" data-i18n="[placeholder]form.email_placeholder" required placeholder="E-MAIL-ADRESSE">
           </div>
           
           <div class="input-row-numeric">
             <span class="field-num">03 <span class="slash">/</span></span>
-            <textarea rows="2" name="Project Details" data-i18n="[placeholder]form.vision_placeholder" required placeholder="ERZÄHLEN SIE UNS VON IHREM PROJEKT"></textarea>
+            <textarea rows="2" name="Project Details" aria-label="ERZÄHLEN SIE UNS VON IHREM PROJEKT" data-i18n="[placeholder]form.vision_placeholder" required placeholder="ERZÄHLEN SIE UNS VON IHREM PROJEKT"></textarea>
           </div>
           
           <!-- Поле файлів у вигляді кнопки з рамкою -->
@@ -582,14 +597,14 @@
             <label for="fileUpload" class="file-upload-box">
               <span id="fileNameDisplay" data-i18n="contact_file_btn">DATEIEN AUSWÄHLEN</span>
             </label>
-            <input type="file" id="fileUpload" name="attachment" accept="image/*,.pdf" multiple style="display: none;">
+            <input type="file" id="fileUpload" name="attachment" accept="image/*,.pdf" multiple>
           </div>
 
           <!-- Список прикріплених файлів -->
           <div id="fileList" class="file-list-container" style="font-size: 13px;"></div>
 
           <div class="form-submit-row">
-            <button type="submit" class="btn-shelnat submit-btn">
+            <button type="submit" class="btn-shelnat submit-btn" aria-live="polite">
               <span data-i18n="submit-btn">ANFRAGE SENDEN</span>
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path d="M1 7H13M13 7L7 1M13 7L7 13" stroke="currentColor" stroke-width="1.2"/>
@@ -605,7 +620,7 @@
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
             <polyline points="22,6 12,13 2,6"></polyline>
           </svg>
-          <span>Wir antworten innerhalb von 24 Stunden.</span>
+          <span data-i18n="contact_response">Wir antworten innerhalb von 24 Stunden.</span>
         </div>
 
       </div>
@@ -614,12 +629,14 @@
   </div>
 </section>
 
+</main>
+
     <footer class="footer">
       <div class="container footer-container">
         <!-- Блок 1: Назва та філософія -->
         <div class="footer-brand-col">
           <div class="f-logo" style="font-size: 24px;">LIBRI<br>INTERIORS</div>
-          <p class="f-brand-philosophy" data-i18n="footer_philosophy">Räume mit charakter. <br>Für menschen mit geschichten</p>
+          <p class="f-brand-philosophy" data-i18n="footer_philosophy">Räume mit Charakter.<br>Für Menschen mit Geschichten.</p>
         </div>
         
         <!-- Контейнер для зручного групування в дві колонки на мобілці -->
@@ -654,7 +671,7 @@
                 <a href="https://instagram.com/libri.interiors" target="_blank" rel="noopener" class="f-contact-link">@libri.interiors</a>
               </div>
               <div class="f-contact-item">
-                <span class="f-contact-label" data-i18n="contact_location">Grafik / Lage</span>
+                <span class="f-contact-label" data-i18n="contact_location">Öffnungszeiten / Standort</span>
                 <span class="f-contact-text" data-i18n="contact_hours">Mo — Fr : 09:00 — 18:00<br> Deutschland</span>
               </div>
             </div>
