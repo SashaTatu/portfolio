@@ -93,5 +93,7 @@
     "contact_email2": "Email",
     "contact_social": "Социальные сети",
     "contact_location": "Часы работы / Локация",
-    "contact_hours": "Пн — Пт : 09:00 — 18:00<br> Германия"
+    "contact_hours": "Пн — Пт : 09:00 — 18:00<br> Германия",
+    "legal_impressum": "Юридическая информация",
+    "legal_privacy": "Политика конфиденциальности"
 }

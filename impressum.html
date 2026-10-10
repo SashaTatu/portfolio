@@ -13,18 +13,18 @@
   <link rel="stylesheet" href="style/impressum.css">
   <link rel="icon" type="image/png" href="img/favicon/kolibri1.png">
 </head>
-<body class="legal-body page-impressum">
+<body class="legal-body page-impressum" data-page="impressum">
   <header class="legal-header">
     <div>
-      <a href="index.html" class="brand-logo-link" aria-label="LIBRI INTERIORS – Startseite">
+      <a href="index.html" class="brand-logo-link" aria-label="LIBRI INTERIORS – Startseite" data-i18n="[aria-label]logo_label">
         <img src="img/favicon/kolibri1.png" alt="" class="brand-logo-img">
         <span class="legal-logo">LIBRI INTERIORS</span>
       </a>
     </div>
-    <a href="index.html" class="legal-back">Zur Startseite</a>
+    <a href="index.html" class="legal-back" data-i18n="back">Zur Startseite</a>
   </header>
 
-  <main class="legal-page">
+  <main class="legal-page" data-i18n="content">
     <h1>Impressum</h1>
 
     <p>Olena Suvorova<br />
@@ -43,8 +43,9 @@
   </main>
 
   <footer class="legal-footer">
-    <a href="impressum.html">Impressum</a>
-    <a href="datenschutz.html">Datenschutz</a>
+    <a href="impressum.html" data-i18n="footer_impressum">Impressum</a>
+    <a href="datenschutz.html" data-i18n="footer_datenschutz">Datenschutz</a>
   </footer>
+  <script src="script/legal-i18n.js" defer></script>
 </body>
 </html>

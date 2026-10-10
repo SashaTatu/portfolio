@@ -93,5 +93,7 @@
     "contact_email2": "Email",
     "contact_social": "Social media",
     "contact_location": "Opening hours / Location",
-    "contact_hours": "Mon — Fri : 09:00 — 18:00<br> Germany"
+    "contact_hours": "Mon — Fri : 09:00 — 18:00<br> Germany",
+    "legal_impressum": "Legal Notice",
+    "legal_privacy": "Privacy Policy"
 }
