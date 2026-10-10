@@ -31,7 +31,16 @@
     "portfolio_description_3": "Jedes Detail trägt die Seele des Konzepts.",
     "portfolio_action": "Alle Projekte anzeigen",
     "services_tag": "— &nbsp; LEISTUNGEN &nbsp; —",
-    
+    "services_title": "Unsere <i style=\"font-family: 'Cormorant Garamond', serif; color: #742739;\">Expertise</i>",
+    "services_subtitle": "Ganzheitliche Interior Lösungen",
+    "services_tagline": "Durchdacht. Ästhetisch. Individuell.",
+    "services_name_1": "<h3>E-Design</h3>",
+    "services_description_1": "<span class='service-item-tag'>Inspiration ohne Grenzen.</span><p>Digitale Interior-Beratung für Kunden weltweit. Sie erhalten ein individuelles Moodboard, Farb- und Materialkonzept sowie eine sorgfältig kuratierte Shoppingliste – einfach, bequem und online.</p>",
+    "services_name_2": "<h3>3D-Visualisierungen</h3>",
+    "services_description_2": "<span class='service-item-tag'>Sehen, bevor es entsteht.</span><p>Fotorealistische Visualisierungen machen Ihr zukünftiges Zuhause erlebbar. Farben, Licht und Materialien werden sichtbar, bevor die Umsetzung beginnt. So treffen Sie Entscheidungen mit Sicherheit und Freude.</p>",
+    "services_name_3": "<h3>Raumkonzepte & Planung</h3>",
+    "services_description_3": "<span class='service-item-tag'>Räume mit Charakter.</span><p>Durchdachte Grundrisse, harmonische Raumaufteilungen und individuelle Gestaltungskonzepte schaffen ein Zuhause, das perfekt zu Ihrem Lebensstil und Ihren ästhetischen Ansprüchen passt.</p>",
+    "services-btn": "Detaillierte Bedingungen und Preise",
     "process_tag": "— DER WEG ZU IHREM ZUHAUSE —",
     "process_title": "In 4 Schritten zum perfekten Raum",
     "process_step1_title": "Analyse & Erstgespräch",
@@ -59,9 +68,18 @@
     "answer5": "Transparenz ist unsere Priorität. Ästhetik ist keine Frage des unbegrenzten Budgets, sondern des klugen Designs. Wir planen von Anfang an realistisch, damit Ihre Vision ohne finanzielle Überraschungen Wirklichkeit wird.",
     "question6": "Warum sollten wir genau mit Libri Interiors arbeiten?",
     "answer6": "Weil Sie zwei Perspektiven für Ihr Projekt bekommen. Wir verbinden kreative Visionen mit technischer Präzision. Sie müssen sich nicht zwischen Schönheit und Funktionalität entscheiden – bei uns bekommen Sie beides aus einer Hand.",
-    
-     
- 
+    "contact_tag": "— &nbsp; KONTAKT &nbsp; —",
+    "contact_title": "Lassen Sie uns<br>Ihr <i style=\"font-family: 'Cormorant Garamond', serif; color: #742739; font-style: normal;\">Zuhause</i><br>gestalten.",
+    "contact_desc": "Erzählen Sie uns von Ihren Ideen, Wünschen und Räumen. Gemeinsam entwickeln wir ein individuelles Konzept, das zu Ihrem Leben passt.",
+    "form": {
+        "name_placeholder": "IHR NAME & NACHNAME",
+        "email_placeholder": "E-MAIL-ADRESSE",
+        "vision_placeholder": "ERZÄHLEN SIE UNS VON IHREM PROJEKT"
+    },
+    "contact_file": "GRUNDRISSE ODER INSPIRATIONEN HOCHLADEN (OPTIONAL)",
+    "contact_file_btn": "DATEIEN AUSWÄHLEN",
+    "submit-btn": "ANFRAGE SENDEN",
+    "contact_response": "Wir antworten innerhalb von 24 Stunden.",
     "footer_philosophy": "Räume mit charakter. <br>Für menschen mit geschichten",
     "footer_navigation": "// Navigation",
     "team": "Über uns",

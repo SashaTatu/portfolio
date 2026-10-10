@@ -589,7 +589,7 @@ const scrollTrigger = document.getElementById('scrollTrigger');
           files: filesData
         };
 
-        const scriptUrl = "https://script.google.com/macros/s/AKfycbz9pwbnknhsnP-l_1B6K4Pu1LBeI3a2WCL5KPyVxjf88hmS0x2YQQoNBsPwHc4qVdQF/exec";
+        const scriptUrl = "https://script.google.com/macros/s/AKfycbz92GTaXz0kUneiV9moxLItEV1CMoCWXIp0x-48Z80spJ4VQNBxk3b6u9iLZaQb_Bm8/exec";
 
         await fetch(scriptUrl, {
           method: 'POST',
