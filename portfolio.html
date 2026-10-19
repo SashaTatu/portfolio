@@ -3,19 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="title">LIBRI INTERIORS — Studio für Innenarchitektur</title>
+  <title data-i18n="title">LIBRI INTERIORS — Interior Design Studio</title>
+
+  <meta name="description" content="Design mit Seele. Räume mit Charakter.">
+  <meta name="theme-color" content="#F9F6F4">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="LIBRI INTERIORS — Interior Design Studio">
+  <meta property="og:description" content="Design mit Seele. Räume mit Charakter.">
+  <meta property="og:url" content="https://libri-interiors.com/">
+  <meta property="og:image" content="https://libri-interiors.com/img/favicon/kolibri1.png">
+  <link rel="canonical" href="https://libri-interiors.com/">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap">
+
   <link rel="preload" as="image" href="img/background/credo-back.webp" type="image/webp">
 
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>section.reveal>.container,section.reveal>.full-quote-container,section.reveal>.cta-fluid-shape{opacity:1!important;transform:none!important;filter:none!important}.fade-in-up-blur{opacity:1;transform:none;filter:none;animation:none}</style>
+  </noscript>
   <link rel="stylesheet" href="style/portfolio.css">
-  <link rel="icon" type="image/png" href="img/favicon/kolibri2.png">
+  <link rel="icon" type="image/png" href="img/favicon/kolibri1.png">
 </head>
-<body>
 
   <div class="bg-grid-lines">
     <div class="grid-line"></div>
@@ -24,89 +36,149 @@
     <div class="grid-line"></div>
   </div>
 
-  <nav class="navbar">
-    <div class="container nav-container">
-      <div class="nav-left-brand">
-        <img src="img/favicon/kolibri2.png" alt="Kolibri Logo" class="nav-logo-img-kolibri" width="40" height="40">
-        <a href="index.html" class="nav-logo">LIBRI<br>INTERIORS</a>
-      </div>
-
-      <!-- Десктопні лінки (автоматично ховаються на мобільних) -->
-      <ul class="nav-links">
-        <li><a href="#" class="nav-item" data-i18n="home-page">Startseite</a></li>
-        <li><a href="portfolio.html" class="nav-item active" data-i18n="portfolio-page">Portfolio</a></li>
-        <li><a href="services.html" class="nav-item" data-i18n="services-page">Leistungen</a></li>
-      </ul>
-      
-      <div class="nav-actions">
-        <a href="order.html" class="btn-nav-order" data-i18n="order-btn">Designer kontaktieren</a>
-        
-        <div class="lang-selector">
-          <button class="lang-btn" id="langBtn">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M12 2a14.5 14.5 0 0 0 0 20M12 2a14.5 14.5 0 0 1 0 20M2 12h20"/>
-            </svg>
-            <span id="current-lang">DE</span>
-          </button>
-          
-          <div class="lang-dropdown" id="langDropdown">
-              <a href="#" class="lang-dropdown-item active" data-lang="de">Deutsch</a>
-              <a href="#" class="lang-dropdown-item" data-lang="uk">Українська</a>
-              <a href="#" class="lang-dropdown-item" data-lang="en">English</a>
-              <a href="#" class="lang-dropdown-item" data-lang="ru">Русский</a>
-          </div>
-        </div>
-
-        <!-- Мобільна кнопка-меню (Кружечок як на референсі) -->
-        <div class="mobile-menu-trigger-wrapper">
-          <button class="burger-menu" id="mobileMenuBtn" aria-label="Toggle Menu">
-            <div class="burger-dot-grid">
-              <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
-              <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
-              <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
-            </div>
-          </button>
-        </div>
-
-      </div>
+<!-- ОНОВЛЕНИЙ НАВБАР -->
+<nav class="navbar" data-i18n="[aria-label]nav_label" aria-label="Hauptnavigation">
+  <div class="container nav-container">
+    <div class="nav-left-brand">
+      <img src="img/favicon/kolibri2.png" alt="" class="nav-logo-img-kolibri" width="40" height="40">
+      <img src="img/favicon/kolibri1.png" alt="" aria-hidden="true" class="nav-logo-img-kolibri1" width="40" height="40">
+      <a href="index.html" class="nav-logo">LIBRI<br>INTERIORS</a>
     </div>
-  </nav>
 
-  <!-- Виїзне мобільне меню -->
-  <div class="mobile-overlay-menu" id="mobileOverlayMenu">
-    <button class="close-mobile-menu" id="closeMobileMenuBtn">&times;</button>
-    <div class="mobile-menu-content">
-      <ul class="mobile-nav-links">
-        <li><a href="#" class="mobile-nav-item" data-i18n="home-page">Startseite</a></li>
-        <li><a href="portfolio.html" class="mobile-nav-item active" data-i18n="portfolio-page">Portfolio</a></li>
-        <li><a href="services.html" class="mobile-nav-item" data-i18n="services-page">Leistungen</a></li>
-      </ul>
+    <!-- Десктопні лінки (автоматично ховаються на мобільних пристроях) -->
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-item"  data-i18n="home-page">Startseite</a></li>
+      <li><a href="portfolio.html" class="nav-item active" aria-current="page" data-i18n="portfolio-page">Portfolio</a></li>
+      <li><a href="services.html" class="nav-item" data-i18n="services-page">Leistungen</a></li>
+    </ul>
+    
+    <div class="nav-actions">
+      <a href="order.html" class="btn-nav-order" data-i18n="order-btn">Designer kontaktieren</a>
       
-      <!-- Оновлений футер меню з виділеною кнопкою -->
-      <div class="mobile-menu-footer">
-        <div class="mobile-action-wrapper">
-          <a href="order.html" class="btn-mobile-menu-order" data-i18n="order-btn">Designer kontaktieren</a>
+      <!-- Селектор мов -->
+      <div class="lang-selector">
+        <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 2a14.5 14.5 0 0 0 0 20M12 2a14.5 14.5 0 0 1 0 20M2 12h20"/>
+          </svg>
+          <span id="current-lang">DE</span>
+        </button>
+        
+        <div class="lang-dropdown" id="langDropdown">
+          <a href="#" class="lang-dropdown-item active" data-lang="de">Deutsch</a>
+          <a href="#" class="lang-dropdown-item" data-lang="uk">Українська</a>
+          <a href="#" class="lang-dropdown-item" data-lang="en">English</a>
+          <a href="#" class="lang-dropdown-item" data-lang="ru">Русский</a>
         </div>
-        <div class="mobile-menu-meta">
-          <p>© 2026 LIBRI INTERIORS</p>
-          <a href="https://instagram.com/libri.interiors" target="_blank">@libri.interiors</a>
-        </div>
+      </div>
+
+      <!-- Мобільна кнопка-меню (Кружечок-бургер) -->
+      <div class="mobile-menu-trigger-wrapper">
+        <button class="burger-menu" id="mobileMenuBtn" aria-label="Menu" aria-expanded="false" aria-controls="mobileOverlayMenu">
+          <div class="burger-dot-grid">
+            <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
+            <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
+            <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
+          </div>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<!-- ВІДПОВІДНЕ ВИЇЗНЕ МОБІЛЬНЕ МЕНЮ -->
+<div class="mobile-overlay-menu" id="mobileOverlayMenu" role="dialog" aria-modal="true" aria-label="Menu" aria-hidden="true" inert>
+  <button class="close-mobile-menu" id="closeMobileMenuBtn" aria-label="Close Menu">&times;</button>
+  <div class="mobile-menu-content">
+    <ul class="mobile-nav-links">
+      <li><a href="index.html" class="mobile-nav-item"  data-i18n="home-page">Startseite</a></li>
+      <li><a href="portfolio.html" class="mobile-nav-item active" aria-current="page" data-i18n="portfolio-page">Portfolio</a></li>
+      <li><a href="services.html" class="mobile-nav-item" data-i18n="services-page">Leistungen</a></li>
+    </ul>
+    
+    <div class="mobile-menu-footer">
+      <div class="mobile-action-wrapper">
+        <a href="order.html" class="btn-mobile-menu-order" data-i18n="order-btn">Designer kontaktieren</a>
+      </div>
+      <div class="mobile-menu-meta">
+        <p>© 2026 LIBRI INTERIORS</p>
+        <a href="https://instagram.com/libri.interiors" target="_blank" rel="noopener">@libri.interiors</a>
       </div>
     </div>
   </div>
+</div>
+
+<main></main>>
+
+<main></main>>
+
+<main></main>>
+
+<main></main>>
+
+<main></main>>
+
+<main></main>>
+
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+<main></main>>
+
+
+
 
     <footer class="footer">
       <div class="container footer-container">
         <!-- Блок 1: Назва та філософія -->
         <div class="footer-brand-col">
-          <div class="f-logo" style="font-family: 'Cormorant Garamond', serif; font-size: 24px;">LIBRI<br>INTERIORS</div>
-          <p class="f-brand-philosophy" data-i18n="footer_philosophy">Räume mit charakter. <br>Für menschen mit geschichten</p>
+          <div class="f-logo" style="font-size: 24px;">LIBRI<br>INTERIORS</div>
+          <p class="f-brand-philosophy" data-i18n="footer_philosophy">Räume mit Charakter.<br>Für Menschen mit Geschichten.</p>
         </div>
         
         <!-- Контейнер для зручного групування в дві колонки на мобілці -->
-   
-
+        <div class="footer-links-wrapper">
+          <!-- Колонка Навігації -->
+          <div class="footer-nav-col">
+            <span class="f-column-label" data-i18n="footer_navigation">// Navigation</span>
+            <ul class="f-nav-list">
+              <li><a href="#about-us" class="f-nav-link" data-i18n="team">Über uns</a></li>
+              <li><a href="#portfolio" class="f-nav-link" data-i18n="portfolio2">Portfolio</a></li>
+              <li><a href="#services" class="f-nav-link" data-i18n="services2">LEISTUNGEN</a></li>
+              <li><a href="#process" class="f-nav-link" data-i18n="process2">Prozess</a></li>
+              <li><a href="#faq" class="f-nav-link" data-i18n="faq">FAQ</a></li>
+              <li><a href="#contact" class="f-nav-link" data-i18n="contact">Kontakt</a></li>
+            </ul>
+          </div>
 
           <!-- Колонка Зв'язку -->
           <div class="footer-contacts-col">
@@ -118,23 +190,28 @@
               </div>
               <div class="f-contact-item">
                 <span class="f-contact-label" data-i18n="contact_email2">Email</span>
-                <a href="mailto:hello@libri-interiors.com" class="f-contact-link">hello@libri-interiors.com</a>
+                <a href="mailto:libri.interior.design@gmail.com" class="f-contact-link">libri.interior.design@gmail.com</a>
               </div>
               <div class="f-contact-item">
                 <span class="f-contact-label" data-i18n="contact_social">Soziale Netzwerke</span>
                 <a href="https://instagram.com/libri.interiors" target="_blank" rel="noopener" class="f-contact-link">@libri.interiors</a>
               </div>
               <div class="f-contact-item">
-                <span class="f-contact-label" data-i18n="contact_location">Grafik / Lage</span>
+                <span class="f-contact-label" data-i18n="contact_location">Öffnungszeiten / Standort</span>
                 <span class="f-contact-text" data-i18n="contact_hours">Mo — Fr : 09:00 — 18:00<br> Deutschland</span>
               </div>
             </div>
           </div>
-
+        </div>
         
-        <!-- Блок 3: Копірайт (винесено окремо для правильного позиціонування на мобільних) -->
-        <div class="f-copy">&copy; 2026. ALL RIGHTS RESERVED.</div>
-      </div>
+<!-- Блок 3: Копірайт та юридичні посилання -->
+<div class="f-copy-wrapper">
+    <div class="f-legal-links">
+        <a href="impressum.html" class="f-legal-link" data-i18n="legal_impressum">Impressum</a>
+        <span class="f-legal-divider">/</span>
+        <a href="datenschutz.html" class="f-legal-link" data-i18n="legal_privacy">Datenschutz</a>
+    </div>
+</div>
     </footer>
 
   <script src="script/portfolio.js" defer></script>

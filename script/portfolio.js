@@ -1,92 +1,142 @@
 document.addEventListener('DOMContentLoaded', async () => {
 
-      // ==========================================
-  // 2. МOБІЛЬНЕ ВИЇЗНЕ МЕНЮ
+  // Безпечний localStorage (приватний режим Safari може кидати помилку)
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch { /* ignore */ } }
+  };
+
+  // ==========================================
+  // 1. АНІМАЦІЯ ПОЯВИ ЕЛЕМЕНТІВ (Reveal)
+  // ==========================================
+  requestAnimationFrame(() => {
+    const revealElements = document.querySelectorAll('.reveal');
+    
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          observer.unobserve(entry.target); 
+        }
+      });
+    }, {
+      root: null,
+      threshold: 0.1, 
+      rootMargin: "0px 0px -40px 0px"
+    });
+
+    revealElements.forEach(element => revealObserver.observe(element));
+  });
+
+
+  // ==========================================
+  // 2. МОБІЛЬНЕ ВИЇЗНЕ МЕНЮ
   // ==========================================
   const mobileMenuBtn = document.getElementById('mobileMenuBtn');
   const closeMobileMenuBtn = document.getElementById('closeMobileMenuBtn');
   const mobileOverlayMenu = document.getElementById('mobileOverlayMenu');
   const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
 
+  function setMobileMenu(open) {
+    mobileOverlayMenu.classList.toggle('active', open);
+    mobileOverlayMenu.setAttribute('aria-hidden', String(!open));
+    mobileOverlayMenu.inert = !open;
+    mobileMenuBtn.setAttribute('aria-expanded', String(open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
   if (mobileMenuBtn && mobileOverlayMenu) {
+    setMobileMenu(false);
+
     mobileMenuBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      mobileOverlayMenu.classList.add('active');
-      document.body.style.overflow = 'hidden';
+      setMobileMenu(true);
+      if (closeMobileMenuBtn) closeMobileMenuBtn.focus();
     });
 
     if (closeMobileMenuBtn) {
       closeMobileMenuBtn.addEventListener('click', () => {
-        mobileOverlayMenu.classList.remove('active');
-        document.body.style.overflow = '';
+        setMobileMenu(false);
+        mobileMenuBtn.focus();
       });
     }
 
-    mobileNavItems.forEach(item => {
-      item.addEventListener('click', () => {
-        mobileOverlayMenu.classList.remove('active');
-        document.body.style.overflow = '';
-      });
-    });
+    mobileNavItems.forEach(item => item.addEventListener('click', () => setMobileMenu(false)));
 
     document.addEventListener('click', (e) => {
       if (mobileOverlayMenu.classList.contains('active') && !mobileOverlayMenu.contains(e.target)) {
-        mobileOverlayMenu.classList.remove('active');
-        document.body.style.overflow = '';
+        setMobileMenu(false);
       }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileOverlayMenu.classList.contains('active')) {
+        setMobileMenu(false);
+        mobileMenuBtn.focus();
+      }
+    });
+
+    // Якщо вікно розширили до десктопу — закриваємо меню
+    window.matchMedia('(min-width: 993px)').addEventListener('change', (e) => {
+      if (e.matches) setMobileMenu(false);
     });
   }
 
-    // ==========================================
-  // 4. ДИНАМІЧНИЙ НАВБАР
+  // ==========================================
+  // 4. ДИНАМІЧНИЙ НАВБАР (throttle через rAF)
   // ==========================================
   const navbar = document.querySelector('.navbar');
+  const navLogoImg = document.querySelector('.nav-logo-img-kolibri');
+  const navLogoImg1 = document.querySelector('.nav-logo-img-kolibri1');
+  const navLogoText = document.querySelector('.nav-logo');
+  const budgetBtn = document.querySelector('.budget-dot');
+
   if (navbar) {
+    let navTicking = false;
+
+    const updateNavbar = () => {
+      const scrolled = window.scrollY > 30;
+      navbar.classList.toggle('scrolled', scrolled);
+      if (navLogoImg) navLogoImg.classList.toggle('scrolled', scrolled);
+      if (navLogoText) navLogoText.classList.toggle('scrolled', scrolled);
+      if (navLogoImg1) navLogoImg1.classList.toggle('scrolled', !scrolled);
+      if (budgetBtn) budgetBtn.classList.toggle('scrolled', scrolled);
+      navTicking = false;
+    };
+
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.style.padding = '10px 0';
-        navbar.style.backgroundColor = 'rgba(249, 246, 244, 0.95)';
-      } else {
-        navbar.style.padding = '15px 0';
-        navbar.style.backgroundColor = 'rgba(249, 246, 244, 0.85)';
+      if (!navTicking) {
+        navTicking = true;
+        requestAnimationFrame(updateNavbar);
       }
     }, { passive: true });
+
+    updateNavbar(); // коректний стан, якщо сторінку відновили посередині
   }
 
-  // ==========================================
-  // 6. СЕЛЕКТОР МОВИ (Dropdown UI)
+
+    // ==========================================
+  // 6. СЕЛЕКТОР МОВИ (відкриття/закриття; вибір мови — у розділі 7)
   // ==========================================
   const langBtn = document.getElementById('langBtn');
   const langSelector = document.querySelector('.lang-selector');
-  const currentLangLabel = document.getElementById('current-lang');
-  const langItems = document.querySelectorAll('.lang-dropdown-item');
 
   if (langBtn && langSelector) {
+    const setLangMenu = (open) => {
+      langSelector.classList.toggle('active', open);
+      langBtn.setAttribute('aria-expanded', String(open));
+    };
+
     langBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      langSelector.classList.toggle('active');
+      setLangMenu(!langSelector.classList.contains('active'));
     });
 
-    document.addEventListener('click', () => {
-      langSelector.classList.remove('active');
-    });
-
-    langItems.forEach((item) => {
-      item.addEventListener('click', (e) => {
-        e.preventDefault();
-        langItems.forEach((el) => el.classList.remove('active'));
-        item.classList.add('active');
-
-        const langCode = item.getAttribute('data-lang').toUpperCase();
-        if (currentLangLabel) {
-          currentLangLabel.textContent = langCode;
-        }
-
-        langSelector.classList.remove('active');
-      });
+    document.addEventListener('click', () => setLangMenu(false));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') setLangMenu(false);
     });
   }
-
 
   // ==========================================
   // 7. СИСТЕМА ЛОКАЛІЗАЦІЇ (i18n) — ВИПРАВЛЕНО
@@ -101,11 +151,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     return pathKey.split('.').reduce((acc, part) => (acc && acc[part] !== undefined ? acc[part] : null), dataObj);
   }
 
+  const langCache = {};
+  let langRequestId = 0;
+
   async function loadLanguage(lang) {
+    const requestId = ++langRequestId; // захист від гонки при швидкому перемиканні мов
     try {
-      const response = await fetch(`./lang/${lang}.json`);
-      if (!response.ok) throw new Error(`Не вдалося завантажити файл мови: ${lang}`);
-      const data = await response.json();
+      if (!langCache[lang]) {
+        const response = await fetch(`./lang/${lang}.json`);
+        if (!response.ok) throw new Error(`Не вдалося завантажити файл мови: ${lang}`);
+        langCache[lang] = await response.json();
+      }
+      if (requestId !== langRequestId) return;
+      const data = langCache[lang];
 
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const rawKey = el.getAttribute('data-i18n');
@@ -118,7 +176,10 @@ document.addEventListener('DOMContentLoaded', async () => {
           const attrName = attrMatch[1];
           const actualKey = attrMatch[2];
           const val = getTranslationValue(data, actualKey);
-          if (val) el.setAttribute(attrName, val);
+          if (val) {
+            el.setAttribute(attrName, val);
+            if (attrName === 'placeholder') el.setAttribute('aria-label', val);
+          }
         } else {
           const val = getTranslationValue(data, rawKey);
           if (val) el.innerHTML = val;
@@ -142,7 +203,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
       });
 
-      localStorage.setItem('selectedLanguage', lang);
+      store.set('selectedLanguage', lang);
+      refreshFaqHeights();
 
       // Сповіщаємо скрипт друку про вибір нової мови
       if (typeof window.onLanguageChangeForTypewriter === 'function') {
@@ -166,9 +228,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   // ЗАВЖДИ викликаємо завантаження мови при старті сторінки
-  const savedLang = localStorage.getItem('selectedLanguage') || 'uk';
+  const storedLang = store.get('selectedLanguage');
+  const savedLang = ['de', 'uk', 'en', 'ru'].includes(storedLang) ? storedLang : 'de';
   loadLanguage(savedLang);
 
-
-
-})
+});

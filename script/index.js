@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // ==========================================
   // 3. ІНДИКАТОР СКРОЛУ HERO
   // ==========================================
-const scrollTrigger = document.getElementById('scrollTrigger');
+  const scrollTrigger = document.getElementById('scrollTrigger');
   const firstSection = document.getElementById('about-us');
 
   if (scrollTrigger && firstSection) {
