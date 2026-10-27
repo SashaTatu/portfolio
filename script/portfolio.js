@@ -82,37 +82,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // ==========================================
-  // 4. ДИНАМІЧНИЙ НАВБАР (throttle через rAF)
-  // ==========================================
-  const navbar = document.querySelector('.navbar');
-  const navLogoImg = document.querySelector('.nav-logo-img-kolibri');
-  const navLogoImg1 = document.querySelector('.nav-logo-img-kolibri1');
-  const navLogoText = document.querySelector('.nav-logo');
-  const budgetBtn = document.querySelector('.budget-dot');
-
-  if (navbar) {
-    let navTicking = false;
-
-    const updateNavbar = () => {
-      const scrolled = window.scrollY > 30;
-      navbar.classList.toggle('scrolled', scrolled);
-      if (navLogoImg) navLogoImg.classList.toggle('scrolled', scrolled);
-      if (navLogoText) navLogoText.classList.toggle('scrolled', scrolled);
-      if (navLogoImg1) navLogoImg1.classList.toggle('scrolled', !scrolled);
-      if (budgetBtn) budgetBtn.classList.toggle('scrolled', scrolled);
-      navTicking = false;
-    };
-
-    window.addEventListener('scroll', () => {
-      if (!navTicking) {
-        navTicking = true;
-        requestAnimationFrame(updateNavbar);
-      }
-    }, { passive: true });
-
-    updateNavbar(); // коректний стан, якщо сторінку відновили посередині
-  }
 
 
     // ==========================================

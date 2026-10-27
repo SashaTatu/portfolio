@@ -27,7 +27,15 @@
   </noscript>
   <link rel="stylesheet" href="style/portfolio.css">
   <link rel="icon" type="image/png" href="img/favicon/kolibri1.png">
+  <script>
+    // Анімація появи вмикається лише якщо JS працює; страховка: через 2 с усе показується примусово
+    (function (d) {
+      d.classList.add('pf-js');
+      setTimeout(function () { d.classList.add('pf-show-all'); }, 2000);
+    })(document.documentElement);
+  </script>
 </head>
+<body>
 
   <div class="bg-grid-lines">
     <div class="grid-line"></div>
@@ -37,7 +45,7 @@
   </div>
 
 <!-- ОНОВЛЕНИЙ НАВБАР -->
-<nav class="navbar" data-i18n="[aria-label]nav_label" aria-label="Hauptnavigation">
+<nav class="navbar navbar-solid" data-i18n="[aria-label]nav_label" aria-label="Hauptnavigation">
   <div class="container nav-container">
     <div class="nav-left-brand">
       <img src="img/favicon/kolibri2.png" alt="" class="nav-logo-img-kolibri" width="40" height="40">
@@ -110,54 +118,101 @@
   </div>
 </div>
 
-<main></main>>
+<main id="portfolio">
+  <!-- Вступ -->
+  <header class="pf-intro">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Portfolio</span>
+        <h1 class="section-title">Ausgewählte <i>Projekte</i></h1>
+      </div>
+    </div>
+  </header>
 
-<main></main>>
+  <!-- Проєкт 01 -->
+  <section class="pf-project" id="project-01" aria-labelledby="pf-title-01">
+    <div class="container pf-inner">
+      <div class="pf-media">
+        <div class="pf-frame">
+          <div class="pf-photo">
+            <img src="img/portfolio/projects/1-Ukrainian-Soul/09.jpeg" alt="Ukrainian Soul — Житловий інтер’єр з видом на місто" width="1360" height="740" loading="eager" decoding="async">
+          </div>
+        </div>
+      </div>
+      <div class="pf-text">
+        <span class="pf-num">01 <span class="slash">/</span></span>
+        <h2 class="pf-title" id="pf-title-01">Ukrainian Soul</h2>
+        <p class="pf-sub">Tradition neu interpretiert.</p>
+        <p class="pf-desc">Das Interior-Konzept „Ukrainian Soul" verbindet modernes Design mit der Seele ukrainischer Kultur.
+Traditionelle Muster, natürliche Materialien und warme Akzente werden neu interpretiert und in eine zeitlose, elegante Formensprache übersetzt. So entsteht eine Wohnung, die nicht nur schön gestaltet ist, sondern auch ein Gefühl von Zugehörigkeit vermittelt.
+Ein Zuhause, das Vergangenheit und Zukunft miteinander verbindet.</p>
+        <a href="projects/project1.html" class="pf-link"><span>ein Projekt ansehen</span></a>
+      </div>
+    </div>
+  </section>
 
-<main></main>>
+  <!-- Проєкт 02 -->
+  <section class="pf-project pf-project--reverse" id="project-02" aria-labelledby="pf-title-02">
+    <div class="container pf-inner">
+      <div class="pf-media">
+        <div class="pf-frame">
+          <div class="pf-photo">
+            <img src="img/portfolio/projects/2-Avenue-Montaigne/05.jpeg" alt="Avenue Montaigne" width="1360" height="740" loading="lazy" decoding="async">
+          </div>
+        </div>
+      </div>
+      <div class="pf-text">
+        <span class="pf-num">02 <span class="slash">/</span></span>
+        <h2 class="pf-title" id="pf-title-02">Avenue Montaigne</h2>
+        <p class="pf-sub">Ein elegantes Wohnkonzept, inspiriert von der zeitlosen Schönheit des Pariser Wohnstils.</p>
+        <p class="pf-desc">Klassische Architekturdetails, edle Materialien und moderne Leichtigkeit verschmelzen zu einem Zuhause voller Charme, Ruhe und Raffinesse..</p>
+        <a href="projects/project2.html" class="pf-link"><span>ein Projekt ansehen</span></a>
+      </div>
+    </div>
+  </section>
 
-<main></main>>
+  <!-- Проєкт 03 -->
+  <section class="pf-project" id="project-03" aria-labelledby="pf-title-03">
+    <div class="container pf-inner">
+      <div class="pf-media">
+        <div class="pf-frame">
+          <div class="pf-photo">
+            <img src="img/portfolio/projects/3-Auszeit-im-Grünen/02.jpeg" alt="Auszeit im Grünen — Ein Ort zum Ankommen und Durchatmen" width="1360" height="740" loading="lazy" decoding="async">
+          </div>
+        </div>
+      </div>
+      <div class="pf-text">
+        <span class="pf-num">03 <span class="slash">/</span></span>
+        <h2 class="pf-title" id="pf-title-03">Auszeit im Grünen</h2>
+        <p class="pf-sub">Ein Ort zum Ankommen und Durchatmen.</p>
+        <p class="pf-desc">Ein kleines modernes Gästehaus mit Sauna, großzügiger Terrasse und direktem Blick in den Garten. Natürliche Materialien wie Holz und Stein schaffen Wärme und Geborgenheit, während gezielte Farbhighlights in Blau- und Grautönen dem Interieur eine moderne und lebendige Note verleihen. Ein Ort zum Ankommen, Entspannen und Genießen – inmitten der Natur.</p>
+        <a href="#" class="pf-link"><span>ein Projekt ansehen</span></a>
+      </div>
+    </div>
+  </section>
 
-<main></main>>
+  <!-- Проєкт 04 -->
+  <section class="pf-project pf-project--reverse" id="project-04" aria-labelledby="pf-title-04">
+    <div class="container pf-inner">
+      <div class="pf-media">
+        <div class="pf-frame">
+          <div class="pf-photo">
+            <img src="img/portfolio/projects/4-Three-Spaces-One-Identity/Familienbad/01.jpg" alt="Three Spaces. One Identity." width="1360" height="740" loading="lazy" decoding="async">
+          </div>
+        </div>
+      </div>
+      <div class="pf-text">
+        <span class="pf-num">04 <span class="slash">/</span></span>
+        <h2 class="pf-title" id="pf-title-04">Three Spaces. One Identity.</h2>
+        <p class="pf-sub"></p>
+        <p class="pf-desc">Drei Badezimmer, ein durchgängiges Gestaltungskonzept. Dunkle Oberflächen, strukturierte Materialien und präzise Lichtinszenierungen verleihen jedem Raum eine eigene Atmosphäre, während Farben, Formen und Details die Verbindung zwischen den Bereichen schaffen.</p>
+        <a href="#" class="pf-link"><span>ein Projekt ansehen</span></a>
+      </div>
+    </div>
+  </section>
+</main>
 
-<main></main>>
-
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-<main></main>>
-
-
-
-
-    <footer class="footer">
+<footer class="footer">
       <div class="container footer-container">
         <!-- Блок 1: Назва та філософія -->
         <div class="footer-brand-col">
@@ -168,7 +223,7 @@
         <!-- Контейнер для зручного групування в дві колонки на мобілці -->
         <div class="footer-links-wrapper">
           <!-- Колонка Навігації -->
-          <div class="footer-nav-col">
+          <div class="footer-nav-col" style="visibility: hidden;">
             <span class="f-column-label" data-i18n="footer_navigation">// Navigation</span>
             <ul class="f-nav-list">
               <li><a href="#about-us" class="f-nav-link" data-i18n="team">Über uns</a></li>
@@ -212,6 +267,7 @@
         <a href="datenschutz.html" class="f-legal-link" data-i18n="legal_privacy">Datenschutz</a>
     </div>
 </div>
+      </div>
     </footer>
 
   <script src="script/portfolio.js" defer></script>

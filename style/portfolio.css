@@ -571,7 +571,7 @@ section.reveal.active > .cta-fluid-shape {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid rgba(143, 47, 69, 0.35);
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
@@ -612,7 +612,7 @@ section.reveal.active > .cta-fluid-shape {
   width: 3px;
   height: 3px;
   border-radius: 50%;
-  background-color: #FFFFFF; /* звичайний стан */
+  background-color: #8f2f45; /* звичайний стан */
   transition: background-color 0.4s ease, transform 0.3s ease;
 }
 
@@ -1080,4 +1080,410 @@ section.reveal.active > .cta-fluid-shape {
     padding-top: 5px;
     border-top: none;
   }
+}
+
+/* ==========================================================================
+   PORTFOLIO — 4 СЕКЦІЇ ПРОЄКТІВ (фото чергується: ліворуч / праворуч)
+   Темний фон як у блоці контактів головної, бордовий акцент, Cormorant + Montserrat
+   ========================================================================== */
+.pf-project {
+  position: relative;
+  z-index: 2;
+  padding: 110px 0;
+  overflow: hidden;
+  background-color: #F7F4F0; /* той самий суцільний фон, що й у секцій головної */
+}
+/* під фіксованою навігацією */
+main > .pf-project:first-child { padding-top: 170px; }
+
+/* тонка лінія-розділювач між проєктами */
+.pf-project + .pf-project::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 10%; right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 194, 189, 0.35), transparent);
+}
+
+.pf-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  column-gap: clamp(40px, 6vw, 96px);
+  align-items: center;
+}
+.pf-project--reverse .pf-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); }
+.pf-project--reverse .pf-media { order: 2; }
+.pf-project--reverse .pf-text  { order: 1; }
+
+/* ---------- Рамка з крапковим візерунком ---------- */
+
+
+.pf-frame {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 3;
+  padding: 0 3.6%;
+  border-radius: clamp(36px, 5vw, 68px);
+  background-color: #FFFFFF;
+  background-image: radial-gradient(circle, rgba(143, 47, 69, 0.13) 1.3px, transparent 1.7px);
+  background-size: 24px 24px;
+  border: 1px solid rgba(201, 194, 189, 0.45);
+  box-shadow: 0 30px 70px -25px rgba(18, 16, 15, 0.18);
+  transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.pf-photo {
+  width: 100%;
+  aspect-ratio: 1.85 / 1;
+  border-radius: clamp(14px, 1.8vw, 26px);
+  overflow: hidden;
+  background-color: #EAE6E1;
+  box-shadow: 0 18px 40px -14px rgba(31, 31, 31, 0.30);
+}
+.pf-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.001);
+  transition: transform 1.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.pf-frame:hover .pf-photo img { transform: scale(1.05); }
+
+/* ---------- Текст ---------- */
+.pf-text { max-width: 540px; }
+
+.pf-num {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 22px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  color: #8F2F45;
+}
+.pf-num .slash { font-style: italic; font-size: 17px; }
+
+.pf-project .pf-title {
+  margin: 0 0 18px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 4.6vw, 66px);
+  font-weight: 300;
+  line-height: 1.06;
+  letter-spacing: 0.01em;
+  color: #1F1F1F;
+}
+
+.pf-sub {
+  margin: 0 0 28px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+  color: #3B3B3B;
+}
+
+.pf-desc {
+  margin: 0 0 40px;
+  max-width: 34em;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15.5px;
+  font-weight: 300;
+  line-height: 1.85;
+  letter-spacing: 0.3px;
+  color: #3B3B3B;
+}
+
+.pf-link {
+  display: inline-block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #1F1F1F;
+  transition: color 0.3s ease;
+}
+.pf-link span {
+  display: inline-block;
+  padding-bottom: 6px;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 0.45s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.pf-link:hover { color: #8F2F45; }
+.pf-link:hover span,
+.pf-link:focus-visible span { background-size: 100% 1px; }
+
+/* ---------- Поява при скролі ---------- */
+.pf-js .pf-media,
+.pf-js .pf-text > * {
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1.1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.pf-js .pf-media { transform: translateX(-44px); }
+.pf-js .pf-project--reverse .pf-media { transform: translateX(44px); }
+.pf-js .pf-text > * { transform: translateY(26px); }
+
+.pf-project.is-in .pf-media,
+.pf-project.is-in .pf-text > * { opacity: 1; transform: none; }
+.pf-project.is-in .pf-text > :nth-child(1) { transition-delay: 0.20s; }
+.pf-project.is-in .pf-text > :nth-child(2) { transition-delay: 0.30s; }
+.pf-project.is-in .pf-text > :nth-child(3) { transition-delay: 0.40s; }
+.pf-project.is-in .pf-text > :nth-child(4) { transition-delay: 0.50s; }
+.pf-project.is-in .pf-text > :nth-child(5) { transition-delay: 0.60s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pf-js .pf-media, .pf-js .pf-text > * { opacity: 1; transform: none; transition: none; }
+  .pf-photo img { transition: none; }
+}
+
+/* ---------- Планшет / телефон ---------- */
+@media (max-width: 900px) {
+  .pf-project { padding: 72px 0; }
+  main > .pf-project:first-child { padding-top: 120px; }
+
+  .pf-inner,
+  .pf-project--reverse .pf-inner {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 40px;
+  }
+  /* на мобільному фото завжди зверху */
+  .pf-project--reverse .pf-media { order: 0; }
+  .pf-project--reverse .pf-text  { order: 1; }
+
+  .pf-js .pf-media,
+  .pf-js .pf-project--reverse .pf-media { transform: translateY(30px); }
+
+  .pf-frame { aspect-ratio: 5 / 4; padding: 0 4.5%; border-radius: 34px; background-size: 20px 20px; }
+  .pf-photo { border-radius: 16px; }
+  .pf-text { max-width: 100%; }
+  .pf-num { margin-bottom: 16px; font-size: 18px; }
+  .pf-project .pf-title { font-size: clamp(34px, 9vw, 46px); }
+  .pf-sub { font-size: 15px; margin-bottom: 22px; }
+  .pf-desc { font-size: 15px; line-height: 1.8; margin-bottom: 32px; }
+}
+
+@media (max-width: 480px) {
+  .pf-project .container { padding-left: 18px; padding-right: 18px; }
+
+}
+
+/* ==========================================================================
+   НАВІГАЦІЯ НА МОБІЛЬНОМУ (перенесено з головної сторінки, у portfolio.css їх не було)
+   ========================================================================== */
+@media (max-width: 992px) {
+  .nav-links, .btn-nav-order { display: none !important; }
+  .mobile-menu-trigger-wrapper { display: flex; }
+  .navbar { padding: 16px 0; }
+  .nav-container { padding: 0 22px; }
+  .nav-logo-img-kolibri, .nav-logo-img-kolibri1 { width: 34px; height: 34px; }
+  .nav-actions { gap: 10px; }
+  .lang-btn { min-height: 40px; padding: 0 12px; }
+}
+@media (max-width: 480px) {
+  .nav-container { padding-left: 18px; padding-right: 18px; }
+  .nav-left-brand .nav-logo { font-size: 11px; letter-spacing: 2.5px; }
+}
+
+/* ==== Навігація портфоліо: світла сторінка без hero → завжди «scrolled»-вигляд ==== */
+.navbar.navbar-solid .nav-logo-img-kolibri {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+}
+.navbar.navbar-solid .nav-logo-img-kolibri1 {
+  opacity: 1;
+  visibility: visible;
+  position: relative;
+}
+.navbar.navbar-solid {
+  background-color: rgba(249, 246, 244, 0.90);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(201, 194, 189, 0.35);
+  padding: 16px 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+}
+.navbar.navbar-solid .nav-logo {
+  color: #1F1F1F; 
+  text-shadow: none;
+}
+.navbar.navbar-solid .nav-item {
+  color: #8F2F45; 
+  text-shadow: none;
+}
+.navbar.navbar-solid .nav-links .nav-item:hover { color: #8F2F45; }
+.navbar.navbar-solid .nav-item.active { color: #8F2F45; }
+.navbar.navbar-solid .nav-item::after {
+  background-color: #8F2F45; 
+  box-shadow: none;
+}
+.navbar.navbar-solid .btn-nav-order,.navbar.navbar-solid .lang-btn {
+  border-color: rgba(92, 29, 36, 0.3); 
+  color: #8F2F45; 
+  background: transparent; /* Одразу прозорі, без білого тла */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+}
+.navbar.navbar-solid .btn-nav-order::before {
+  background-color: #8F2F45; /* Змінюємо колір бекграунду для ховеру на бордовий */
+}
+.navbar.navbar-solid .btn-nav-order:hover { 
+  color: #FFFFFF; 
+  border-color: #8F2F45; 
+}
+.navbar.navbar-solid .lang-btn:hover,.navbar.navbar-solid .lang-selector.active .lang-btn {
+  border-color: #8F2F45;
+  background-color: rgba(143, 47, 69, 0.06);
+}
+
+/* Страховка: якщо скрипт появи не спрацював, секції все одно стають видимими */
+.pf-show-all .pf-media,
+.pf-show-all .pf-text > * { opacity: 1 !important; transform: none !important; }
+
+/* ==========================================================================
+   ПОКРАЩЕННЯ ВИГЛЯДУ СТОРІНКИ ПОРТФОЛІО
+   ========================================================================== */
+main#portfolio { counter-reset: pf; }
+.pf-project { counter-increment: pf; }
+
+/* --- Вступний заголовок сторінки (як section-header на головній) --- */
+.pf-intro { position: relative; z-index: 2; background-color: #F7F4F0; padding: 150px 0 10px; text-align: center; }
+.pf-intro .section-header { margin-bottom: 0; }
+.pf-intro .section-title { font-size: clamp(36px, 5vw, 60px); }
+.pf-intro .section-title i { color: #8F2F45; }
+.pf-intro + .pf-project { padding-top: 100px; }
+
+/* --- Фото: тонка бордова рамка-зсув позаду + плавний підйом при наведенні --- */
+.pf-media { position: relative; isolation: isolate; }
+.pf-media::before {
+  content: '';
+  position: absolute;
+  inset: 20px -20px -20px 20px;
+  z-index: -1;
+  border: 1px solid rgba(143, 47, 69, 0.28);
+  border-radius: clamp(36px, 5vw, 68px);
+  pointer-events: none;
+  transition: inset 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.pf-project--reverse .pf-media::before { inset: 20px 20px -20px -20px; }
+.pf-media:hover .pf-frame { transform: translateY(-5px); box-shadow: 0 44px 90px -28px rgba(18, 16, 15, 0.28); }
+.pf-media:hover::before { inset: 14px -14px -14px 14px; }
+.pf-project--reverse .pf-media:hover::before { inset: 14px 14px -14px -14px; }
+
+/* м'яка віньєтка знизу фото для глибини */
+.pf-photo { position: relative; }
+.pf-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(18, 16, 15, 0) 62%, rgba(18, 16, 15, 0.18) 100%);
+  pointer-events: none;
+}
+
+/* --- Текст --- */
+.pf-text { position: relative; isolation: isolate; }
+
+/* великий ледь помітний номер позаду тексту */
+.pf-text::before {
+  content: counter(pf, decimal-leading-zero);
+  position: absolute;
+  z-index: -1;
+  top: -0.3em;
+  left: -0.06em;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(150px, 17vw, 250px);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: rgba(143, 47, 69, 0.07);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* лінія після «01 /» */
+.pf-num::after {
+  content: '';
+  align-self: center;
+  width: 54px;
+  height: 1px;
+  margin-left: 12px;
+  background: linear-gradient(90deg, rgba(143, 47, 69, 0.55), rgba(143, 47, 69, 0));
+}
+
+.pf-sub:empty { display: none; }          /* порожні підписи не залишають діри */
+.pf-sub { padding-left: 14px; border-left: 1px solid rgba(143, 47, 69, 0.45); }
+.pf-desc { white-space: pre-line; }       /* ваші переноси рядків у <p> стають абзацами */
+.pf-project .pf-title { text-wrap: balance; }
+
+/* --- Посилання з круглою стрілкою (як у таблиці послуг на головній) --- */
+.pf-link { display: inline-flex; align-items: center; gap: 18px; }
+.pf-link::after {
+  content: '';
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(92, 29, 36, 0.3);
+  border-radius: 50%;
+  background: no-repeat center / 16px 16px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238F2F45' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E");
+  transition: background-color 0.4s ease, border-color 0.4s ease, transform 0.4s ease;
+}
+.pf-link:hover::after,
+.pf-link:focus-visible::after {
+  background-color: #8F2F45;
+  border-color: #8F2F45;
+  transform: translateX(5px);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FFFFFF' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14M13 6l6 6-6 6'/%3E%3C/svg%3E");
+}
+
+@media (max-width: 900px) {
+  .pf-intro { padding: 118px 0 0; }
+  .pf-intro + .pf-project { padding-top: 48px; }
+  .pf-media::before,
+  .pf-project--reverse .pf-media::before { inset: 12px -10px -12px 10px; border-radius: 34px; }
+  .pf-project--reverse .pf-media::before { inset: 12px 10px -12px -10px; }
+  .pf-text::before { font-size: 130px; top: -0.3em; }
+  .pf-link::after { flex-basis: 40px; width: 40px; height: 40px; }
+}
+@media (max-width: 480px) {
+  .pf-frame { border-radius: 28px; }
+  .pf-media::before { border-radius: 28px; }
+}
+
+/* ==========================================================================
+   БЕЗ БІЛОГО ТЛА ПІД ФОТО: рамку прибрано, фото стоїть прямо на фоні сторінки
+   ========================================================================== */
+.pf-frame {
+  display: block;
+  aspect-ratio: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+.pf-photo {
+  aspect-ratio: 4 / 3;
+  border-radius: clamp(26px, 3.2vw, 46px);
+  box-shadow: 0 34px 70px -28px rgba(18, 16, 15, 0.38);
+  transition: box-shadow 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.pf-media:hover .pf-frame { transform: translateY(-5px); box-shadow: none; }
+.pf-media:hover .pf-photo { box-shadow: 0 46px 86px -30px rgba(18, 16, 15, 0.45); }
+
+/* бордова лінія-зсув тепер повторює форму фото */
+.pf-media::before,
+.pf-project--reverse .pf-media::before { border-radius: clamp(26px, 3.2vw, 46px); }
+
+@media (max-width: 900px) {
+  .footer-nav-col { display: none; } /* на планшетах і телефонах прибираємо колонку навігації футера */
+  .pf-frame { aspect-ratio: auto; padding: 0; border-radius: 0; }
+  .pf-photo { aspect-ratio: 4 / 3; border-radius: 26px; }
+  .pf-media::before,
+  .pf-project--reverse .pf-media::before { border-radius: 26px; }
 }
