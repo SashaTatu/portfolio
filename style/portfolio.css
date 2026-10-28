@@ -938,7 +938,6 @@ section.reveal.active > .cta-fluid-shape {
   /* Блок 2: Обгортка навігації та зв'язку, що ділить екран на дві колонки */
   .footer-links-wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Дві рівні колонки */
     gap: 30px 20px;
     width: 100%;
   }
