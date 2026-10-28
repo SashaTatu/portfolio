@@ -170,38 +170,79 @@
   }
 
   /* --- відкриття / закриття --- */
+  function flyTransform() {                      // положення мініатюри відносно великого фото
+    var a = links[idx];
+    var t = a.querySelector('img') || a;
+    var r = t.getBoundingClientRect();
+    var b = slide.getBoundingClientRect();
+    if (!b.width || !b.height || r.width < 2) return null;
+    if (r.bottom < 0 || r.top > window.innerHeight || r.right < 0 || r.left > window.innerWidth) return null;
+    var sc = Math.max(r.width / b.width, r.height / b.height);
+    var dx = (r.left + r.width / 2) - (b.left + b.width / 2);
+    var dy = (r.top + r.height / 2) - (b.top + b.height / 2);
+    return 'translate(' + dx + 'px,' + dy + 'px) scale(' + sc + ')';
+  }
+  function stopAnims() {
+    if (slide.getAnimations) slide.getAnimations().forEach(function (a) { a.cancel(); });
+  }
+
   function open(i) {
     clearTimeout(closeTimer);
     lastFocus = document.activeElement;
     busy = false;
+    stopAnims();
     slide.style.transform = ''; slide.style.opacity = '';
     lb.style.removeProperty('--lb-o');
     lb.hidden = false;
     document.documentElement.classList.add('lb-lock');
     isOpen = true;
-    load(i, function () {
+    load(i, function () {                        // фото плавно «підлітає» з мініатюри до нас
       if (RM) return;
+      var tf = flyTransform() || 'scale(0.92)';
       slide.animate(
-        [{ transform: 'scale(0.94)', opacity: 0 }, { transform: 'none', opacity: 1 }],
-        { duration: 560, easing: EASE }
+        [
+          { transform: tf, opacity: 0 },
+          { opacity: 1, offset: 0.3 },
+          { transform: 'none', opacity: 1 }
+        ],
+        { duration: 720, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }
       );
     });
     requestAnimationFrame(function () { lb.classList.add('is-open'); });
     closeBtn.focus({ preventScroll: true });
   }
-  function close() {
+  function close(fly) {
     if (!isOpen) return;
     isOpen = false;
+    var tf = null;
+    if (fly !== false && !RM && !busy) {
+      reset();
+      slide.style.transform = ''; slide.style.opacity = '';
+      tf = flyTransform();
+    }
     lb.classList.remove('is-open');
     document.documentElement.classList.remove('lb-lock');
+    var wait = 420;
+    if (tf) {                                    // фото відлітає назад на своє місце в галереї
+      wait = 560;
+      slide.animate(
+        [
+          { transform: 'none', opacity: 1 },
+          { opacity: 1, offset: 0.65 },
+          { transform: tf, opacity: 0 }
+        ],
+        { duration: 520, easing: 'cubic-bezier(0.65, 0, 0.35, 1)', fill: 'forwards' }
+      );
+    }
     closeTimer = setTimeout(function () {
       if (!isOpen) {
+        stopAnims();
         lb.hidden = true;
         img.removeAttribute('src');
         slide.style.transform = ''; slide.style.opacity = '';
         lb.style.removeProperty('--lb-o');
       }
-    }, 380);
+    }, wait);
     if (lastFocus && lastFocus.focus) lastFocus.focus({ preventScroll: true });
   }
 
@@ -311,8 +352,8 @@
       return;
     }
 
-    if (!drag.axis && drag.moved > 8) {            // визначаємо напрямок жесту
-      drag.axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+    if (!drag.axis && drag.moved > 6) {            // визначаємо напрямок жесту (горизонталь — з перевагою)
+      drag.axis = Math.abs(dx) * 1.15 > Math.abs(dy) ? 'x' : 'y';
       if (drag.axis === 'x' && links.length < 2) drag.axis = 'n';
     }
     if (drag.axis === 'x') {                       // фото їде за пальцем
@@ -340,13 +381,13 @@
     drag = null;
 
     if (ax === 'x') {
-      var thr = Math.min(110, stage.clientWidth * 0.2);
-      if (Math.abs(dx) > thr || (Math.abs(vx) > 0.5 && Math.abs(dx) > 30)) go(dx < 0 ? 1 : -1, dx);
+      var thr = Math.min(80, stage.clientWidth * 0.18);
+      if (Math.abs(dx) > thr || (Math.abs(vx) > 0.3 && Math.abs(dx) > 24)) go(dx < 0 ? 1 : -1, dx);
       else settle();
       return;
     }
     if (ax === 'y') {
-      if (dy > 120 || (vy > 0.6 && dy > 40)) close();
+      if (dy > 120 || (vy > 0.6 && dy > 40)) close(false);
       else settle();
       return;
     }

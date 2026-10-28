@@ -1050,6 +1050,12 @@ section.reveal.active > .cta-fluid-shape {
   gap: 10px;
 }
 
+@media (max-width: 768px) {
+  .f-legal-links {
+    margin-top: 30px; /* Додаємо відступ зверху для мобільних пристроїв */
+  }
+}
+
 /* Посилання */
 .f-legal-link {
   font-family: 'Montserrat', sans-serif;
