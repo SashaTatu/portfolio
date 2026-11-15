@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const requestId = ++langRequestId; // захист від гонки при швидкому перемиканні мов
     try {
       if (!langCache[lang]) {
-        const response = await fetch(`./lang/${lang}.json`);
+        const response = await fetch(`/lang/${lang}.json`);
         if (!response.ok) throw new Error(`Не вдалося завантажити файл мови: ${lang}`);
         langCache[lang] = await response.json();
       }
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
 
       store.set('selectedLanguage', lang);
-      refreshFaqHeights();
+      if (typeof refreshFaqHeights === 'function') refreshFaqHeights();
 
       // Сповіщаємо скрипт друку про вибір нової мови
       if (typeof window.onLanguageChangeForTypewriter === 'function') {
