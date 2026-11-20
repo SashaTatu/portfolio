@@ -12,8 +12,9 @@
   <link rel="preload" as="image" href="img/background/credo-back.webp" type="image/webp">
 
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-  <link rel="stylesheet" href="style/portfolio.css">
-  <link rel="icon" type="image/png" href="img/favicon/kolibri2.png">
+  <link rel="stylesheet" href="style/index.css">
+  <link rel="stylesheet" href="style/order.css">
+  <link rel="icon" type="image/png" href="img/favicon/kolibri1.png">
 </head>
 <body>
 
@@ -24,54 +25,57 @@
     <div class="grid-line"></div>
   </div>
 
-  <nav class="navbar">
-    <div class="container nav-container">
-      <div class="nav-left-brand">
-        <img src="img/favicon/kolibri2.png" alt="Kolibri Logo" class="nav-logo-img-kolibri" width="40" height="40">
-        <a href="index.html" class="nav-logo">LIBRI<br>INTERIORS</a>
-      </div>
-
-      <!-- Десктопні лінки (автоматично ховаються на мобільних) -->
-      <ul class="nav-links">
-        <li><a href="#" class="nav-item" data-i18n="home-page">Startseite</a></li>
-        <li><a href="portfolio.html" class="nav-item active" data-i18n="portfolio-page">Portfolio</a></li>
-        <li><a href="services.html" class="nav-item" data-i18n="services-page">Leistungen</a></li>
-      </ul>
-      
-      <div class="nav-actions">
-        <a href="order.html" class="btn-nav-order" data-i18n="order-btn">Designer kontaktieren</a>
-        
-        <div class="lang-selector">
-          <button class="lang-btn" id="langBtn">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M12 2a14.5 14.5 0 0 0 0 20M12 2a14.5 14.5 0 0 1 0 20M2 12h20"/>
-            </svg>
-            <span id="current-lang">DE</span>
-          </button>
-          
-          <div class="lang-dropdown" id="langDropdown">
-              <a href="#" class="lang-dropdown-item active" data-lang="de">Deutsch</a>
-              <a href="#" class="lang-dropdown-item" data-lang="uk">Українська</a>
-              <a href="#" class="lang-dropdown-item" data-lang="en">English</a>
-              <a href="#" class="lang-dropdown-item" data-lang="ru">Русский</a>
-          </div>
-        </div>
-
-        <!-- Мобільна кнопка-меню (Кружечок як на референсі) -->
-        <div class="mobile-menu-trigger-wrapper">
-          <button class="burger-menu" id="mobileMenuBtn" aria-label="Toggle Menu">
-            <div class="burger-dot-grid">
-              <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
-              <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
-              <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
-            </div>
-          </button>
-        </div>
-
-      </div>
+<!-- ОНОВЛЕНИЙ НАВБАР -->
+<nav class="navbar" data-i18n="[aria-label]nav_label" aria-label="Hauptnavigation">
+  <div class="container nav-container">
+    <div class="nav-left-brand">
+      <img src="img/favicon/kolibri2.png" alt="" class="nav-logo-img-kolibri" width="40" height="40">
+      <img src="img/favicon/kolibri1.png" alt="" aria-hidden="true" class="nav-logo-img-kolibri1" width="40" height="40">
+      <a href="index.html" class="nav-logo">LIBRI<br>INTERIORS</a>
     </div>
-  </nav>
+
+    <!-- Десктопні лінки (автоматично ховаються на мобільних пристроях) -->
+    <ul class="nav-links">
+      <li><a href="index.html" class="nav-item" aria-current="page" data-i18n="home-page">Startseite</a></li>
+      <li><a href="portfolio.html" class="nav-item" data-i18n="portfolio-page">Portfolio</a></li>
+      <li><a href="services.html" class="nav-item" data-i18n="services-page">Leistungen</a></li>
+    </ul>
+    
+    <div class="nav-actions">
+      <a href="order.html" class="btn-nav-order" data-i18n="order-btn">Designer kontaktieren</a>
+      
+      <!-- Селектор мов -->
+      <div class="lang-selector">
+        <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 2a14.5 14.5 0 0 0 0 20M12 2a14.5 14.5 0 0 1 0 20M2 12h20"/>
+          </svg>
+          <span id="current-lang">DE</span>
+        </button>
+        
+        <div class="lang-dropdown" id="langDropdown">
+          <a href="#" class="lang-dropdown-item active" data-lang="de">Deutsch</a>
+          <a href="#" class="lang-dropdown-item" data-lang="uk">Українська</a>
+          <a href="#" class="lang-dropdown-item" data-lang="en">English</a>
+          <a href="#" class="lang-dropdown-item" data-lang="ru">Русский</a>
+        </div>
+      </div>
+
+      <!-- Мобільна кнопка-меню (Кружечок-бургер) -->
+      <div class="mobile-menu-trigger-wrapper">
+        <button class="burger-menu" id="mobileMenuBtn" aria-label="Menu" aria-expanded="false" aria-controls="mobileOverlayMenu">
+          <div class="burger-dot-grid">
+            <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
+            <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
+            <span class="burger-dot"></span><span class="burger-dot"></span><span class="burger-dot"></span>
+          </div>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</nav>
 
   <!-- Виїзне мобільне меню -->
   <div class="mobile-overlay-menu" id="mobileOverlayMenu">
@@ -95,48 +99,135 @@
       </div>
     </div>
   </div>
+<main>
 
-    <footer class="footer">
-      <div class="container footer-container">
-        <!-- Блок 1: Назва та філософія -->
-        <div class="footer-brand-col">
-          <div class="f-logo" style="font-family: 'Cormorant Garamond', serif; font-size: 24px;">LIBRI<br>INTERIORS</div>
-          <p class="f-brand-philosophy" data-i18n="footer_philosophy">Räume mit charakter. <br>Für menschen mit geschichten</p>
-        </div>
+  <section id="contact" class="section-padding reveal contact-section-luxury">
+    <div class="contact-bg-texture"></div>
+    <div class="contact-bg-overlay"></div>
+
+    <div class="container contact-container-luxury">
+      <div class="contact-card-box">
         
-        <!-- Контейнер для зручного групування в дві колонки на мобілці -->
-   
+        <!-- Ліва колонка: Фото у рамці (НЕ ЗМІНЕНА) -->
+        <div class="contact-left">
+          <div class="contact-image-wrapper">
+            <div class="contact-image-frame"></div>
+            <!-- Замініть шлях у src на реальне зображення вашої команди -->
+            <img src="img/people/team.webp" alt="Team" class="contact-photo" />
+          </div>
+        </div>
 
+        <!-- Права колонка: Заголовок, опис, форма та переваги -->
+        <div class="contact-right">
+          <span class="section-tag" style="text-align: left;" data-i18n="contact_tag">— &nbsp; KONTAKT &nbsp; —</span>
+          <h2 data-i18n="contact_title">Lassen Sie uns<br>Ihr <i style="font-family: 'Cormorant Garamond', serif; color: #742739; font-style: normal;">Zuhause</i><br>gestalten.</h2>
+          <p class="contact-meta-text" data-i18n="contact_desc">
+            Erzählen Sie uns von Ihren Ideen, Wünschen und Räumen. Gemeinsam entwickeln wir ein individuelles Konzept, das zu Ihrem Leben passt.
+          </p>
 
-          <!-- Колонка Зв'язку -->
-          <div class="footer-contacts-col">
-            <span class="f-column-label" data-i18n="contact_heading">// Kontakt</span>
-            <div class="footer-contacts-grid">
-              <div class="f-contact-item">
-                <span class="f-contact-label" data-i18n="contact_phone">Telefon</span>
-                <a href="tel:+4917661059883" class="f-contact-link">+49 176 61059883</a>
+          <form class="shelnat-form" id="generalContactForm">
+            <div class="hp-field" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+            
+            <div class="input-row-numeric">
+              <span class="field-num">01 <span class="slash">/</span></span>
+              <input type="text" name="Client Name" autocomplete="name" aria-label="IHR NAME &amp; NACHNAME" data-i18n="[placeholder]form.name_placeholder" required placeholder="IHR NAME & NACHNAME">
+            </div>
+            
+            <div class="input-row-numeric">
+              <span class="field-num">02 <span class="slash">/</span></span>
+              <input type="email" name="Client Email" autocomplete="email" aria-label="E-MAIL-ADRESSE" data-i18n="[placeholder]form.email_placeholder" required placeholder="E-MAIL-ADRESSE">
+            </div>
+            
+            <div class="input-row-numeric">
+              <span class="field-num">03 <span class="slash">/</span></span>
+              <textarea rows="2" name="Project Details" aria-label="ERZÄHLEN SIE UNS VON IHREM PROJEKT" data-i18n="[placeholder]form.vision_placeholder" required placeholder="ERZÄHLEN SIE UNS VON IHREM PROJEKT"></textarea>
+            </div>
+            
+            <!-- Поле файлів у вигляді кнопки з рамкою -->
+            <div class="input-file-block">
+              <div class="input-file-top">
+                <span class="field-num">04 <span class="slash">/</span></span>
+                <span class="file-label-text" data-i18n="contact_file">GRUNDRISSE ODER INSPIRATIONEN HOCHLADEN (OPTIONAL)</span>
               </div>
-              <div class="f-contact-item">
-                <span class="f-contact-label" data-i18n="contact_email2">Email</span>
-                <a href="mailto:hello@libri-interiors.com" class="f-contact-link">hello@libri-interiors.com</a>
-              </div>
-              <div class="f-contact-item">
-                <span class="f-contact-label" data-i18n="contact_social">Soziale Netzwerke</span>
-                <a href="https://instagram.com/libri.interiors" target="_blank" rel="noopener" class="f-contact-link">@libri.interiors</a>
-              </div>
-              <div class="f-contact-item">
-                <span class="f-contact-label" data-i18n="contact_location">Grafik / Lage</span>
-                <span class="f-contact-text" data-i18n="contact_hours">Mo — Fr : 09:00 — 18:00<br> Deutschland</span>
+              <label for="fileUpload" class="file-upload-box">
+                <span id="fileNameDisplay" data-i18n="contact_file_btn">DATEIEN AUSWÄHLEN</span>
+              </label>
+              <input type="file" id="fileUpload" name="attachment" accept="image/*,.pdf" multiple>
+            </div>
+
+            <!-- Список прикріплених файлів -->
+            <div id="fileList" class="file-list-container" style="font-size: 13px;"></div>
+
+            <div class="form-submit-row">
+              <button type="submit" class="btn-shelnat submit-btn" aria-live="polite">
+                <span data-i18n="submit-btn">ANFRAGE SENDEN</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M1 7H13M13 7L7 1M13 7L7 13" stroke="currentColor" stroke-width="1.2"/>
+                </svg>
+              </button>
+            </div>
+
+          </form>
+
+          <!-- Нижній рядок з часу відповіді -->
+          <div class="contact-bottom-info">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <span data-i18n="contact_response">Wir antworten innerhalb von 24 Stunden.</span>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+      <footer class="footer">
+        <div class="container footer-container">
+          <!-- Блок 1: Назва та філософія -->
+          <div class="footer-brand-col">
+            <div class="f-logo" style="font-size: 24px;">LIBRI<br>INTERIORS</div>
+            <p class="f-brand-philosophy" data-i18n="footer_philosophy">Räume mit Charakter.<br>Für Menschen mit Geschichten.</p>
+          </div>
+          
+          <!-- Контейнер для зручного групування в дві колонки на мобілці -->
+          <div class="footer-links-wrapper">
+            <!-- Колонка Зв'язку -->
+            <div class="footer-contacts-col">
+              <span class="f-column-label" data-i18n="contact_heading">// Kontakt</span>
+              <div class="footer-contacts-grid">
+                <div class="f-contact-item">
+                  <span class="f-contact-label" data-i18n="contact_phone">Telefon</span>
+                  <a href="tel:+4917661059883" class="f-contact-link">+49 176 61059883</a>
+                </div>
+                <div class="f-contact-item">
+                  <span class="f-contact-label" data-i18n="contact_email2">Email</span>
+                  <a href="mailto:libri.interior.design@gmail.com" class="f-contact-link">libri.interior.design@gmail.com</a>
+                </div>
+                <div class="f-contact-item">
+                  <span class="f-contact-label" data-i18n="contact_social">Soziale Netzwerke</span>
+                  <a href="https://instagram.com/libri.interiors" target="_blank" rel="noopener" class="f-contact-link">@libri.interiors</a>
+                </div>
+                <div class="f-contact-item">
+                  <span class="f-contact-label" data-i18n="contact_location">Öffnungszeiten / Standort</span>
+                  <span class="f-contact-text" data-i18n="contact_hours">Mo — Fr : 09:00 — 18:00<br> Deutschland</span>
+                </div>
               </div>
             </div>
           </div>
-
-        
-        <!-- Блок 3: Копірайт (винесено окремо для правильного позиціонування на мобільних) -->
-        <div class="f-copy">&copy; 2026. ALL RIGHTS RESERVED.</div>
+          
+  <!-- Блок 3: Копірайт та юридичні посилання -->
+  <div class="f-copy-wrapper">
+      <div class="f-legal-links">
+          <a href="impressum.html" class="f-legal-link" data-i18n="legal_impressum">Impressum</a>
+          <span class="f-legal-divider">/</span>
+          <a href="datenschutz.html" class="f-legal-link" data-i18n="legal_privacy">Datenschutz</a>
       </div>
-    </footer>
-
-  <script src="script/portfolio.js" defer></script>
+  </div>
+        </div>
+      </footer>
+  <script src="script/index.js" defer></script>
 </body>
 </html>
